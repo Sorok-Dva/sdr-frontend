@@ -13,51 +13,51 @@ import shapeImg6 from '../../assets/images/shape/services-shape/6.png'
 
 const servicesData = [
   {
-    iconName: 'flaticon-chip',
-    title: 'Robotics & Drones',
+    iconName: 'fa fa-moon-stars',
+    title: 'Guides de Rêves Lucides',
     shortText:
-      'Lorem consectetur ipsum dolor sit amet, adipiscing elit, do eiusmod tempor incididunt sed.',
-    viewDetails: '/services/service-details/',
+      'Apprenez à contrôler vos rêves et explorez des mondes fantastiques avec nos guides détaillés.',
+    viewDetails: '/guides/reves-lucides',
     aosDelay: '100',
   },
   {
-    iconName: 'flaticon-vr',
-    title: 'Virtually Reality',
+    iconName: 'fa fa-book',
+    title: 'Journal de Rêves',
     shortText:
-      'Lorem consectetur ipsum dolor sit amet, adipiscing elit, do eiusmod tempor incididunt sed.',
-    viewDetails: '/services/service-details/',
+      'Capturez chaque détail de vos rêves et suivez vos progrès avec notre journal interactif.',
+    viewDetails: '/dreams',
     aosDelay: '200',
   },
   {
-    iconName: 'flaticon-blockchain',
-    title: 'Blockchain Project',
+    iconName: 'fa fa-users',
+    title: 'Communauté de Rêveurs',
     shortText:
-      'Lorem consectetur ipsum dolor sit amet, adipiscing elit, do eiusmod tempor incididunt sed.',
-    viewDetails: '/services/service-details/',
+      'Partagez vos expériences oniriques et connectez-vous avec d’autres rêveurs passionnés.',
+    viewDetails: '/community',
     aosDelay: '300',
   },
   {
-    iconName: 'flaticon-target',
-    title: 'Image Processing',
+    iconName: 'fa fa-globe',
+    title: 'Interprétation des Rêves',
     shortText:
-      'Lorem consectetur ipsum dolor sit amet, adipiscing elit, do eiusmod tempor incididunt sed.',
-    viewDetails: '/services/service-details/',
+      'Découvrez les significations cachées de vos rêves grâce à nos outils d’interprétation.',
+    viewDetails: '/interpretation-des-reves',
     aosDelay: '400',
   },
   {
-    iconName: 'flaticon-choice',
-    title: 'Order Management',
+    iconName: 'fa fa-newspaper',
+    title: 'Articles et Conseils',
     shortText:
-      'Lorem consectetur ipsum dolor sit amet, adipiscing elit, do eiusmod tempor incididunt sed.',
-    viewDetails: '/services/service-details/',
+      'Accédez à une bibliothèque d’articles rédigés par des experts pour enrichir vos connaissances.',
+    viewDetails: '/articles',
     aosDelay: '500',
   },
   {
-    iconName: 'flaticon-deep-learning',
-    title: 'Machine Learning',
+    iconName: 'fa fa-head-side-brain',
+    title: 'Consultations avec Experts',
     shortText:
-      'Lorem consectetur ipsum dolor sit amet, adipiscing elit, do eiusmod tempor incididunt sed.',
-    viewDetails: '/services/service-details/',
+      'Recevez des conseils personnalisés de spécialistes du rêve et de la psychologie.',
+    viewDetails: '/consultations',
     aosDelay: '600',
   },
 ]
@@ -68,15 +68,13 @@ const Services: React.FC = () => {
       <div className="offer-area pt-100 pb-70">
         <div className="container">
           <div className="section-title">
-            <span>Services</span>
-            <h2>Our Professional Services For You</h2>
+            <span>Nos Services</span>
+            <h2>Découvrez Nos Services pour Explorer Vos Rêves</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure
-              architecto quaerat eaque sapiente accusantium ad ut explicabo
-              consequuntur fuga quidem? Sint.
+              "Le Sentier des Rêves" vous offre une gamme de services pour vous aider à explorer, comprendre, et partager vos expériences oniriques. Que vous soyez novice ou expert, nous avons quelque chose pour vous.
             </p>
           </div>
-
+          
           <div className="row justify-content-center">
             {servicesData &&
               servicesData.slice(0, 6).map((value, i) => (
@@ -98,8 +96,7 @@ const Services: React.FC = () => {
               ))}
           </div>
         </div>
-
-        {/* Shape Images */}
+        
         <div className="offer-shape">
           <Image src={shapeImg1} alt="Image" width={300} height={375} />
           <Image src={shapeImg2} alt="Image" width={300} height={375} />
