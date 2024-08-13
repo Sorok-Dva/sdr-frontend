@@ -7,27 +7,19 @@ import teamShape from '../../assets/images/team/team-shape.png'
 
 const teamData = [
   {
-    image: '/images/team/team5.png',
+    image: '/images/team/42.png',
     name: 'Sorok-Dva',
     designation: 'CEO & Founder',
     aosDelay: '100',
 
     socialLinks: [
       {
-        iconName: 'bx bxl-facebook',
-        url: 'https://facebook.com/',
+        iconName: 'bx bxl-github',
+        url: 'https://github.com/Sorok-Dva',
       },
       {
-        iconName: 'bx bxl-twitter',
-        url: 'https://twitter.com/',
-      },
-      {
-        iconName: 'bx bxl-linkedin',
-        url: 'https://linkedin.com/',
-      },
-      {
-        iconName: 'bx bxl-pinterest-alt',
-        url: 'https://pinterest.com/',
+        iconName: 'bx bxl-patreon',
+        url: 'https://www.patreon.com/sorokdva',
       },
     ],
   },
@@ -39,12 +31,14 @@ const TeamTwo: React.FC = () => {
       <div className="team-area pb-70">
         <div className="container">
           <div className="section-title home-four-section-title">
-            <span>Team</span>
-            <h2>Meet Our Genius Team</h2>
+            <span>Équipe</span>
+            <h2>Découvrez le Créateur Inspiré</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              eos ea obcaecati et similique incidunt animi, sed, quos officiis
-              placeat. Id ipsa molestias.
+              "Le Sentier des Rêves" est le fruit de ma passion pour l&apos;onirisme et les rêves lucides.
+              En tant que créateur unique de cette plateforme, je m&apos;efforce de vous offrir les meilleures ressources et
+              une communauté accueillante pour explorer et partager vos expériences oniriques.
+              <br/>
+              Rejoignez-moi dans cette aventure fascinante où chaque rêve devient une découverte.
             </p>
           </div>
 
