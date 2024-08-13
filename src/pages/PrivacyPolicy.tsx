@@ -18,14 +18,10 @@ const SectionTitle = styled.h2`
   margin-bottom: 1rem;
 `
 
-const SectionSubTitle = styled.h5`
-  color: ${props => props.theme.colors.primary};
-  margin-bottom: 1rem;
-`
-
 const Paragraph = styled.p`
   color: ${props => props.theme.colors.text};
   margin-bottom: 1rem;
+  font-size: 20px;
 `
 
 const PrivacyPolicy = () => {
@@ -101,7 +97,8 @@ const PrivacyPolicy = () => {
             
             <SectionTitle>8. Contact</SectionTitle>
             <Paragraph>
-              Pour toute question relative à cette politique de confidentialité ou pour exercer vos droits, vous pouvez nous contacter à l&apos;adresse suivante : [Adresse e-mail de contact].
+              Pour toute question relative à cette politique de confidentialité ou pour exercer vos droits, vous pouvez nous contacter à l&apos;adresse suivante : <a
+                href="mailto:support@screen-me.cloud">sorokdva.developer+sdr@gmail.com</a>.
             </Paragraph>
             
             <Paragraph>
