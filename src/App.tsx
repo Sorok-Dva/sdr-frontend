@@ -1,13 +1,13 @@
 import 'react-toastify/dist/ReactToastify.css'
 import 'assets/vendor/nucleo/css/nucleo.css'
-import 'assets/vendor/font-awesome/css/font-awesome.min.css'
+import 'assets/vendor/font-awesome/css/fa.all.css'
 import './index.css'
 import 'styles/Toastify.css'
 import 'styles/Spinner.css'
 
 import React from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import styled, { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components'
 
 import { UserProvider } from 'context/UserContext'
 import { AuthProvider } from 'context/AuthContext'
