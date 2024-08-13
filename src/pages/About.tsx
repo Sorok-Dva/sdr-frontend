@@ -10,10 +10,10 @@ export default function Page() {
   return (
     <>
       <PageBanner
-        pageTitle="À props du Senter des Rêves"
+        pageTitle="À props du Sentier des Rêves"
         homePageUrl="/"
         homePageText="Accueil"
-        activePageText="À props du Senter des Rêves"
+        activePageText="À props du Sentier des Rêves"
       />
 
       <About />

@@ -15,6 +15,10 @@ const menus = [
     link: '/',
   },
   {
+    label: 'À propos',
+    link: '/about',
+  },
+  {
     label: 'Services',
     link: '#',
     submenu: [
