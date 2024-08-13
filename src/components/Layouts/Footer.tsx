@@ -196,13 +196,12 @@ const Footer = () => {
         </div>
       </footer>
 
-      {/* Footer Bottom Area   */}
       <footer className="footer-bottom-area">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-4">
               <div className="copy-right">
-                <p>Copyright &copy; {currentYear} Sentier des Rêves. Tout droits réservés</p>
+                <p>Copyright &copy; {currentYear} <b>Sentier des Rêves</b>. Tout droits réservés</p>
               </div>
             </div>
 
