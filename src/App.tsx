@@ -15,7 +15,6 @@ import { ErrorProvider, useError } from 'context/ErrorContext'
 import GoogleTagManager from './components/GoogleTagManager'
 import Navbar from './components/Layouts/Navbar'
 import Footer from './components/Layouts/Footer'
-import ScrollToTopButton from 'components/ScrollToTopButton'
 import NotFound from './components/ErrorPage/404'
 import AdminRoute from 'components/AdminRoute'
 
@@ -103,7 +102,6 @@ const AppContent: React.FC = () => {
       </Container>
       {!isAdminRoute && <Footer />}
       <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
-      <ScrollToTopButton />
     </>
   )
 }

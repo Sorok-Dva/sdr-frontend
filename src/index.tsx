@@ -9,6 +9,9 @@ import 'swiper/css/bundle'
 import './assets/styles/style.css'
 import './assets/styles/responsive.css'
 
+import AosAnimation from './components/Layouts/AosAnimation'
+import ScrollToTop from './components/Layouts/ScrollToTop'
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -49,6 +52,8 @@ root.render(
     <React.StrictMode>
       <Router>
         <App/>
+        <AosAnimation />
+        <ScrollToTop />
       </Router>
     </React.StrictMode>,
   </Sentry.ErrorBoundary>,
