@@ -3,7 +3,7 @@ import MainBanner from '../components/HomeOne/MainBanner'
 import Services from '../components/HomeOne/Services'
 import Newsletter from '../components/Common/Newsletter'
 import News from '../components/Common/News'
-const Home : React.FC = () => {
+const LandingPage : React.FC = () => {
   
   return (
     <>
@@ -30,4 +30,4 @@ const Home : React.FC = () => {
   )
 }
 
-export default Home
+export default LandingPage
