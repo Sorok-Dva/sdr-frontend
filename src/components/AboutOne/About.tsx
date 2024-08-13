@@ -4,7 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 
-import aboutImg from '../../assets/images/about-img.png'
+import aboutImg from '../../assets/images/dreaming.png'
 
 const About: React.FC = () => {
   return (
@@ -20,55 +20,59 @@ const About: React.FC = () => {
 
             <div className="col-lg-6">
               <div className="about-content">
-                <span>About Us</span>
+                <span>À propos du Sentier des Rêves</span>
                 <h2>
-                  We Complete Every Project With Extra Care As Customer Need
+                  Découvrez le pouvoir caché de vos nuits.
                 </h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
-                  maecenas accumsan lacus vel.
+                  "Le Sentier des Rêves" est une plateforme dédiée à l'exploration des rêves et de la conscience.
+                  Conçu pour les curieux et les passionnés de l'onirisme, notre site offre des outils et des ressources
+                  pour vous aider à naviguer dans le monde fascinant des rêves lucides.
+                  Que vous soyez un novice ou un rêveur expérimenté, vous trouverez ici des guides pratiques,
+                  un journal de rêve numérique, et une communauté bienveillante pour partager et discuter
+                  de vos expériences nocturnes. <br/>
+                  <b>Rejoignez-nous sur ce chemin de découverte intérieure et
+                    réveillez le rêveur qui sommeille en vous.</b>
                 </p>
-
+                
                 <div className="row">
                   <div className="col-lg-6 col-sm-6">
                     <ul>
                       <li>
                         <i className="flaticon-checked"></i>
-                        Advanced caching
+                        Tutoriels sur les rêves lucides
                       </li>
                       <li>
                         <i className="flaticon-checked"></i>
-                        Unlimited applications
+                        Journal de rêve numérique
                       </li>
                       <li>
                         <i className="flaticon-checked"></i>
-                        PHP 7 ready transfer
+                        Communauté de partage de rêves
                       </li>
                     </ul>
                   </div>
-
+                  
                   <div className="col-lg-6 col-sm-6">
                     <ul>
                       <li>
                         <i className="flaticon-checked"></i>
-                        PHP ready serves
+                        Ressources sur l'interprétation des rêves
                       </li>
                       <li>
                         <i className="flaticon-checked"></i>
-                        24/7 Free extra support
+                        Suivi des rêves lucides
                       </li>
                       <li>
                         <i className="flaticon-checked"></i>
-                        Optimized stack
+                        Conseils et astuces personnalisés
                       </li>
                     </ul>
                   </div>
                 </div>
-
-                <Link to="/about" className="default-btn">
-                  Learn More
+                
+                <Link to="/register" className="default-btn">
+                  Nous rejoindre
                 </Link>
               </div>
             </div>
