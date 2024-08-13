@@ -9,7 +9,7 @@ import mainImg from '../../assets/images/home-one/main-img1.png'
 // Banner Shape Images
 import shape1 from '../../assets/images/home-one/shape1.png'
 import shape2 from '../../assets/images/home-one/shape2.png'
-import shape3 from '../../assets/images/home-one/shape3.png'
+import shape3 from '../../assets/images/home-one/shape6.png'
 import shape4 from '../../assets/images/home-one/shape4.png'
 
 // Animate Shape Images
@@ -76,7 +76,7 @@ const MainBanner: React.FC = () => {
 
               {/* Banner Shape Images */}
               <div className="banner-img">
-                {/*<Image
+                <Image
                   className="animate__animated animate__fadeInUp animate__fast"
                   src={shape1}
                   alt="Image"
@@ -96,7 +96,7 @@ const MainBanner: React.FC = () => {
                   alt="Image"
                   width={250}
                   height={375}
-                />*/}
+                />
                 <Image
                   className="animate__animated animate__fadeInRight animate__fast"
                   src={shape4}
