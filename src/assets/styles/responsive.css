@@ -124,7 +124,7 @@
     margin-bottom: 15px;
     line-height: 1.3;
   }
-  .business-btn {
+  .dreams-btn {
     text-align: center;
   }
   .main-banner-area {
@@ -225,12 +225,12 @@
   .offer-area .offer-shape img:nth-child(2) {
     opacity: 0.3;
   }
-  .business-content h2 {
+  .dreams-content h2 {
     font-size: 25px;
     margin-bottom: 30px;
     line-height: 1.3;
   }
-  .business-area .default-btn {
+  .dreams-area .default-btn {
     margin-top: 0;
   }
   .counter-nth:nth-child(1) .single-counter {
@@ -1126,11 +1126,11 @@
   .offer-area .offer-shape img:nth-child(2) {
     opacity: 0.3;
   }
-  .business-content h2 {
+  .dreams-content h2 {
     font-size: 30px;
     margin-bottom: 30px;
   }
-  .business-area .default-btn {
+  .dreams-area .default-btn {
     margin-top: 0;
   }
   .counter-nth:nth-child(1) .single-counter {
@@ -1529,7 +1529,7 @@
   .choose-title h2 {
     font-size: 30px;
   }
-  .business-content h2 {
+  .dreams-content h2 {
     font-size: 30px;
     margin-bottom: 40px;
   }

@@ -1146,8 +1146,10 @@ Main Banner Area Style
   left: 0;
 }
 .main-banner-area.main-banner-area-one .banner-img img:nth-child(3) {
-  top: -100px;
-  left: 70px;
+  top: -174px;
+  left: -64px;
+  height: 34rem;
+  width: 34rem;
 }
 .main-banner-area.main-banner-area-one .banner-img img:nth-child(4) {
   top: -33px;
@@ -1582,11 +1584,11 @@ Offer Area Style
 /*
 Business  Area Style
 ======================================================*/
-.business-area .default-btn {
+.dreams-area .default-btn {
   margin-top: 10px;
 }
 
-.business-content h2 {
+.dreams-content h2 {
   font-size: 40px;
   margin-top: -9px;
   margin-bottom: 40px;
@@ -2954,13 +2956,13 @@ About Area Four Style
 /*
 Business Area Four Style
 ======================================================*/
-.business-area-four .business-content h2 {
+.dreams-area-four .dreams-content h2 {
   color: #ffffff;
 }
-.business-area-four .single-business h3 {
+.dreams-area-four .single-business h3 {
   color: #ffffff;
 }
-.business-area-four .single-business p {
+.dreams-area-four .single-business p {
   color: #e7e7e7;
 }
 

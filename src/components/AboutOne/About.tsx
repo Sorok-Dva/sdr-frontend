@@ -91,6 +91,101 @@ const About: React.FC = () => {
           </div>
         </div>
       </div>
+      <div className="dreams-area ptb-100">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-6">
+              <div className="dreams-content">
+                <h2>Explorez et Partagez vos Rêves Lucides</h2>
+              </div>
+              
+              <div className="single-dreams-feature">
+                <i className="flaticon-dream"></i>
+                <h3>Tutoriels pour Rêves Lucides</h3>
+                <p>
+                  Apprenez à maîtriser l'art des rêves lucides grâce à nos tutoriels complets. Chaque étape est
+                  expliquée pour vous aider à explorer vos rêves en toute conscience.
+                </p>
+              </div>
+              
+              <div className="single-dreams-feature">
+                <i className="flaticon-community"></i>
+                <h3>Une Communauté pour Partager vos Expériences</h3>
+                <p>
+                  Rejoignez notre communauté de rêveurs et partagez vos récits oniriques. Découvrez les expériences des
+                  autres utilisateurs et trouvez l'inspiration pour vos propres rêves.
+                </p>
+              </div>
+              
+              <div className="dreams-btn">
+                <Link to="/about-2" className="default-btn">
+                  En savoir plus
+                </Link>
+              </div>
+            </div>
+            
+            <div className="col-lg-6">
+              <div className="row">
+                <div
+                  className="col-lg-6 col-sm-6 counter-nth"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                  data-aos-delay="100"
+                >
+                  <div className="single-counter">
+                    <h2>
+                      <span className="target">150+</span>
+                    </h2>
+                    <p>Tutoriels Disponibles</p>
+                  </div>
+                </div>
+                
+                <div
+                  className="col-lg-6 col-sm-6 counter-nth"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                  data-aos-delay="200"
+                >
+                  <div className="single-counter">
+                    <h2>
+                      <span className="target">500+</span>
+                    </h2>
+                    <p>Utilisateurs Actifs</p>
+                  </div>
+                </div>
+                
+                <div
+                  className="col-lg-6 col-sm-6 counter-nth"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                  data-aos-delay="300"
+                >
+                  <div className="single-counter">
+                    <h2>
+                      <span className="target">1200+</span>
+                    </h2>
+                    <p>Rêves Partagés</p>
+                  </div>
+                </div>
+                
+                <div
+                  className="col-lg-6 col-sm-6 counter-nth"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                  data-aos-delay="400"
+                >
+                  <div className="single-counter">
+                    <h2>
+                      <span className="target">50+</span>
+                    </h2>
+                    <p>Conseils d'Experts</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

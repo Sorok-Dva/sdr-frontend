@@ -7,23 +7,23 @@ template.
 
 This files table contents are outlined below>>>>>
 
-******************************************* 
+*******************************************
 ** - Default Area Style
 ** - Preloader Area Style
 ** - Go Top Area Style
-** - Page navigation Area Style  
+** - Page navigation Area Style
 ** - Video wave Style
 ** - Default Btn Area Style
 ** - Read More Area Style
-** - Section Title Area Style 
+** - Section Title Area Style
 ** - Preloader Area Style
-** - Keyframes Area Style 
+** - Keyframes Area Style
 ** - Nice Select Area Style
 ** --- HOME ONE STYLE --- **
 ** - Milford Nav Area Style
 ** - Main Banner Area Style
 ** - Features Area Style
-** - About Area Style 
+** - About Area Style
 ** - Choose Us Area Style
 ** - Offer Area Style
 ** - Business  Area Style
@@ -39,7 +39,7 @@ This files table contents are outlined below>>>>>
 ** - Pricing Area Style
 ** - Newsletter Area Style
 ** - Industries Serve Area Style
-** - Brand Area Serve Area Style 
+** - Brand Area Serve Area Style
 ** --- HOME THREE STYLE --- **
 ** - Main Banner Area Three Style
 ** - Team Area Three Style
@@ -65,12 +65,12 @@ This files table contents are outlined below>>>>>
 ** - Coming Soon Area Style
 ** - Sign In & Log In  Area Style
 ** - Ask Question Area Style
-** - Checkout Area Style 
+** - Checkout Area Style
 ** - Cart Area Style
 ** - Blog Details Area Style
 ** - Contact Info Area Style
 ** - Main Contact Area Style
-** - Contact Info Area Three Style 
+** - Contact Info Area Three Style
 ** - Service Details Area Style
 
 *******************************************
@@ -101,7 +101,7 @@ a {
   display: inline-block;
   transition: $transition;
   text-decoration: none;
-  
+
   &:hover {
     text-decoration: none;
     color: $heading-color;
@@ -1516,7 +1516,7 @@ Choose Us Area Style
   box-shadow: $box-shadow;
   margin-bottom: 30px;
   transition: $transition;
- 
+
   span {
     width: 70px;
     height: 70px;
@@ -1756,14 +1756,14 @@ Offer Area Style
 }
 
 /*
-Business  Area Style
+Dreams  Area Style
 ======================================================*/
-.business-area {
+.dreams-area {
   .default-btn {
     margin-top: 10px;
   }
 }
-.business-content {
+.dreams-content {
   h2 {
     font-size: 40px;
     margin-top: -9px;
@@ -3269,8 +3269,8 @@ About Area Four Style
 /*
 Business Area Four Style
 ======================================================*/
-.business-area-four {
-  .business-content {
+.dreams-area-four {
+  .dreams-content {
     h2 {
       color: $white-color;
     }
@@ -3452,11 +3452,11 @@ jumpx SliderArea Style
   }
 }
 
-/*==================================================== 
+/*====================================================
 INNER PAGE STYLE
 ======================================================*/
 
-/* 
+/*
 Page Title Area Style
 =====================================================*/
 .page-title-area {
@@ -3558,7 +3558,7 @@ Page Title Area Style
   }
 }
 
-/* 
+/*
 Coming Soon Area Style
 =====================================================*/
 .coming-soon-area {
@@ -4869,7 +4869,7 @@ Blog Details Area Style
 }
 
 /*
-Contact Info Area Style 
+Contact Info Area Style
 ================================*/
 .contact-info-area {
   .single-contact-info {
