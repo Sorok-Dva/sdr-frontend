@@ -1150,6 +1150,8 @@ Main Banner Area Style
   left: -64px;
   height: 34rem;
   width: 34rem;
+  transform: translatey(0px);
+  animation: float 6s ease-in-out infinite;
 }
 .main-banner-area.main-banner-area-one .banner-img img:nth-child(4) {
   top: -33px;
@@ -4812,4 +4814,17 @@ Service Details Area Style
 
 .form-check .form-check-input {
   margin-top: 5px;
+}
+
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
 }/*# sourceMappingURL=style.css.map */
