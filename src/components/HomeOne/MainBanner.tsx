@@ -4,12 +4,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 
-import mainImg from '../../assets/images/home-one/main-img1.png'
+import mainImg from '../../assets/images/mainImg.png'
 
 // Banner Shape Images
 import shape1 from '../../assets/images/home-one/shape1.png'
 import shape2 from '../../assets/images/home-one/shape2.png'
-import shape3 from '../../assets/images/home-one/shape6.png'
+import shape3 from 'assets/images/home-one/shape5.png'
 import shape4 from '../../assets/images/home-one/shape4.png'
 
 // Animate Shape Images

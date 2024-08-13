@@ -970,8 +970,11 @@
                     display: block;
                     margin-bottom: 10px;
                 }
-                font-size: 15px;
-                margin-bottom: 0.3em;
+
+                & {
+                    font-size: 15px;
+                    margin-bottom: 0.3em;
+                }
             }
             .comment-body {
                 padding-left: 0;
@@ -1768,9 +1771,12 @@
                     width: 300px;
                 }
                 img:nth-child(3) {
-                    top: 0;
-                    left: 45px;
-                    width: 200px;
+                    top: 17px !important;
+                    left: -49px !important;
+                    height: 24rem !important;
+                    width: 24rem !important;
+                    transform: translatey(0px);
+                    animation: float 6s ease-in-out infinite;
                 }
                 img:nth-child(4) {
                     top: 80px;
