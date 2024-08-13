@@ -1,9 +1,9 @@
 import React from 'react'
 import PageBanner from '../components/Common/PageBanner'
 import About from '../components/AboutOne/About'
-import Testimonials from '../components/Common/Testimonials'
-import TeamTwo from '../components/Common/TeamTwo'
-import Partner from '../components/Common/Partner'
+// import Testimonials from '../components/Common/Testimonials'
+import Team from '../components/Common/TeamTwo'
+// import Partner from '../components/Common/Partner'
 
 export default function Page() {
   return (
@@ -17,13 +17,13 @@ export default function Page() {
 
       <About />
 
-      <Testimonials />
+      {/*<Testimonials />*/}
 
-      <TeamTwo />
+      <Team />
 
-      <div className="pb-50">
+      {/* <div className="pb-50">
         <Partner />
-      </div>
+      </div>*/}
 
     </>
   )
