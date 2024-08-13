@@ -9,7 +9,7 @@ import React from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
-import { UserProvider } from 'context/UserContext'
+import { UserProvider, useUser } from 'context/UserContext'
 import { AuthProvider } from 'context/AuthContext'
 import { ErrorProvider, useError } from 'context/ErrorContext'
 
@@ -19,7 +19,7 @@ import Footer from './components/Layouts/Footer'
 import NotFound from './components/ErrorPage/404'
 import AdminRoute from 'components/AdminRoute'
 
-import Home from './pages/Home'
+import LandingPage from 'pages/LandingPage'
 import Login from './components/Auth/LoginForm'
 import Register from './pages/Register'
 import AboutPage from './pages/About'
@@ -49,6 +49,7 @@ const theme = {
 
 const AppContent: React.FC = () => {
   const { serverError } = useError()
+  const { user } = useUser()
   const location = useLocation()
   const isAdminRoute = location.pathname.startsWith('/admin')
   
@@ -63,7 +64,15 @@ const AppContent: React.FC = () => {
           </>
         ) : (
           <>
-            <Route path="/" element={<Home />} />
+            {user ? (
+              <>
+                <Route path="/" element={<AboutPage />} />
+              </>
+            ) : (
+              <>
+                <Route path="/" element={<LandingPage />} />
+              </>
+            )}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<AboutPage />} />
