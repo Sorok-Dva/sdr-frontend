@@ -210,10 +210,10 @@ const Footer = () => {
               <div className="privacy">
                 <ul>
                   <li>
-                    <Link to="/terms-conditions">Terms & Conditions</Link>
+                    <Link to="/terms-of-service">Terms & Conditions</Link>
                   </li>
                   <li>
-                    <Link to="/privacy-policy">Politique de confidentialité</Link>
+                    <Link to="/privacy">Politique de confidentialité</Link>
                   </li>
                 </ul>
               </div>

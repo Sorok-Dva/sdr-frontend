@@ -41,7 +41,7 @@ import { ToastContainer } from 'react-toastify'
 const theme = {
   colors: {
     primary: '#0070f3',
-    secondary: '#1db954',
+    secondary: '#09dfdf',
     background: 'rgba(9,9,9,0)',
     text: '#090909',
   },
