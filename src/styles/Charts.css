@@ -1,0 +1,26 @@
+.chart-container {
+  background: #172b4d;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 24px;
+}
+
+.chart-container h2 {
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.chart-container .btn-group {
+  margin-top: -16px;
+}
+
+.chart-container .btn {
+  color: #ffffff;
+  background-color: #5e72e4;
+  border-color: #5e72e4;
+}
+
+.chart-container .btn.active {
+  background-color: #32325d;
+  border-color: #32325d;
+}
