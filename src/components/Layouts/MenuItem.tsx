@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 interface MenuItemProps {
   label: string;
   link: string;
-  submenu: {
+  submenu?: {
     label: string;
     link: string;
     className?: string;
@@ -31,30 +31,32 @@ const MenuItem: React.FC<MenuItemProps> = ({ label, link, submenu }) => {
           {label} <i className="bx bx-chevron-down"></i>
         </Link>
         
-        <ul className="dropdown-menu">
-          {submenu.map((subItem) => {
-            const isActive = pathname === subItem.link
-            return (
-              <li className="nav-item" key={subItem.label}>
-                <Link
-                  to={subItem.link}
-                  className={`nav-link ${isActive ? 'active' : ''}`}
-                  onClick={subItem.onClick}  // Transmettre onClick ici
-                >
-                  {subItem.label}
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
+        { submenu && (
+          <ul className="dropdown-menu">
+            { submenu.map((subItem) => {
+              const isActive = pathname === subItem.link
+              return (
+                <li className="nav-item" key={ subItem.label }>
+                  <Link
+                    to={ subItem.link }
+                    className={ `nav-link ${ isActive ? 'active': '' }` }
+                    onClick={ subItem.onClick }  // Transmettre onClick ici
+                  >
+                    { subItem.label }
+                  </Link>
+                </li>
+              )
+            }) }
+          </ul>
+        ) }
       </li>
     )
   }
   
   return (
-    <li className="nav-item" key={label}>
-      <Link to={link} className="nav-link">
-        {label}
+    <li className="nav-item" key={ label }>
+      <Link to={ link } className="nav-link">
+        { label }
       </Link>
     </li>
   )

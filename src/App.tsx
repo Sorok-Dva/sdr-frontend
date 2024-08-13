@@ -1,6 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css'
 import 'assets/vendor/nucleo/css/nucleo.css'
 import 'assets/vendor/font-awesome/css/font-awesome.min.css'
+import './index.css'
 import 'styles/Toastify.css'
 import 'styles/Spinner.css'
 
@@ -46,16 +47,6 @@ const theme = {
   },
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding-top: 4rem; /* to avoid content hiding behind the fixed navbar */
-  background-color: ${props => props.theme.colors.background};
-`
-
 const AppContent: React.FC = () => {
   const { serverError } = useError()
   const location = useLocation()
@@ -64,42 +55,36 @@ const AppContent: React.FC = () => {
   return (
     <>
       {!isAdminRoute && <Navbar />}
-      <Container style={{
-        alignItems: 'inherit',
-        minHeight: 'max-content',
-        paddingTop: 'unset',
-      }}>
-        <Routes>
-          {serverError ? (
-            <>
-              <Route path="/service-unavailable" element={<ServiceUnavailable />} />
-              <Route path="*" element={<Navigate to="/service-unavailable" />} />
-            </>
-          ) : (
-            <>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/help" element={<HelpPage />} />
-              <Route path="/privacy" element={<PrivacyPolicyPage />} />
-              <Route path="/terms-of-service" element={<TOSPage />} />
-              <Route path="/faq" element={<FAQPage />} />
-              <Route path="/user/:nickname" element={<UserProfile />} />
-              <Route element={<AdminRoute />}>
-                <Route path="/admin" element={<AdminLayout />}>
-                  <Route path="home" element={<AdminDashboard />} />
-                  <Route path="users" element={<UserList />} />
-                  <Route path="users/:id" element={<AdminUserProfile />} />
-                  <Route path="reports" element={<ReportsList />} />
-                  <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
-                </Route>
+      <Routes>
+        {serverError ? (
+          <>
+            <Route path="/service-unavailable" element={<ServiceUnavailable />} />
+            <Route path="*" element={<Navigate to="/service-unavailable" />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/help" element={<HelpPage />} />
+            <Route path="/privacy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-of-service" element={<TOSPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/user/:nickname" element={<UserProfile />} />
+            <Route element={<AdminRoute />}>
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route path="home" element={<AdminDashboard />} />
+                <Route path="users" element={<UserList />} />
+                <Route path="users/:id" element={<AdminUserProfile />} />
+                <Route path="reports" element={<ReportsList />} />
+                <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
               </Route>
-              <Route path="*" element={<NotFound />} />
-            </>
-          )}
-        </Routes>
-      </Container>
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </>
+        )}
+      </Routes>
       {!isAdminRoute && <Footer />}
       <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
     </>

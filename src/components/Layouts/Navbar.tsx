@@ -5,32 +5,14 @@ import { Img as Image } from 'react-image'
 import { Link } from 'react-router-dom'
 import MenuItem from './MenuItem'
 
+const StyledUl = styled.ul`
+  margin-left: 10vh !important;
+`
+
 const menus = [
   {
-    label: 'Home',
-    link: '#',
-    submenu: [
-      {
-        label: 'Home Demo 1',
-        link: '/',
-      },
-      {
-        label: 'Home Demo 2',
-        link: '/home-2/',
-      },
-      {
-        label: 'Home Demo 3',
-        link: '/home-3/',
-      },
-      {
-        label: 'Home Demo 4',
-        link: '/home-4/',
-      },
-      {
-        label: 'Home Demo 5',
-        link: '/home-5/',
-      },
-    ],
+    label: 'Accueil',
+    link: '/',
   },
   {
     label: 'Services',
@@ -141,6 +123,7 @@ const menus = [
 
 import logo from '../../assets/img/logo.png'
 import { useUser } from 'context/UserContext'
+import styled from 'styled-components'
 
 const Navbar: React.FC = () => {
   const { user, logout } = useUser()
@@ -198,11 +181,11 @@ const Navbar: React.FC = () => {
             </button>
             
             <div className={classOne} id="navbarSupportedContent">
-              <ul className="navbar-nav m-auto">
+              <StyledUl className="navbar-nav m-auto">
                 {menus.map((menuItem) => (
                   <MenuItem key={menuItem.label} {...menuItem} />
                 ))}
-              </ul>
+              </StyledUl>
               
               <div className="others-options">
                 {user ? (
