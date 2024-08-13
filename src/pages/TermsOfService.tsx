@@ -148,7 +148,7 @@ const TermsOfService = () => {
             </Paragraph>
             
             <Paragraph>
-              <em>Dernière mise à jour : Mercredi 13 Août 2024</em>
+              <em>Dernière mise à jour : Mercredi 13 Août 2024 à 18h04</em>
             </Paragraph>
           </TermsContainer>
         </div>
