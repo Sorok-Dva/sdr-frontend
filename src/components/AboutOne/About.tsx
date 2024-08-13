@@ -14,12 +14,24 @@ const About: React.FC = () => {
           <div className="row align-items-center">
             <div className="col-lg-6">
               <div className="about-img">
-                <Image src={aboutImg} alt="Image" width={490} height={420} />
+                <div
+                  className="about-img"
+                  data-aos="fade-in"
+                  data-aos-duration="800"
+                  data-aos-delay="100"
+                >
+                  <Image src={ aboutImg } alt="Image" width={ 490 } height={ 420 }/>
+                </div>
               </div>
             </div>
-
+            
             <div className="col-lg-6">
-              <div className="about-content">
+              <div
+                className="about-content"
+                data-aos="fade-in"
+                data-aos-duration="800"
+                data-aos-delay="500"
+              >
                 <span>À propos du Sentier des Rêves</span>
                 <h2>
                   Découvrez le pouvoir caché de vos nuits.
