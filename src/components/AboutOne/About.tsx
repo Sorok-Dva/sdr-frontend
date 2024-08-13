@@ -37,8 +37,8 @@ const About: React.FC = () => {
                   Découvrez le pouvoir caché de vos nuits.
                 </h2>
                 <p>
-                  "Le Sentier des Rêves" est une plateforme dédiée à l'exploration des rêves et de la conscience.
-                  Conçu pour les curieux et les passionnés de l'onirisme, notre site offre des outils et des ressources
+                  "Le Sentier des Rêves" est une plateforme dédiée à l&apos;exploration des rêves et de la conscience.
+                  Conçu pour les curieux et les passionnés de l&apos;onirisme, notre site offre des outils et des ressources
                   pour vous aider à naviguer dans le monde fascinant des rêves lucides.
                   Que vous soyez un novice ou un rêveur expérimenté, vous trouverez ici des guides pratiques,
                   un journal de rêve numérique, et une communauté bienveillante pour partager et discuter
@@ -69,7 +69,7 @@ const About: React.FC = () => {
                     <ul>
                       <li>
                         <i className="flaticon-checked"></i>
-                        Ressources sur l'interprétation des rêves
+                        Ressources sur l&apos;interprétation des rêves
                       </li>
                       <li>
                         <i className="flaticon-checked"></i>
@@ -103,7 +103,7 @@ const About: React.FC = () => {
                 <i className="flaticon-dream"></i>
                 <h3>Tutoriels pour Rêves Lucides</h3>
                 <p>
-                  Apprenez à maîtriser l'art des rêves lucides grâce à nos tutoriels complets. Chaque étape est
+                  Apprenez à maîtriser l&apos;art des rêves lucides grâce à nos tutoriels complets. Chaque étape est
                   expliquée pour vous aider à explorer vos rêves en toute conscience.
                 </p>
               </div>
@@ -113,13 +113,13 @@ const About: React.FC = () => {
                 <h3>Une Communauté pour Partager vos Expériences</h3>
                 <p>
                   Rejoignez notre communauté de rêveurs et partagez vos récits oniriques. Découvrez les expériences des
-                  autres utilisateurs et trouvez l'inspiration pour vos propres rêves.
+                  autres utilisateurs et trouvez l&apos;inspiration pour vos propres rêves.
                 </p>
               </div>
               
               <div className="dreams-btn">
-                <Link to="/about-2" className="default-btn">
-                  En savoir plus
+                <Link to="/register" className="default-btn">
+                  Nous rejoindre
                 </Link>
               </div>
             </div>
@@ -178,7 +178,7 @@ const About: React.FC = () => {
                     <h2>
                       <span className="target">50+</span>
                     </h2>
-                    <p>Conseils d'Experts</p>
+                    <p>Conseils d&apos;Experts</p>
                   </div>
                 </div>
               </div>
