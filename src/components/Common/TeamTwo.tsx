@@ -32,9 +32,9 @@ const TeamTwo: React.FC = () => {
         <div className="container">
           <div className="section-title home-four-section-title">
             <span>Équipe</span>
-            <h2>Découvrez le Créateur Inspiré</h2>
-            <p>
-              "Le Sentier des Rêves" est le fruit de ma passion pour l&apos;onirisme et les rêves lucides.
+            <h2 style={{ color: 'black'}}>Découvrez le Créateur Inspiré</h2>
+            <p style={{ color: 'black'}}>
+              &quot;Le Sentier des Rêves&quot; est le fruit de ma passion pour l&apos;onirisme et les rêves lucides.
               En tant que créateur unique de cette plateforme, je m&apos;efforce de vous offrir les meilleures ressources et
               une communauté accueillante pour explorer et partager vos expériences oniriques.
               <br/>

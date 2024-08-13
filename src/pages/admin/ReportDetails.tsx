@@ -29,28 +29,24 @@ interface ReportDetail {
   reportedBy : string;
 }
 
-interface ScreenshotData {
+interface DreamData {
   id : number;
   userId : number;
   url : string;
   title : string;
-  path : string;
   privacy : string;
   views : number;
 }
 
 const ReportDetails : React.FC = () => {
-  const { screenshotId } = useParams<{ screenshotId : string }>()
+  const { dreamId } = useParams<{ dreamId : string }>()
   const { token } = useAuth()
   const navigate = useNavigate()
-  const [screenshot, setScreenshot] = useState<ScreenshotData | null>(null)
+  const [dream, setDream] = useState<DreamData | null>(null)
   const [reportDetails, setReportDetails] = useState<ReportDetail[]>([])
   const [mostInvokedReason, setMostInvokedReason] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
-  const [baseUrl] = useState(
-    process.env.NODE_ENV === 'development' ? 'http://localhost:3000': '',
-  )
  
   const [closeModal, setCloseModal] = useState<boolean>(false)
   const toggleCloseModal = () => setCloseModal(!closeModal)
@@ -64,7 +60,7 @@ const ReportDetails : React.FC = () => {
   useEffect(() => {
     const fetchReportDetails = async () => {
       try {
-        const response = await fetch(`/api/admin/reports/${ screenshotId }/details`, {
+        const response = await fetch(`/api/admin/reports/${ dreamId }/details`, {
           headers: {
             Authorization: `Bearer ${ token }`,
           },
@@ -77,10 +73,10 @@ const ReportDetails : React.FC = () => {
         const data = await response.json()
         setMostInvokedReason(data.mostInvokedReason)
         setReportDetails(data.reportDetails)
-        setScreenshot(data.screenshot)
+        setDream(data.dream)
     
         const reasons = data.reportDetails.map((detail : ReportDetail) => detail.reason)
-        setUniqueReasons(Array.from(new Set(reasons))) // Utiliser Set pour obtenir des raisons uniques
+        setUniqueReasons(Array.from(new Set(reasons)))
       } catch (err : any) {
         setError(err.message)
       } finally {
@@ -89,11 +85,11 @@ const ReportDetails : React.FC = () => {
     }
   
     fetchReportDetails()
-  }, [screenshotId, token])
+  }, [dreamId, token])
  
   const handleCloseReport = async () => {
     try {
-      const response = await fetch(`/api/admin/reports/${ screenshotId }/resolve`, {
+      const response = await fetch(`/api/admin/reports/${ dreamId }/resolve`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -126,7 +122,7 @@ const ReportDetails : React.FC = () => {
     }
   
     try {
-      const response = await fetch(`/api/admin/reports/${ screenshotId }`, {
+      const response = await fetch(`/api/admin/reports/${ dreamId }`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -136,11 +132,11 @@ const ReportDetails : React.FC = () => {
       })
    
       if (!response.ok) {
-        toast.error(`Failed to delete the screenshot. (${response.statusText}).`,
+        toast.error(`Failed to delete the dream. (${response.statusText}).`,
           ToastOptionsDefault
         )
       } else {
-        toast.success('The screenshot has been successfully deleted and report marked as solved.',
+        toast.success('The dream has been successfully deleted and report marked as solved.',
           ToastOptionsDefault
         )
       }
@@ -164,7 +160,7 @@ const ReportDetails : React.FC = () => {
     )
   }
  
-  if (!screenshot) {
+  if (!dream) {
     return (
       <Container className="loader-container">
         <div className="spinner-wrapper">
@@ -208,7 +204,7 @@ const ReportDetails : React.FC = () => {
       </Button>
       <Row className="mb-4">
         <Col>
-          <h2>Report Details for Screenshot &quot;{ screenshot.title }&quot; (ID: { screenshotId })</h2>
+          <h2>Report Details for Dream &quot;{ dream.title }&quot; (ID: { dreamId })</h2>
           <h4>
             Most Invoked Reason:{ ' ' }
             <Badge color="warning" pill className="text-white">
@@ -239,7 +235,7 @@ const ReportDetails : React.FC = () => {
       <Modal isOpen={ closeModal } toggle={ toggleCloseModal }>
         <ModalHeader toggle={ toggleCloseModal }>Confirm Close Report</ModalHeader>
         <ModalBody>
-          Are you sure you want to close this report? This action will mark the report as resolved, and it will no
+          Are you sure you want to close this report ? This action will mark the report as resolved, and it will no
           longer be active.
         </ModalBody>
         <ModalFooter>
@@ -256,7 +252,7 @@ const ReportDetails : React.FC = () => {
         <ModalHeader toggle={ toggleDeleteModal }>Confirm Delete Screenshot</ModalHeader>
         <ModalBody>
           <p>
-            Are you sure you want to delete this screenshot? This action will delete the screenshot and resolve the
+            Are you sure you want to delete this dream ? This action will delete the screenshot and resolve the
             report.
           </p>
           <FormGroup>

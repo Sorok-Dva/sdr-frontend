@@ -1,8 +1,6 @@
 'use client'
 
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { FaHome } from 'react-icons/fa'
 import { Button, Col, Row } from 'reactstrap'
 import { FaDiscord, FaRotateRight } from 'react-icons/fa6'
 

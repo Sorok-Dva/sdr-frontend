@@ -9,15 +9,13 @@ import Manufacturing from './Manufacturing'
 const WhatWeOffer: React.FC = () => {
   const openTabSection = (evt: MouseEvent<HTMLLIElement>, tabName: string) => {
     let i: number
-    let tabcontent: HTMLCollectionOf<Element>
-    let tablinks: HTMLCollectionOf<Element>
+    const tabcontent: HTMLCollectionOf<Element> = document.getElementsByClassName('tabs_item')
+    const tablinks: HTMLCollectionOf<Element> = document.getElementsByTagName('li')
 
-    tabcontent = document.getElementsByClassName('tabs_item')
     for (i = 0; i < tabcontent.length; i++) {
       (tabcontent[i] as HTMLElement).style.display = 'none'
     }
 
-    tablinks = document.getElementsByTagName('li')
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace('current', '')
     }

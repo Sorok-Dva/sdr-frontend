@@ -45,7 +45,7 @@ module.exports = {
       'warn'
     ],
     'react/no-unescaped-entities': [
-      'warn'
+      'off'
     ],
     'no-mixed-spaces-and-tabs': [
       'off'

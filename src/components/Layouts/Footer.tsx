@@ -4,7 +4,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 
-import logo from '../../assets/images/white-logo.png'
 import shape1 from '../../assets/images/shape/footer-shape-one.png'
 import shape2 from '../../assets/images/shape/footer-shape-two.png'
 
