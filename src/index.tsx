@@ -55,8 +55,8 @@ root.render(
         <AosAnimation />
         <ScrollToTop />
       </Router>
-    </React.StrictMode>,
-  </Sentry.ErrorBoundary>,
+    </React.StrictMode>
+  </Sentry.ErrorBoundary>
 )
 
 // If you want to start measuring performance in your app, pass a function
