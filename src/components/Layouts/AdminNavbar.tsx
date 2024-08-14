@@ -26,28 +26,21 @@ const menus = [
     isAdmin: true,
   },
   {
-    label: 'Services',
-    link: '#',
+    label: 'Tutorials',
+    link: '/admin/tutorials/',
+    isAdmin: true,
     submenu: [
       {
-        label: 'Services Style One',
-        link: '/services/',
+        label: 'List',
+        link: '/admin/tutorials/',
       },
       {
-        label: 'Services Style Two',
-        link: '/services/style-2/',
+        label: 'Add',
+        link: '/admin/tutorials/add',
       },
       {
-        label: 'Services Style Three',
-        link: '/services/style-3/',
-      },
-      {
-        label: 'Services Style Four',
-        link: '/services/style-4/',
-      },
-      {
-        label: 'Service Details',
-        link: '/services/service-details/',
+        label: 'Approval queue',
+        link: '/admin/tutorials/approval-queue',
       },
     ],
   },
