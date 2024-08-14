@@ -7,26 +7,6 @@ const NewsSidebar: React.FC = () => {
   return (
     <>
       <div className="widget-area" id="secondary">
-        <div className="widget widget_search">
-          <h3 className="widget-title">Search Now</h3>
-
-          <div className="post-wrap">
-            <form className="search-form">
-              <label>
-                <input
-                  type="search"
-                  className="search-field"
-                  placeholder="Search..."
-                />
-              </label>
-
-              <button type="submit">
-                <i className="bx bx-search"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-
         <div className="widget widget-posts-thumb">
           <h3 className="widget-title">Popular Posts</h3>
 
@@ -132,27 +112,22 @@ const NewsSidebar: React.FC = () => {
             <ul>
               <li>
                 <Link to="#">
-                  Business <span>(10)</span>
+                  Tutoriels <span>(10)</span>
                 </Link>
               </li>
               <li>
                 <Link to="#">
-                  Privacy <span>(20)</span>
+                  Conseils <span>(20)</span>
                 </Link>
               </li>
               <li>
                 <Link to="#">
-                  Technology <span>(10)</span>
+                  Retour d'expérience <span>(10)</span>
                 </Link>
               </li>
               <li>
                 <Link to="#">
-                  Tips <span>(12)</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="#">
-                  Uncategorized <span>(16)</span>
+                  Non catégorisé <span>(16)</span>
                 </Link>
               </li>
             </ul>
@@ -164,13 +139,11 @@ const NewsSidebar: React.FC = () => {
 
           <div className="post-wrap">
             <div className="tagcloud">
-              <Link to="#">IT Solution (3)</Link>
-              <Link to="#">Uncategorized (3)</Link>
-              <Link to="#">Tips (2)</Link>
-              <Link to="#">AI Solution (2)</Link>
-              <Link to="#">Technology (1)</Link>
-              <Link to="#">Privacy (1)</Link>
-              <Link to="#">Business (1)</Link>
+              <Link to="#">Rêves Lucides (3)</Link>
+              <Link to="#">Interpretation (2)</Link>
+              <Link to="#">Débutant (2)</Link>
+              <Link to="#">Expérimenté (1)</Link>
+              <Link to="#">Non catégorisé (3)</Link>
             </div>
           </div>
         </div>
