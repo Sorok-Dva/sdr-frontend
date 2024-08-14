@@ -7,17 +7,17 @@ import { Img as Image } from 'react-image'
 import mainImg from '../../assets/images/mainImg.png'
 
 // Banner Shape Images
-import shape1 from '../../assets/images/home-one/shape1.png'
-import shape2 from '../../assets/images/home-one/shape2.png'
-import shape3 from 'assets/images/home-one/shape5.png'
-import shape4 from '../../assets/images/home-one/shape4.png'
+import shape1 from '../../assets/images/landing-page/shape1.png'
+import shape2 from '../../assets/images/landing-page/shape2.png'
+import shape3 from 'assets/images/landing-page/shape5.png'
+import shape4 from '../../assets/images/landing-page/shape4.png'
 
 // Animate Shape Images
-import animateShape1 from '../../assets/images/home-one/shape/animate1.png'
-import animateShape2 from '../../assets/images/home-one/shape/animate2.png'
-import animateShape3 from '../../assets/images/home-one/shape/animate3.png'
+import animateShape1 from '../../assets/images/landing-page/shape/animate1.png'
+import animateShape2 from '../../assets/images/landing-page/shape/animate2.png'
+import animateShape3 from '../../assets/images/landing-page/shape/animate3.png'
 
-import bottomShape from '../../assets/images/home-one/bottom-shape.png'
+import bottomShape from '../../assets/images/landing-page/bottom-shape.png'
 
 const MainBanner: React.FC = () => {
   return (

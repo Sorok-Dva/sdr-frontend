@@ -3,6 +3,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { useUser } from 'context/UserContext'
 
 interface MenuItemProps {
   label: string;
@@ -14,11 +15,17 @@ interface MenuItemProps {
     onClick?: () => void;
   }[];
   children?: React.ReactNode;
+  isAdmin?: boolean;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ label, link, submenu }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ label, link, submenu, isAdmin }) => {
+  const { user } = useUser()
   const location = useLocation()
   const pathname = location.pathname
+  
+  if (isAdmin && !user?.isAdmin) {
+    return null
+  }
   
   if (submenu) {
     return (
@@ -31,24 +38,22 @@ const MenuItem: React.FC<MenuItemProps> = ({ label, link, submenu }) => {
           {label} <i className="bx bx-chevron-down"></i>
         </Link>
         
-        { submenu && (
-          <ul className="dropdown-menu">
-            { submenu.map((subItem) => {
-              const isActive = pathname === subItem.link
-              return (
-                <li className="nav-item" key={ subItem.label }>
-                  <Link
-                    to={ subItem.link }
-                    className={ `nav-link ${ isActive ? 'active': '' }` }
-                    onClick={ subItem.onClick }  // Transmettre onClick ici
-                  >
-                    { subItem.label }
-                  </Link>
-                </li>
-              )
-            }) }
-          </ul>
-        ) }
+        <ul className="dropdown-menu">
+          { submenu.map((subItem) => {
+            const isActive = pathname === subItem.link
+            return (
+              <li className="nav-item" key={ subItem.label }>
+                <Link
+                  to={ subItem.link }
+                  className={ `nav-link ${ isActive ? 'active': '' }` }
+                  onClick={ subItem.onClick }
+                >
+                  { subItem.label }
+                </Link>
+              </li>
+            )
+          }) }
+        </ul>
       </li>
     )
   }

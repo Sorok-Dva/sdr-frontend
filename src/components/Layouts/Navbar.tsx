@@ -109,16 +109,21 @@ const menus = [
     ],
   },
   {
-    label: 'Contact',
-    link: '#',
+    label: 'Admin',
+    isAdmin: true,
+    link: '/admin',
     submenu: [
       {
-        label: 'Contact Style One',
-        link: '/contact/',
+        label: 'Users',
+        link: '/admin/users',
       },
       {
-        label: 'Contact Style Two',
-        link: '/contact-2/',
+        label: 'Dreams',
+        link: '/admin/dreams/',
+      },
+      {
+        label: 'Reports',
+        link: '/admin/reports/',
       },
     ],
   },

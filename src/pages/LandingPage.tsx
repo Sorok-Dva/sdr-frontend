@@ -1,6 +1,6 @@
 import React from 'react'
-import MainBanner from '../components/HomeOne/MainBanner'
-import Services from '../components/HomeOne/Services'
+import MainBanner from '../components/LandingPage/MainBanner'
+import Services from '../components/LandingPage/Services'
 import Newsletter from '../components/Common/Newsletter'
 import News from '../components/Common/News'
 const LandingPage : React.FC = () => {
