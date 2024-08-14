@@ -39,6 +39,7 @@ import ServiceUnavailable from 'pages/ServiceUnavailable'
 import { ToastContainer } from 'react-toastify'
 import HomePage from 'pages/HomePage'
 import AdminNavbar from 'components/Layouts/AdminNavbar'
+import DreamDiary from 'pages/DreamDiary'
 
 const theme = {
   colors: {
@@ -83,6 +84,7 @@ const AppContent: React.FC = () => {
             <Route path="/terms-of-service" element={<TOSPage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/user/:nickname" element={<UserProfile />} />
+            <Route path="/dream-diary" element={<DreamDiary />} />
             <Route element={<AdminRoute />}>
               <Route path="/admin" element={<AdminLayout />}>
                 <Route path="home" element={<AdminDashboard />} />

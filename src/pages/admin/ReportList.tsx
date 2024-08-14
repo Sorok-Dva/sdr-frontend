@@ -3,11 +3,7 @@ import {
   Badge,
   Button,
   Col,
-  Container,
   Input,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
   Row,
   Table,
 } from 'reactstrap'
@@ -104,109 +100,127 @@ const ReportsList: React.FC = () => {
           <Row className="mb-3">
             <Col>
               <h2>Reports List</h2>
-              <p>Total Reports: {filteredReports.length}</p>
+              <p>Total Reports: { filteredReports.length }</p>
             </Col>
             <Col>
               <Input
                 type="text"
                 placeholder="Search in all fields"
-                value={searchTerm}
-                onChange={handleSearch}
+                value={ searchTerm }
+                onChange={ handleSearch }
               />
             </Col>
           </Row>
           <Table hover>
             <thead>
               <tr>
-                <th onClick={() => handleSort('dreamId')}>
-              ID {sortedField === 'dreamId' && (isAsc ? '↑' : '↓')}
+                <th onClick={ () => handleSort('dreamId') }>
+                ID { sortedField === 'dreamId' && (isAsc ? '↑': '↓') }
                 </th>
-                <th onClick={() => handleSort('reportedBy')}>
-               Author {sortedField === 'reportedBy' && (isAsc ? '↑' : '↓')}
+                <th onClick={ () => handleSort('reportedBy') }>
+                Author { sortedField === 'reportedBy' && (isAsc ? '↑': '↓') }
                 </th>
-                <th onClick={() => handleSort('reportCount')}>
-              Report Count {sortedField === 'reportCount' && (isAsc ? '↑' : '↓')}
+                <th onClick={ () => handleSort('reportCount') }>
+                Report Count { sortedField === 'reportCount' && (isAsc ? '↑': '↓') }
                 </th>
-                <th onClick={() => handleSort('earliestReportDate')}>
-              Earliest Report Date {sortedField === 'earliestReportDate' && (isAsc ? '↑' : '↓')}
+                <th onClick={ () => handleSort('earliestReportDate') }>
+                Earliest Report Date { sortedField === 'earliestReportDate' && (isAsc ? '↑': '↓') }
                 </th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {currentReports.length === 0 ? (
+              { currentReports.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="text-center">
-                No active reports found
+                  <td colSpan={ 6 } className="text-center">
+                  No active reports found
                   </td>
                 </tr>
-              ) : (
+              ): (
                 currentReports.map((report) => (
-                  <tr key={report.dreamId}>
-                    <td>{report.dreamId}</td>
+                  <tr key={ report.dreamId }>
+                    <td>{ report.dreamId }</td>
                     <td>
-                      <Link to={`/admin/users/${report.reportedById}`}>
-                        {report.reportedBy}
+                      <Link to={ `/admin/users/${ report.reportedById }` }>
+                        { report.reportedBy }
                       </Link>
                     </td>
                     <td>
                       <Badge pill color="primary">
-                        {report.reportCount}
+                        { report.reportCount }
                       </Badge>
                     </td>
-                    <td>{new Date(report.earliestReportDate).toLocaleDateString()}</td>
+                    <td>{ new Date(report.earliestReportDate).toLocaleDateString() }</td>
                     <td className="d-flex justify-content-between">
-                      <Link to={`/admin/reports/${report.dreamId}/details`}>
+                      <Link to={ `/admin/reports/${ report.dreamId }/details` }>
                         <Button className="btn-icon btn-2 mb-3" color="success" type="button">
                           <span className="btn-inner--icon">
-                            <FaEye />
+                            <FaEye/>
                           </span>
                         </Button>
                       </Link>
                     </td>
                   </tr>
                 ))
-              )}
+              ) }
             </tbody>
           </Table>
-          <Pagination>
-            <PaginationItem disabled={currentPage === 1}>
-              <PaginationLink first onClick={() => paginate(1)} />
-            </PaginationItem>
-            <PaginationItem disabled={currentPage === 1}>
-              <PaginationLink previous onClick={() => paginate(currentPage - 1)} />
-            </PaginationItem>
-            {[...Array(totalPages)].map((_, index) => (
-              <PaginationItem active={index + 1 === currentPage} key={index}>
-                <PaginationLink onClick={() => paginate(index + 1)}>
-                  {index + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
-            <PaginationItem disabled={currentPage === totalPages}>
-              <PaginationLink next onClick={() => paginate(currentPage + 1)} />
-            </PaginationItem>
-            <PaginationItem disabled={currentPage === totalPages}>
-              <PaginationLink last onClick={() => paginate(totalPages)} />
-            </PaginationItem>
-            <Col>
-              <Input
-                type="select"
-                value={rowsPerPage}
-                onChange={(e) => {
-                  setRowsPerPage(Number(e.target.value))
-                  setCurrentPage(1) // Reset to first page when changing rows per page
-                }}
-                className="w-auto"
-              >
-                {[10, 30, 50, 100, 500].map((size) => (
-                  <option key={size} value={size}>
-                    {size} rows per page
-                  </option>
-                ))}
-              </Input>
-            </Col>
-          </Pagination>
+          <div className="col-lg-12">
+            <div className="page-navigation-area">
+              <nav aria-label="Page navigation example text-center">
+                <ul className="pagination">
+                  <li className={ `page-item ${ currentPage === 1 ? 'disabled': '' }` }>
+                    <Link to="#" className="page-link page-links" onClick={ () => paginate(1) }>
+                      <i className="bx bx-chevrons-left"></i>
+                    </Link>
+                  </li>
+                  
+                  <li className={ `page-item ${ currentPage === 1 ? 'disabled': '' }` }>
+                    <Link to="#" className="page-link" onClick={ () => paginate(currentPage - 1) }>
+                      <i className="bx bx-chevron-left"></i>
+                    </Link>
+                  </li>
+                  
+                  { [...Array(totalPages)].map((_, index) => (
+                    <li key={ index } className={ `page-item ${ index + 1 === currentPage ? 'active': '' }` }>
+                      <Link to="#" className="page-link" onClick={ () => paginate(index + 1) }>
+                        { index + 1 }
+                      </Link>
+                    </li>
+                  )) }
+                  
+                  <li className={ `page-item ${ currentPage === totalPages ? 'disabled': '' }` }>
+                    <Link to="#" className="page-link" onClick={ () => paginate(currentPage + 1) }>
+                      <i className="bx bx-chevron-right"></i>
+                    </Link>
+                  </li>
+                  
+                  <li className={ `page-item ${ currentPage === totalPages ? 'disabled': '' }` }>
+                    <Link to="#" className="page-link page-links" onClick={ () => paginate(totalPages) }>
+                      <i className="bx bx-chevrons-right"></i>
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+              
+              <div className="col">
+                <select
+                  value={ rowsPerPage }
+                  onChange={ (e) => {
+                    setRowsPerPage(Number(e.target.value))
+                    paginate(1)
+                  } }
+                  className="form-select w-auto"
+                >
+                  { [10, 30, 50, 100, 500].map((size) => (
+                    <option key={ size } value={ size }>
+                      { size } lignes par page
+                    </option>
+                  )) }
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {
   Col,
-  Container,
   Input,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Progress,
   Row,
-  Spinner,
   Table,
 } from 'reactstrap'
 import { useAuth } from 'context/AuthContext'
@@ -146,42 +140,62 @@ const UserList: React.FC = () => {
               ))}
             </tbody>
           </Table>
-          <Pagination>
-            <PaginationItem disabled={currentPage === 1}>
-              <PaginationLink first onClick={() => paginate(1)} />
-            </PaginationItem>
-            <PaginationItem disabled={currentPage === 1}>
-              <PaginationLink previous onClick={() => paginate(currentPage - 1)} />
-            </PaginationItem>
-            {[...Array(totalPages)].map((_, index) => (
-              <PaginationItem active={index + 1 === currentPage} key={index}>
-                <PaginationLink onClick={() => paginate(index + 1)}>{index + 1}</PaginationLink>
-              </PaginationItem>
-            ))}
-            <PaginationItem disabled={currentPage === totalPages}>
-              <PaginationLink next onClick={() => paginate(currentPage + 1)} />
-            </PaginationItem>
-            <PaginationItem disabled={currentPage === totalPages}>
-              <PaginationLink last onClick={() => paginate(totalPages)} />
-            </PaginationItem>
-            <Col>
-              <Input
-                type="select"
-                value={rowsPerPage}
-                onChange={(e) => {
-                  setRowsPerPage(Number(e.target.value))
-                  setCurrentPage(1) // Reset to first page when changing rows per page
-                }}
-                className="w-auto"
-              >
-                {[10, 30, 50, 100, 500].map((size) => (
-                  <option key={size} value={size}>
-                    {size} rows per page
-                  </option>
-                ))}
-              </Input>
-            </Col>
-          </Pagination>
+          <div className="col-lg-12">
+            <div className="page-navigation-area">
+              <nav aria-label="Page navigation example text-center">
+                <ul className="pagination">
+                  <li className={ `page-item ${ currentPage === 1 ? 'disabled': '' }` }>
+                    <Link to="#" className="page-link page-links" onClick={ () => paginate(1) }>
+                      <i className="bx bx-chevrons-left"></i>
+                    </Link>
+                  </li>
+                  
+                  <li className={ `page-item ${ currentPage === 1 ? 'disabled': '' }` }>
+                    <Link to="#" className="page-link" onClick={ () => paginate(currentPage - 1) }>
+                      <i className="bx bx-chevron-left"></i>
+                    </Link>
+                  </li>
+                  
+                  { [...Array(totalPages)].map((_, index) => (
+                    <li key={ index } className={ `page-item ${ index + 1 === currentPage ? 'active': '' }` }>
+                      <Link to="#" className="page-link" onClick={ () => paginate(index + 1) }>
+                        { index + 1 }
+                      </Link>
+                    </li>
+                  )) }
+                  
+                  <li className={ `page-item ${ currentPage === totalPages ? 'disabled': '' }` }>
+                    <Link to="#" className="page-link" onClick={ () => paginate(currentPage + 1) }>
+                      <i className="bx bx-chevron-right"></i>
+                    </Link>
+                  </li>
+                  
+                  <li className={ `page-item ${ currentPage === totalPages ? 'disabled': '' }` }>
+                    <Link to="#" className="page-link page-links" onClick={ () => paginate(totalPages) }>
+                      <i className="bx bx-chevrons-right"></i>
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+              
+              <div className="col">
+                <select
+                  value={ rowsPerPage }
+                  onChange={ (e) => {
+                    setRowsPerPage(Number(e.target.value))
+                    paginate(1)
+                  } }
+                  className="form-select w-auto"
+                >
+                  { [10, 30, 50, 100, 500].map((size) => (
+                    <option key={ size } value={ size }>
+                      { size } lignes par page
+                    </option>
+                  )) }
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

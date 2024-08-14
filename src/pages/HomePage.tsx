@@ -91,7 +91,7 @@ const HomePage = () => {
             <JournalEntry>
               <p>Dernière entrée: Rêve du 13 août</p>
             </JournalEntry>
-            <Link to="/dreams-diary" className="btn btn-outline-success">
+            <Link to="/dream-diary" className="btn btn-outline-success">
               Voir tout le journal
             </Link>
           </Section>

@@ -8,7 +8,7 @@ const featuresData = [
     iconName: 'fa fa-book',
     title: 'Journal de rêve',
     shortText: 'Utilisez votre journal de rêve interactif pour enregistrer et suivre vos aventures nocturnes. Notez vos rêves, identifiez des motifs récurrents, et explorez les profondeurs de votre subconscient à travers des annotations et des analyses personnelles.',
-    viewDetails: '/dreams-diary',
+    viewDetails: '/dream-diary',
     aosDelay: '300',
   },
   {
