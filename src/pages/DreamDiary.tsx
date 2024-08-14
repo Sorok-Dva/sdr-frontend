@@ -4,10 +4,11 @@ import PageBanner from 'components/Common/PageBanner'
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa'
 import { useAuth } from 'context/AuthContext'
 
-type Dream = {
+export type Dream = {
   title: string;
   date: string;
   content: string;
+  total?: number;
 };
 
 type DreamPrivacy = 'public' | 'private'
