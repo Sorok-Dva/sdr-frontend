@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import MainBanner from 'components/HomePage/MainBanner'
 import Features from 'components/HomePage/Features'
+import { useAuth } from 'context/AuthContext'
+import { Dream } from 'pages/DreamDiary'
 
 const DashboardContainer = styled.div`
   padding: 2rem;
@@ -74,7 +76,26 @@ const NotificationItem = styled.div`
 `
 
 const HomePage = () => {
+  const { token } = useAuth()
+  const [dream, setDream] = useState<Dream>()
   
+  useEffect(() => {
+    const fetchDream = async () => {
+      try {
+        const response = await fetch('/api/dreams/my/last', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        const data: Dream = await response.json()
+        setDream(data)
+      } catch (err) {
+        console.error('Failed to fetch dreams', err)
+      }
+    }
+    
+    fetchDream()
+  }, [token])
   return (
     <>
       <MainBanner />
@@ -89,7 +110,10 @@ const HomePage = () => {
           <Section>
             <SectionTitle>Votre Journal de Rêves</SectionTitle>
             <JournalEntry>
-              <p>Dernière entrée: Rêve du 13 août</p>
+              <p>Dernière entrée: { dream?.title || 'Aucune entrée' }</p>
+            </JournalEntry>
+            <JournalEntry>
+              <p>Total: { dream?.total || '0' }</p>
             </JournalEntry>
             <Link to="/dream-diary" className="btn btn-outline-success">
               Voir tout le journal
