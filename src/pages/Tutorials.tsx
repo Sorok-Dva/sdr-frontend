@@ -13,7 +13,19 @@ import blogImg5 from 'assets/images/blog/blog8.png'
 import blogImg6 from 'assets/images/blog/blog9.png'
 import PageBanner from 'components/Common/PageBanner'
 
-const NewsDetailsContent: React.FC = () => {
+export type Tutorial = {
+  id: number;
+  userId: number;
+  categoryId: number;
+  title: string;
+  image?: string;
+  content: string;
+  views: number;
+  slug: string;
+  createdAt: Date;
+};
+
+const TutorialsList: React.FC = () => {
   return (
     <>
       <PageBanner
@@ -358,4 +370,4 @@ const NewsDetailsContent: React.FC = () => {
   )
 }
 
-export default NewsDetailsContent
+export default TutorialsList

@@ -5,6 +5,7 @@ import MainBanner from 'components/HomePage/MainBanner'
 import Features from 'components/HomePage/Features'
 import { useAuth } from 'context/AuthContext'
 import { Dream } from 'pages/DreamDiary'
+import { Tutorial } from 'pages/Tutorials'
 
 const DashboardContainer = styled.div`
   padding: 2rem;
@@ -78,6 +79,7 @@ const NotificationItem = styled.div`
 const HomePage = () => {
   const { token } = useAuth()
   const [dream, setDream] = useState<Dream>()
+  const [tutorials, setTutorials] = useState<Tutorial[]>([])
   
   useEffect(() => {
     const fetchDream = async () => {
@@ -94,12 +96,27 @@ const HomePage = () => {
       }
     }
     
+    const fetchTopTutorials = async () => {
+      try {
+        const response = await fetch('/api/tutorials/top', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        const tutorials: Tutorial[] = await response.json()
+        setTutorials(tutorials)
+      } catch (err) {
+        console.error('Failed to fetch tutorials', err)
+      }
+    }
+    
     fetchDream()
+    fetchTopTutorials()
   }, [token])
+  
   return (
     <>
       <MainBanner />
-      
       <Features />
       <DashboardContainer>
         <WelcomeMessage id="dashboard">
@@ -110,10 +127,10 @@ const HomePage = () => {
           <Section>
             <SectionTitle>Votre Journal de Rêves</SectionTitle>
             <JournalEntry>
-              <p>Dernière entrée: { dream?.title || 'Aucune entrée' }</p>
+              <p>Dernière entrée: {dream?.title || 'Aucune entrée'}</p>
             </JournalEntry>
             <JournalEntry>
-              <p>Total: { dream?.total || '0' }</p>
+              <p>Total: {dream?.total || '0'}</p>
             </JournalEntry>
             <Link to="/dream-diary" className="btn btn-outline-success">
               Voir tout le journal
@@ -122,6 +139,14 @@ const HomePage = () => {
           
           <Section>
             <SectionTitle>Tutoriels Recommandés</SectionTitle>
+            {tutorials.map((tutorial: Tutorial, index) => (
+              <TutorialItem key={index}>
+                <Link to={`/tutorial/${tutorial.id}/${tutorial.slug}`}>
+                  <p>{ tutorial.title }</p>
+                </Link>
+              
+              </TutorialItem>
+            ))}
             <TutorialItem>
               <p>Maîtriser le rêve lucide en 7 jours</p>
             </TutorialItem>
