@@ -27,6 +27,8 @@ import FAQPage from './pages/FAQ'
 import HelpPage from './pages/Help'
 import PrivacyPolicyPage from './pages/PrivacyPolicy'
 import TOSPage from './pages/TermsOfService'
+import Tutorial from 'pages/Tutorial'
+import TutorialsList from './pages/Tutorials'
 import UserProfile from './pages/UserProfile'
 import AdminLayout from './layouts/Admin'
 import UserList from 'pages/admin/UserList'
@@ -85,6 +87,8 @@ const AppContent: React.FC = () => {
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/user/:nickname" element={<UserProfile />} />
             <Route path="/dream-diary" element={<DreamDiary />} />
+            <Route path="/tutorials" element={<TutorialsList />} />
+            <Route path="/tutorial/:id/:slug" element={<Tutorial />} />
             <Route element={<AdminRoute />}>
               <Route path="/admin" element={<AdminLayout />}>
                 <Route path="home" element={<AdminDashboard />} />
