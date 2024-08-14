@@ -128,7 +128,7 @@ const HomePage = () => {
             <TutorialItem>
               <p>Comprendre les symboles oniriques</p>
             </TutorialItem>
-            <Link to="/dreams-diary" className="btn btn-outline-primary">
+            <Link to="/tutorials" className="btn btn-outline-primary">
               Voir tous les tutoriels
             </Link>
           </Section>
