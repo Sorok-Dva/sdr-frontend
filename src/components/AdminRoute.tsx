@@ -19,7 +19,6 @@ const AdminRoute : React.FC = () => {
   }
   
   if (!isAdmin) {
-    // Not an admin
     return <Navigate to="/" replace/>
   }
   
