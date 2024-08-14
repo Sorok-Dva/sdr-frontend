@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Input, Pagination, PaginationItem, PaginationLink, Progress, Row, Table } from 'reactstrap'
+import {
+  Col,
+  Container,
+  Input,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Progress,
+  Row,
+  Spinner,
+  Table,
+} from 'reactstrap'
 import { useAuth } from 'context/AuthContext'
 import { Link } from 'react-router-dom'
+import PageBanner from 'components/Common/PageBanner'
 
 interface User {
   id: number;
   nickname: string;
   email: string;
   roleId: string;
-  screenshotCount: number;
-  quota: number;
+  dreamsCount: number;
+  points: number;
   createdAt: Date;
 }
 
@@ -78,109 +90,100 @@ const UserList: React.FC = () => {
   
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
   
-  const getProgressBarClass = (quota: number) => {
-    if (quota < 50) return 'bg-gradient-success'
-    if (quota < 80) return 'bg-gradient-warning'
-    return 'bg-gradient-danger'
-  }
-  
   return (
     <>
-      <Container fluid className="pt-8">
-        <Row className="mb-3">
-          <Col>
-            <h2>User List</h2>
-            <p>Total Users: {filteredUsers.length}</p>
-          </Col>
-          <Col>
-            <Input
-              type="text"
-              placeholder="Search by username or email"
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-          </Col>
-        </Row>
-        <Table hover>
-          <thead>
-            <tr>
-              <th onClick={() => handleSort('nickname')}>
+      <PageBanner
+        pageTitle="Users List"
+        homePageUrl="/"
+        homePageText="Home"
+        activePageText="[Admin] See users list"
+      />
+      <div className="pt-100 pb-70">
+        <div className="container">
+          <Row className="mb-3">
+            <Col>
+              <h2>User List</h2>
+              <p>Total Users: {filteredUsers.length}</p>
+            </Col>
+            <Col>
+              <Input
+                type="text"
+                placeholder="Search by username or email"
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+            </Col>
+          </Row>
+          <Table hover>
+            <thead>
+              <tr>
+                <th onClick={() => handleSort('nickname')}>
               Username {sortedField === 'nickname' && (isAsc ? '↑' : '↓')}
-              </th>
-              <th onClick={() => handleSort('email')}>
+                </th>
+                <th onClick={() => handleSort('email')}>
               Email {sortedField === 'email' && (isAsc ? '↑' : '↓')}
-              </th>
-              <th onClick={() => handleSort('screenshotCount')}>
-              Screenshots {sortedField === 'screenshotCount' && (isAsc ? '↑' : '↓')}
-              </th>
-              <th onClick={() => handleSort('quota')}>
-              Quota {sortedField === 'quota' && (isAsc ? '↑' : '↓')}
-              </th>
-              <th onClick={() => handleSort('createdAt')}>
+                </th>
+                <th onClick={() => handleSort('dreamsCount')}>
+              Dreams {sortedField === 'dreamsCount' && (isAsc ? '↑' : '↓')}
+                </th>
+                <th onClick={() => handleSort('points')}>
+              Points {sortedField === 'points' && (isAsc ? '↑' : '↓')}
+                </th>
+                <th onClick={() => handleSort('createdAt')}>
               Created At {sortedField === 'createdAt' && (isAsc ? '↑' : '↓')}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentUsers.map((user) => (
-              <tr key={user.id}>
-                <td><Link to={`/admin/users/${user.id}`}>{user.nickname}</Link></td>
-                <td>{user.email}</td>
-                <td>{user.screenshotCount}</td>
-                <td>
-                  <div className="d-flex align-items-center">
-                    <span className="mr-2">{user.quota}%</span>
-                    <div>
-                      <Progress
-                        max="100"
-                        value={user.quota}
-                        barClassName={getProgressBarClass(user.quota)}
-                      />
-                    </div>
-                  </div>
-                </td>
-                <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-        <Pagination>
-          <PaginationItem disabled={currentPage === 1}>
-            <PaginationLink first onClick={() => paginate(1)} />
-          </PaginationItem>
-          <PaginationItem disabled={currentPage === 1}>
-            <PaginationLink previous onClick={() => paginate(currentPage - 1)} />
-          </PaginationItem>
-          {[...Array(totalPages)].map((_, index) => (
-            <PaginationItem active={index + 1 === currentPage} key={index}>
-              <PaginationLink onClick={() => paginate(index + 1)}>{index + 1}</PaginationLink>
-            </PaginationItem>
-          ))}
-          <PaginationItem disabled={currentPage === totalPages}>
-            <PaginationLink next onClick={() => paginate(currentPage + 1)} />
-          </PaginationItem>
-          <PaginationItem disabled={currentPage === totalPages}>
-            <PaginationLink last onClick={() => paginate(totalPages)} />
-          </PaginationItem>
-          <Col>
-            <Input
-              type="select"
-              value={rowsPerPage}
-              onChange={(e) => {
-                setRowsPerPage(Number(e.target.value))
-                setCurrentPage(1) // Reset to first page when changing rows per page
-              }}
-              className="w-auto"
-            >
-              {[10, 30, 50, 100, 500].map((size) => (
-                <option key={size} value={size}>
-                  {size} rows per page
-                </option>
+            </thead>
+            <tbody>
+              {currentUsers.map((user) => (
+                <tr key={user.id}>
+                  <td><Link to={`/admin/users/${user.id}`}>{user.nickname}</Link></td>
+                  <td>{user.email}</td>
+                  <td>{user.dreamsCount}</td>
+                  <td>{user.points}</td>
+                  <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                </tr>
               ))}
-            </Input>
-          </Col>
-        </Pagination>
-      </Container>
+            </tbody>
+          </Table>
+          <Pagination>
+            <PaginationItem disabled={currentPage === 1}>
+              <PaginationLink first onClick={() => paginate(1)} />
+            </PaginationItem>
+            <PaginationItem disabled={currentPage === 1}>
+              <PaginationLink previous onClick={() => paginate(currentPage - 1)} />
+            </PaginationItem>
+            {[...Array(totalPages)].map((_, index) => (
+              <PaginationItem active={index + 1 === currentPage} key={index}>
+                <PaginationLink onClick={() => paginate(index + 1)}>{index + 1}</PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem disabled={currentPage === totalPages}>
+              <PaginationLink next onClick={() => paginate(currentPage + 1)} />
+            </PaginationItem>
+            <PaginationItem disabled={currentPage === totalPages}>
+              <PaginationLink last onClick={() => paginate(totalPages)} />
+            </PaginationItem>
+            <Col>
+              <Input
+                type="select"
+                value={rowsPerPage}
+                onChange={(e) => {
+                  setRowsPerPage(Number(e.target.value))
+                  setCurrentPage(1) // Reset to first page when changing rows per page
+                }}
+                className="w-auto"
+              >
+                {[10, 30, 50, 100, 500].map((size) => (
+                  <option key={size} value={size}>
+                    {size} rows per page
+                  </option>
+                ))}
+              </Input>
+            </Col>
+          </Pagination>
+        </div>
+      </div>
     </>
   )
 }
