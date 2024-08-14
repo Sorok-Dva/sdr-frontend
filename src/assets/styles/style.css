@@ -633,19 +633,33 @@ Preloader Area Style
   width: 6px;
   margin: 0 1px;
   display: inline-block;
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
   animation: sk-stretchdelay 1.2s infinite ease-in-out;
 }
 .spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
   animation-delay: -1.1s;
 }
 .spinner .rect3 {
+  -webkit-animation-delay: -1s;
   animation-delay: -1s;
 }
 .spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
   animation-delay: -0.9s;
 }
 .spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
   animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.4);
+  }
+  20% {
+    -webkit-transform: scaleY(1);
+  }
 }
 @keyframes sk-stretchdelay {
   0%, 40%, 100% {
@@ -1070,7 +1084,7 @@ Main Banner Area Style
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url(../images/home-one/shape/animate4.png);
+  background-image: url(../images/landing-page/shape/animate4.png);
   animation: focus-one 1s linear 1s infinite;
   z-index: -1;
 }
@@ -1081,7 +1095,7 @@ Main Banner Area Style
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url(../images/home-one/shape/animate4.png);
+  background-image: url(../images/landing-page/shape/animate4.png);
   animation: moVebounce 5s linear infinite;
   z-index: -1;
 }
@@ -2229,11 +2243,13 @@ Banner Two Area Style
   top: 0;
 }
 .main-banner-area-two .banner-img .circle-img {
-  top: -230px;
   position: relative;
+  top: -290px;
+  width: 22rem;
+  left: 11rem;
 }
 .main-banner-area-two .banner-img .circle-img img {
-  animation: rotation 20s linear infinite;
+  animation: rotation 80s linear infinite;
 }
 .main-banner-area-two .banner-img .square-img {
   position: relative;
@@ -2250,10 +2266,11 @@ Banner Two Area Style
   margin: auto;
 }
 .main-banner-area-two .banner-img img:nth-child(3) {
-  top: 0;
-  left: 0;
+  top: 4rem;
+  left: 0rem;
   right: 0;
   margin: auto;
+  width: 20rem;
 }
 .main-banner-area-two .banner-img img:nth-child(5) {
   top: -120px;
@@ -2728,6 +2745,9 @@ Brand Three Area Style
 /*
 Case Area Style
 ======================================================*/
+.case-area {
+  text-align: center;
+}
 .case-area .swiper-pagination {
   position: initial;
   margin-top: 30px;
@@ -4295,8 +4315,7 @@ Blog Details Area Style
   content: "";
   left: 0;
   top: 8px;
-  -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-          clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }
 .news-details-area .widget-area .widget_categories ul li a {
   display: block;
@@ -4346,8 +4365,7 @@ Blog Details Area Style
   content: "";
   left: 0;
   top: 8px;
-  -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-          clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }
 .news-details-area .widget-area .widget_tag_cloud .widget-title {
   margin-bottom: 0;
@@ -4816,7 +4834,6 @@ Service Details Area Style
   margin-top: 5px;
 }
 
-
 @keyframes float {
   0% {
     transform: translatey(0px);
@@ -4827,4 +4844,6 @@ Service Details Area Style
   100% {
     transform: translatey(0px);
   }
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
