@@ -37,6 +37,8 @@ import ReportDetails from 'pages/admin/ReportDetails'
 import ServiceUnavailable from 'pages/ServiceUnavailable'
 
 import { ToastContainer } from 'react-toastify'
+import HomePage from 'pages/HomePage'
+import AdminNavbar from 'components/Layouts/AdminNavbar'
 
 const theme = {
   colors: {
@@ -55,7 +57,7 @@ const AppContent: React.FC = () => {
   
   return (
     <>
-      {!isAdminRoute && <Navbar />}
+      {!isAdminRoute ? (<Navbar />) : (<AdminNavbar />) }
       <Routes>
         {serverError ? (
           <>
@@ -66,7 +68,7 @@ const AppContent: React.FC = () => {
           <>
             {user ? (
               <>
-                <Route path="/" element={<AboutPage />} />
+                <Route path="/" element={<HomePage />} />
               </>
             ) : (
               <>
