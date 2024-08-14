@@ -19,6 +19,8 @@ import Footer from './components/Layouts/Footer'
 import NotFound from './components/ErrorPage/404'
 import AdminRoute from 'components/AdminRoute'
 
+import AddTutorial from 'pages/admin/AddTutorial'
+import DreamDiary from 'pages/DreamDiary'
 import LandingPage from 'pages/LandingPage'
 import Login from './components/Auth/LoginForm'
 import Register from './pages/Register'
@@ -41,7 +43,6 @@ import ServiceUnavailable from 'pages/ServiceUnavailable'
 import { ToastContainer } from 'react-toastify'
 import HomePage from 'pages/HomePage'
 import AdminNavbar from 'components/Layouts/AdminNavbar'
-import DreamDiary from 'pages/DreamDiary'
 
 const theme = {
   colors: {
@@ -96,6 +97,7 @@ const AppContent: React.FC = () => {
                 <Route path="users/:id" element={<AdminUserProfile />} />
                 <Route path="reports" element={<ReportsList />} />
                 <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
+                <Route path="tutorials/add" element={<AddTutorial />} />
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />
