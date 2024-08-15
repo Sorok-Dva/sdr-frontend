@@ -212,7 +212,7 @@ const AddTutorial = () => {
               <Link to="#" className="btn btn-outline-secondary" type="button" onClick={() => setIsPreview(!isPreview)}>
                 {isPreview ? 'Back' : 'Preview'}
               </Link>
-              {!isPreview && <Link to="#" className="btn btn-outline-primary ml-30" type="submit">Update</Link>}
+              {!isPreview && <Link to="#" className="btn btn-outline-primary ml-30" onClick={handleFormSubmit}>Update</Link>}
               <Link to="#" className="btn btn-outline-danger ml-30" onClick={ () => setDeleteModalOpen(true) }>
                 <FaTrash/> Delete
               </Link>
