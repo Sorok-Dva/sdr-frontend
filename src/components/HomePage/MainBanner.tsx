@@ -24,6 +24,8 @@ import animateShape1 from '../../assets/images/landing-page/shape/animate1.png'
 import animateShape2 from '../../assets/images/landing-page/shape/animate2.png'
 import animateShape3 from '../../assets/images/landing-page/shape/animate3.png'
 import { useUser } from 'context/UserContext'
+import { FaDiscord } from 'react-icons/fa6'
+import { Button } from 'reactstrap'
 
 const MainBanner: React.FC = () => {
   const { user } = useUser()
@@ -64,6 +66,31 @@ const MainBanner: React.FC = () => {
                   <Link to="/tutorials" className="default-btn">
                     Voir les tutos
                   </Link>
+                </div>
+                <div
+                  className="banner-btn"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                  data-aos-delay="300"
+                >
+                  <Button
+                    href="https://discord.gg/J7urdBrNcn"
+                    target="_blank"
+                    className="col-md-5"
+                    style={ {
+                      backgroundColor: '#7289da',
+                      border: 'none',
+                      color: 'white',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginTop: '2rem',
+                      padding: '0.5rem 1rem',
+                    } }
+                  >
+                    <FaDiscord size={ 24 } style={ { marginRight: '8px' } }/>
+                    Rejoindre le serveur discord
+                  </Button>
                 </div>
               </div>
             </div>
