@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 import { Tutorial } from 'pages/Tutorials'
 import { stripHtmlTags } from 'utils/stripHtmlTags'
+import { slugify } from 'utils/slugify'
 
 const LastTutorials: React.FC = () => {
   const [tutorials, setTutorials] = useState<Tutorial[]>([])
@@ -51,7 +52,7 @@ const LastTutorials: React.FC = () => {
               >
                 <div className="single-news">
                   <div className="blog-img">
-                    <Link to={`/tutorials/${tutorial.id}/${tutorial.slug}`}>
+                    <Link to={`/tutorial/${tutorial.id}/${tutorial.slug}`}>
                       <Image
                         src={tutorial.image ?? 'path/to/default/image.png'}
                         alt="Image"
@@ -69,15 +70,18 @@ const LastTutorials: React.FC = () => {
                     <ul>
                       <li>
                         <Link to="#">
-                          <i className="flaticon-user"></i> {tutorial.user?.nickname ?? 'Unknown'}
+                          <i className="flaticon-user"></i> { tutorial.user?.nickname ?? 'Unknown' }
                         </Link>
                       </li>
                       <li>
-                        <i className="flaticon-conversation"></i> 0 Comments {/* Placeholder for comments */}
+                        <i className="flaticon-conversation"></i> { tutorial.commentCount } commentaires
+                      </li>
+                      <li>
+                        <i className="fa fa-heart"></i> { tutorial.upvote } likes
                       </li>
                     </ul>
                     
-                    <Link to={`/tutorials/${tutorial.id}/${tutorial.slug}`}>
+                    <Link to={ `/tutorial/${ tutorial.id }/${ slugify(tutorial.title) }` }>
                       <h3>{tutorial.title}</h3>
                     </Link>
                     
@@ -85,7 +89,7 @@ const LastTutorials: React.FC = () => {
                       {stripHtmlTags(tutorial.content).substring(0, 150)}...
                     </p>
                     
-                    <Link to={`/tutorials/${tutorial.id}/${tutorial.slug}`} className="read-more">
+                    <Link to={`/tutorial/${tutorial.id}/${slugify(tutorial.title)}`} className="read-more">
                       Lire la suite <i className="bx bx-plus"></i>
                     </Link>
                   </div>

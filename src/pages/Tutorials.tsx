@@ -116,7 +116,7 @@ const TutorialsList: React.FC = () => {
                               <i className="fa fa-heart"></i> {tutorial.upvote} Likes
                             </li>
                           </ul>
-                          <Link to={`/tutorials/${tutorial.id}/${tutorial.slug}`}>
+                          <Link to={`/tutorial/${tutorial.id}/${slugify(tutorial.title)}`}>
                             <h3>{tutorial.title}</h3>
                           </Link>
                           <p>
