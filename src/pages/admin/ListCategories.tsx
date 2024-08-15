@@ -4,7 +4,7 @@ import { useAuth } from 'context/AuthContext'
 import PageBanner from 'components/Common/PageBanner'
 import { toast } from 'react-toastify'
 import { ToastOptionsDefault } from 'utils/toastOptions'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 const ListContainer = styled.div`
   padding: 2rem;
@@ -72,7 +72,7 @@ const EditButton = styled(Button)`
 const CategoryList: React.FC = () => {
   const { token } = useAuth()
   const [categories, setCategories] = useState<{ id: number; title: string; description: string }[]>([])
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   
   useEffect(() => {
     const fetchCategories = async () => {
