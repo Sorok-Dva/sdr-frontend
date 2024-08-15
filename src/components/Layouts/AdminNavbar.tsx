@@ -31,12 +31,12 @@ const menus = [
     isAdmin: true,
     submenu: [
       {
-        label: 'List',
-        link: '/admin/tutorials/',
-      },
-      {
         label: 'Add',
         link: '/admin/tutorials/add',
+      },
+      {
+        label: 'List',
+        link: '/admin/tutorials/',
       },
       {
         label: 'Approval queue',
@@ -45,48 +45,17 @@ const menus = [
     ],
   },
   {
-    label: 'Pages',
-    link: '#',
+    label: 'Categories',
+    link: '/admin/categories/list',
+    isAdmin: true,
     submenu: [
       {
-        label: 'Pricing',
-        link: '/pricing/',
+        label: 'Add',
+        link: '/admin/categories/add',
       },
       {
-        label: 'Team',
-        link: '/team/',
-      },
-      {
-        label: 'Testimonials',
-        link: '/testimonials/',
-      },
-      {
-        label: 'FAQ',
-        link: '/faq/',
-      },
-      {
-        label: 'Login',
-        link: '/auth/login/',
-      },
-      {
-        label: 'Sign Up',
-        link: '/auth/sign-up/',
-      },
-      {
-        label: 'Terms & Conditions',
-        link: '/terms-conditions/',
-      },
-      {
-        label: 'Privacy Policy',
-        link: '/privacy-policy/',
-      },
-      {
-        label: 'Coming Soon',
-        link: '/coming-soon/',
-      },
-      {
-        label: '404 Error Page',
-        link: '/404/',
+        label: 'List',
+        link: '/admin/categories/list',
       },
     ],
   },
