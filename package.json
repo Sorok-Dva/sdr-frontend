@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "NODE_OPTIONS=--openssl-legacy-provider PORT=3001 react-scripts start",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build && npm run sentry:sourcemaps",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build && npm run sentry:sourcemaps && npm run sentry:sourcemaps",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .js,.ts,.tsx --fix",
@@ -18,7 +18,7 @@
     "compile:scss": "sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css",
     "minify:scss": "sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.min.css --style compressed",
     "build:scss": "npm run compile:scss && npm run minify:scss && npm run map:scss",
-    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org screenme --project frontend-app ./build && sentry-cli sourcemaps upload --org screenme --project frontend-app ./build"
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org sentier-des-reves --project sdr-frontend ./build && sentry-cli sourcemaps upload --org sentier-des-reves --project sdr-frontend ./build"
   },
   "proxy": "http://localhost:3000/",
   "dependencies": {
