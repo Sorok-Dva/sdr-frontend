@@ -66,7 +66,6 @@ const AddTutorial = () => {
   
   const API_KEY=process.env.REACT_APP_TINYMCE_API_KEY
   
-  console.log(process.env)
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     

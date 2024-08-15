@@ -11,9 +11,11 @@ import PageBanner from 'components/Common/PageBanner'
 import { Container, Spinner } from 'reactstrap'
 import { Tutorial } from 'pages/Tutorials'
 import { FaEye } from 'react-icons/fa6'
+import { useUser } from 'context/UserContext'
 
 
 const TutorialPage: React.FC = () => {
+  const { user } = useUser()
   const [tutorial, setTutorial] = useState<Tutorial>()
   const [loading, setLoading] = useState(true)
   const { id, slug } = useParams<{ id: string; slug: string }>()
@@ -73,9 +75,9 @@ const TutorialPage: React.FC = () => {
                       />
                     </div>
                     
-                    <div className="article-content">
+                    <div className="article-content pb-70">
                       <div className="entry-meta">
-                        <ul>
+                        <ul className="meta-list">
                           <li>
                             <span>Posté le:</span> February 20 , 2020
                           </li>
@@ -88,11 +90,14 @@ const TutorialPage: React.FC = () => {
                             <Link to="#">{ tutorial.views }</Link>
                           </li>
                         </ul>
+                        { user?.isAdmin
+                          && <Link className="btn btn-outline-danger edit-button"
+                            to={`/admin/tutorials/${tutorial.id}/edit`}>Modifier</Link>}
                       </div>
                       
-                      <h3>{ tutorial.title }</h3>
+                      <h1 className="pt-70">{ tutorial.title }</h1>
                       
-                      <div
+                      <div className="pt-5"
                         dangerouslySetInnerHTML={ { __html: tutorial.content.replace(/(<? *script)/gi, 'illegalscript') } }>
                       </div>
                     </div>

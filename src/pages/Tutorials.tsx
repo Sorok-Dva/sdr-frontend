@@ -16,7 +16,7 @@ import PageBanner from 'components/Common/PageBanner'
 export type Tutorial = {
   id: number;
   userId: number;
-  categoryId: number;
+  categoryId: string;
   title: string;
   image?: string;
   content: string;
