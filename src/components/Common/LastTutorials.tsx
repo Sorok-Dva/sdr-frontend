@@ -8,16 +8,16 @@ import blogImg1 from '../../assets/images/blog/blog1.png'
 import blogImg2 from '../../assets/images/blog/blog2.png'
 import blogImg3 from '../../assets/images/blog/blog3.png'
 
-const News: React.FC = () => {
+const LastTutorials: React.FC = () => {
   return (
     <>
       <div className="news-area pt-100 pb-70">
         <div className="container">
           <div className="section-title">
             <span>Derniers articles</span>
-            <h2>Nos derniers articles</h2>
+            <h2>Nos derniers tutoriels</h2>
             <p>
-              Découvrez nos derniers articles sur les rêves lucides !
+              Découvrez nos derniers tutoriels sur les rêves lucides !
             </p>
           </div>
 
@@ -178,4 +178,4 @@ const News: React.FC = () => {
   )
 }
 
-export default News
+export default LastTutorials

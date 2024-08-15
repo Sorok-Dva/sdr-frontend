@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import NewsSidebar from 'components/News/TutorialsSidebar'
+import NewsSidebar from 'components/Tutorials/TutorialsSidebar'
 import { Link } from 'react-router-dom'
 import CommentsArea from './CommentsArea'
 import { Img as Image } from 'react-image'
