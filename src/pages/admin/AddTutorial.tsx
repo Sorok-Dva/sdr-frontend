@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import '../../styles/Tutorial.css'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useAuth } from 'context/AuthContext'
 import { Editor } from '@tinymce/tinymce-react'
@@ -60,22 +61,48 @@ const PreviewContainer = styled.div`
   background-color: #f9f9f9;
 `
 
+export type Category = {
+  id: number,
+  title: string,
+  description: string,
+}
 
 const AddTutorial = () => {
   const { token } = useAuth()
   const navigate = useNavigate()
   const [title, setTitle] = useState('')
+  const [image, setImage] = useState('')
   const [categoryId, setCategoryId] = useState('')
   const [content, setContent] = useState('')
   const [isPreview, setIsPreview] = useState(false)
+  const [categories, setCategories] = useState<Category[]>([])
   
   const API_KEY=process.env.REACT_APP_TINYMCE_API_KEY
+  
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('/api/tutorials/categories', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        const data = await response.json()
+        setCategories(data)
+      } catch (error) {
+        toast.error('Failed to fetch categories', ToastOptionsDefault)
+      }
+    }
+    
+    fetchCategories()
+  }, [token])
   
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
     const tutorialData = {
       title,
+      image,
       categoryId: parseInt(categoryId),
       content,
     }
@@ -97,8 +124,8 @@ const AddTutorial = () => {
         toast.success('Tutoriel ajouté avec succès !',
           ToastOptionsDefault
         )
-        console.log('RESPONSE', response)
-        // navigate(`/tutorial/${response.id}/${slugify(title)}`)
+        const res = await response.json()
+        navigate(`/tutorial/${res.id}/${slugify(title)}`)
       } else {
         toast.error('Erreur lors de l\'ajout du tutoriel.',
           ToastOptionsDefault
@@ -134,6 +161,17 @@ const AddTutorial = () => {
               </FormGroup>
               
               <FormGroup>
+                <Label htmlFor="image">Image d'illustration</Label>
+                <Input
+                  type="text"
+                  id="image"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                  required
+                />
+              </FormGroup>
+              
+              <FormGroup>
                 <Label htmlFor="category">Catégorie</Label>
                 <Select
                   id="category"
@@ -142,8 +180,11 @@ const AddTutorial = () => {
                   required
                 >
                   <option value="">Sélectionnez une catégorie</option>
-                  <option value="1">Catégorie 1</option> {/* Remplacez par vos catégories réelles */}
-                  <option value="2">Catégorie 2</option>
+                  {categories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.title}
+                    </option>
+                  ))}
                 </Select>
               </FormGroup>
               
