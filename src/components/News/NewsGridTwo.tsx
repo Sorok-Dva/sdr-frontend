@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Link } from 'react-router-dom'
-import NewsSidebar from './NewsSidebar'
+import NewsSidebar from 'components/News/TutorialsSidebar'
 import { Img as Image } from 'react-image'
 
 import blogImg1 from '../../assets/images/blog/blog4.png'

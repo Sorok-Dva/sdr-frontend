@@ -3,7 +3,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const NewsSidebar: React.FC = () => {
+const TutorialsSidebar: React.FC = () => {
   return (
     <>
       <div className="widget-area" id="secondary">
@@ -152,4 +152,4 @@ const NewsSidebar: React.FC = () => {
   )
 }
 
-export default NewsSidebar
+export default TutorialsSidebar
