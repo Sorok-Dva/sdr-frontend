@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import { useAuth } from 'context/AuthContext'
 import { Editor } from '@tinymce/tinymce-react'
 import PageBanner from 'components/Common/PageBanner'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Tutorial } from 'pages/Tutorials'
 import { toast } from 'react-toastify'
 import { ToastOptionsDefault } from 'utils/toastOptions'
 import { slugify } from 'utils/slugify'
+import { Container, Modal, ModalBody, ModalFooter, ModalHeader, Spinner } from 'reactstrap'
+import { FaTrash } from 'react-icons/fa'
 
 const AdminContainer = styled.div`
   padding: 2rem;
@@ -41,18 +43,6 @@ const Select = styled.select`
   font-size: 1rem;
 `
 
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    background-color: #555;
-  }
-`
-
 const PreviewContainer = styled.div`
   margin-top: 2rem;
   border: 1px solid #ccc;
@@ -60,7 +50,6 @@ const PreviewContainer = styled.div`
   padding: 1rem;
   background-color: #f9f9f9;
 `
-
 
 const AddTutorial = () => {
   const navigate = useNavigate()
@@ -70,9 +59,11 @@ const AddTutorial = () => {
   const [content, setContent] = useState('')
   const [isPreview, setIsPreview] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
+  
   const { id } = useParams<{ id: string; }>()
   
-  const API_KEY=process.env.REACT_APP_TINYMCE_API_KEY
+  const API_KEY= process.env.REACT_APP_TINYMCE_API_KEY
   
   useEffect(() => {
     const fetchTutorial = async () => {
@@ -91,6 +82,26 @@ const AddTutorial = () => {
     
     fetchTutorial()
   }, [id])
+  
+  const handleDelete = async () => {
+    try {
+      await fetch(`/api/admin/tutorials/${ id }`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${ token }`,
+        },
+      })
+      toast.success('Tutorial successfully deleted.',
+        ToastOptionsDefault
+      )
+      navigate('/tutorials')
+    } catch (err) {
+      toast.error('Failed to delete tutorial.',
+        ToastOptionsDefault
+      )
+      console.error('Failed to delete tutorial', err)
+    }
+  }
   
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -126,6 +137,17 @@ const AddTutorial = () => {
         ToastOptionsDefault
       )
     }
+  }
+  
+  if (loading) {
+    return <Container className="loader-container">
+      <div className="spinner-wrapper">
+        <Spinner animation="border" role="status" className="custom-spinner">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+        <div className="loading-text">Loading</div>
+      </div>
+    </Container>
   }
   
   return (
@@ -187,10 +209,13 @@ const AddTutorial = () => {
                 />
               </FormGroup>
               
-              <Button type="button" onClick={() => setIsPreview(!isPreview)}>
+              <Link to="#" className="btn btn-outline-secondary" type="button" onClick={() => setIsPreview(!isPreview)}>
                 {isPreview ? 'Back' : 'Preview'}
-              </Button>
-              {!isPreview && <Button type="submit">Update</Button>}
+              </Link>
+              {!isPreview && <Link to="#" className="btn btn-outline-primary ml-30" type="submit">Update</Link>}
+              <Link to="#" className="btn btn-outline-danger ml-30" onClick={ () => setDeleteModalOpen(true) }>
+                <FaTrash/> Delete
+              </Link>
             </form>
             
             {isPreview && (
@@ -200,6 +225,22 @@ const AddTutorial = () => {
               </PreviewContainer>
             )}
           </AdminContainer>
+          <Modal isOpen={ isDeleteModalOpen } toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
+            <ModalHeader toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
+              Confirm Delete
+            </ModalHeader>
+            <ModalBody>
+              Are you sure you want to delete this tutorial ?
+            </ModalBody>
+            <ModalFooter>
+              <Link to="#" className="btn btn-outline-danger" onClick={ handleDelete }>
+                Delete
+              </Link>{ ' ' }
+              <Link to="#" className="btn btn-outline-warning" onClick={ () => setDeleteModalOpen(false) }>
+                Cancel
+              </Link>
+            </ModalFooter>
+          </Modal>
         </div>
       </div>
     </>

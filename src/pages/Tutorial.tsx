@@ -12,13 +12,16 @@ import { Container, Spinner } from 'reactstrap'
 import { Tutorial } from 'pages/Tutorials'
 import { FaEye } from 'react-icons/fa6'
 import { useUser } from 'context/UserContext'
+import NotFound from 'components/ErrorPage/404'
+import { toast } from 'react-toastify'
+import { ToastOptionsDefault } from 'utils/toastOptions'
 
 
 const TutorialPage: React.FC = () => {
   const { user } = useUser()
   const [tutorial, setTutorial] = useState<Tutorial>()
   const [loading, setLoading] = useState(true)
-  const { id, slug } = useParams<{ id: string; slug: string }>()
+  const { id} = useParams<{ id: string; }>()
   
   useEffect(() => {
     const fetchTutorial = async () => {
@@ -28,7 +31,10 @@ const TutorialPage: React.FC = () => {
         setTutorial(data)
         setLoading(false)
       } catch (error) {
-        console.error('Error fetching the tutorial:', error)
+        toast.error('Une erreur est survenue dans la récupération du tutoriel.',
+          ToastOptionsDefault
+        )
+        console.error(error)
         setLoading(false)
       }
     }
@@ -48,7 +54,7 @@ const TutorialPage: React.FC = () => {
   }
   
   if (!tutorial) {
-    return <div>Error loading tutorial</div>
+    return <NotFound />
   }
   
   return (
@@ -90,9 +96,11 @@ const TutorialPage: React.FC = () => {
                             <Link to="#">{ tutorial.views }</Link>
                           </li>
                         </ul>
-                        { user?.isAdmin
-                          && <Link className="btn btn-outline-danger edit-button"
-                            to={`/admin/tutorials/${tutorial.id}/edit`}>Modifier</Link>}
+                        { user?.isAdmin &&
+                          <>
+                            <Link className="btn btn-outline-warning edit-button"
+                              to={`/admin/tutorials/${tutorial.id}/edit`}>Modifier</Link>
+                          </>}
                       </div>
                       
                       <h1 className="pt-70">{ tutorial.title }</h1>
