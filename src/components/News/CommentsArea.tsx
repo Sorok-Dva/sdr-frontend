@@ -112,7 +112,7 @@ const CommentsArea: React.FC = () => {
   return (
     <div className="comments-area">
       <h3 className="comments-title">{ comments.length } Commentaires:</h3>
-      { comments.length === 0 && <h5 className="mx-auto">Soyez les premier à laisser un commentaire !</h5> }
+      { comments.length === 0 && <h5 className="mx-auto">Soyez le premier à laisser un commentaire !</h5> }
       <ol className="comment-list">
         { comments.map((comment) => (
           <li key={ comment.id } className="comment">
