@@ -2,7 +2,7 @@ import React from 'react'
 import MainBanner from '../components/LandingPage/MainBanner'
 import Services from '../components/LandingPage/Services'
 import Newsletter from '../components/Common/Newsletter'
-import News from '../components/Common/News'
+import News from 'components/Common/LastTutorials'
 const LandingPage : React.FC = () => {
   
   return (

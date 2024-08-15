@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import TutorialsSidebar from 'components/News/TutorialsSidebar'
+import TutorialsSidebar from 'components/Tutorials/TutorialsSidebar'
 import { Link } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 import PageBanner from 'components/Common/PageBanner'

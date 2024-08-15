@@ -64,15 +64,15 @@ const menus = [
     link: '#',
     submenu: [
       {
-        label: 'News Grid',
+        label: 'Tutorials Grid',
         link: '/news/',
       },
       {
-        label: 'News Right Sidebar',
+        label: 'Tutorials Right Sidebar',
         link: '/news/news-right-sidebar/',
       },
       {
-        label: 'News Details',
+        label: 'Tutorials Details',
         link: '/news/news-details/',
       },
     ],

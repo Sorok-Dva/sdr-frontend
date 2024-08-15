@@ -61,7 +61,7 @@ const MainBanner: React.FC = () => {
                     C'est parti !
                   </a>
 
-                  <Link to="/articles" className="default-btn">
+                  <Link to="/tutorials" className="default-btn">
                     Voir les tutos
                   </Link>
                 </div>

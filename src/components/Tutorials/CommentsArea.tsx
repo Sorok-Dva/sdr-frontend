@@ -117,7 +117,7 @@ const CommentsArea: React.FC = () => {
         { comments.map((comment) => (
           <li key={ comment.id } className="comment">
             <div className="comment-body">
-              <footer className="comment-meta">
+              <div className="comment-meta">
                 <div className="comment-author vcard">
                   <Image
                     src={ comment.user.avatar }
@@ -132,7 +132,7 @@ const CommentsArea: React.FC = () => {
                 <div className="comment-metadata">
                   <span>{ new Date(comment.createdAt).toLocaleString() }</span>
                 </div>
-              </footer>
+              </div>
               <div className="comment-content">
                 <p>{ comment.content }</p>
               </div>

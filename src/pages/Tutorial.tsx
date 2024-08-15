@@ -1,9 +1,9 @@
 'use client'
 import '../styles/Tutorial.css'
 import React, { useEffect, useState } from 'react'
-import NewsSidebar from 'components/News/TutorialsSidebar'
+import NewsSidebar from 'components/Tutorials/TutorialsSidebar'
 import { Link, useParams } from 'react-router-dom'
-import CommentsArea from '../components/News/CommentsArea'
+import CommentsArea from '../components/Tutorials/CommentsArea'
 import { Img as Image } from 'react-image'
 
 import { type Tutorial } from 'pages/Tutorials'

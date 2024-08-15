@@ -62,20 +62,6 @@ const ProgressTracker = styled.div`
   border-radius: 8px;
 `
 
-const ArticleItem = styled.div`
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 8px;
-`
-
-const NotificationItem = styled.div`
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 8px;
-`
-
 const HomePage = () => {
   const { token } = useAuth()
   const [dream, setDream] = useState<Dream>()
@@ -147,12 +133,6 @@ const HomePage = () => {
               
               </TutorialItem>
             ))}
-            <TutorialItem>
-              <p>Maîtriser le rêve lucide en 7 jours</p>
-            </TutorialItem>
-            <TutorialItem>
-              <p>Comprendre les symboles oniriques</p>
-            </TutorialItem>
             <Link to="/tutorials" className="btn btn-outline-primary">
               Voir tous les tutoriels
             </Link>
@@ -177,28 +157,6 @@ const HomePage = () => {
               <p>Progrès: 3/7 rêves lucides cette semaine</p>
             </ProgressTracker>
             <Link to="/objectifs">Voir tous les objectifs</Link>
-          </Section>
-          
-          <Section>
-            <SectionTitle>Articles Récents</SectionTitle>
-            <ArticleItem>
-              <p>Interpréter vos rêves: Guide complet</p>
-            </ArticleItem>
-            <ArticleItem>
-              <p>Comment se souvenir de ses rêves</p>
-            </ArticleItem>
-            <Link to="/articles">Voir tous les articles</Link>
-          </Section>
-          
-          <Section>
-            <SectionTitle>Notifications</SectionTitle>
-            <NotificationItem>
-              <p>Vous avez un nouveau commentaire sur votre rêve partagé.</p>
-            </NotificationItem>
-            <NotificationItem>
-              <p>Nouveau message dans votre boîte de réception.</p>
-            </NotificationItem>
-            <Link to="/notifications">Voir toutes les notifications</Link>
           </Section>
         </GridContainer>
       </DashboardContainer>
