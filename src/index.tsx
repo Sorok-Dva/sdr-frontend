@@ -15,6 +15,7 @@ import ScrollToTop from './components/Layouts/ScrollToTop'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
+import ScrollToTopHook from 'hooks/scrollToTop'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import * as Sentry from '@sentry/react'
@@ -51,6 +52,7 @@ root.render(
   <Sentry.ErrorBoundary>
     <React.StrictMode>
       <Router>
+        <ScrollToTopHook />
         <App/>
         <AosAnimation />
         <ScrollToTop />
