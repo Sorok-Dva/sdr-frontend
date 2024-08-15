@@ -15,96 +15,38 @@ const menus = [
     link: '/',
   },
   {
-    label: 'À propos',
-    link: '/about',
+    label: 'Mon journal de rêves',
+    link: '/dream-diary',
   },
   {
-    label: 'Services',
-    link: '#',
+    label: 'Tutoriels',
+    link: '/tutorials',
     submenu: [
       {
-        label: 'Services Style One',
-        link: '/services/',
+        label: 'Liste',
+        link: '/tutorials/',
       },
       {
-        label: 'Services Style Two',
-        link: '/services/style-2/',
+        label: 'Les plus vus',
+        link: '/tutorials/most-viewed/',
       },
       {
-        label: 'Services Style Three',
-        link: '/services/style-3/',
-      },
-      {
-        label: 'Services Style Four',
-        link: '/services/style-4/',
-      },
-      {
-        label: 'Service Details',
-        link: '/services/service-details/',
+        label: 'Les plus aimés',
+        link: '/tutorials/most-liked/',
       },
     ],
   },
   {
-    label: 'Pages',
+    label: 'Communauté',
     link: '#',
     submenu: [
       {
-        label: 'Pricing',
-        link: '/pricing/',
+        label: 'Liste des rêves',
+        link: '/community/dreams',
       },
       {
-        label: 'Team',
-        link: '/team/',
-      },
-      {
-        label: 'Testimonials',
-        link: '/testimonials/',
-      },
-      {
-        label: 'FAQ',
-        link: '/faq/',
-      },
-      {
-        label: 'Login',
-        link: '/auth/login/',
-      },
-      {
-        label: 'Sign Up',
-        link: '/auth/sign-up/',
-      },
-      {
-        label: 'Terms & Conditions',
-        link: '/terms-conditions/',
-      },
-      {
-        label: 'Privacy Policy',
-        link: '/privacy-policy/',
-      },
-      {
-        label: 'Coming Soon',
-        link: '/coming-soon/',
-      },
-      {
-        label: '404 Error Page',
-        link: '/404/',
-      },
-    ],
-  },
-  {
-    label: 'News',
-    link: '#',
-    submenu: [
-      {
-        label: 'News Grid',
-        link: '/news/',
-      },
-      {
-        label: 'News Right Sidebar',
-        link: '/news/news-right-sidebar/',
-      },
-      {
-        label: 'News Details',
-        link: '/news/news-details/',
+        label: 'Classement des utilisateurs',
+        link: '/community/leaderboard',
       },
     ],
   },
@@ -130,6 +72,10 @@ const menus = [
         link: '/admin/reports/',
       },
     ],
+  },
+  {
+    label: 'À propos',
+    link: '/about',
   },
 ]
 
