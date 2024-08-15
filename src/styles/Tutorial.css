@@ -1,0 +1,47 @@
+h1 {
+  color: #008080;
+  text-align: center;
+  margin-top: 20px;
+}
+h2 {
+  color: #005f5f;
+}
+p {
+  margin-bottom: 15px;
+}
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+.highlight {
+  background-color: #e7f3f3;
+  border-left: 5px solid #008080;
+  padding: 10px;
+  margin: 15px 0;
+}
+.important {
+  color: #d9534f;
+  font-weight: bold;
+}
+.tips {
+  color: #5bc0de;
+  font-weight: bold;
+}
+.steps {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+code {
+  background-color: #eee;
+  padding: 2px 4px;
+  font-family: monospace;
+}
+footer {
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #005f5f;
+  color: white;
+}
