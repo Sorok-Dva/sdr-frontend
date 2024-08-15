@@ -115,13 +115,13 @@ const TutorialPage: React.FC = () => {
                     
                     <div className="article-content pb-70">
                       <div className="entry-meta">
-                        <ul className="meta-list">
+                        <ul className="meta-list" style={{ fontWeight: 'bold', fontSize: '14px' }}>
                           <li>
                             <span>Posté le:</span> February 20 , 2020
                           </li>
                           <li>
                             <span>Posté par:</span>
-                            <Link to="#">{tutorial.userId}</Link>
+                            <Link to="#">{tutorial.user?.nickname}</Link>
                           </li>
                           <li>
                             <span><FaEye /></span>
@@ -134,8 +134,8 @@ const TutorialPage: React.FC = () => {
                               to={`/admin/tutorials/${tutorial.id}/edit`}>Modifier</Link>
                           </>}
                       </div>
-                      
-                      <h1 className="pt-70">{tutorial.title}</h1>
+                      <hr/>
+                      <h1 style={{ marginTop: '1rem' }}>{tutorial.title}</h1>
                       
                       <div className="pt-5"
                         dangerouslySetInnerHTML={{
