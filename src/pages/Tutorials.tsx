@@ -24,6 +24,10 @@ export type Tutorial = {
   upvote: number;
   slug: string;
   createdAt: Date;
+  user?: {
+    nickname: string;
+    avatar: string;
+  }
 };
 
 const TutorialsList: React.FC = () => {
