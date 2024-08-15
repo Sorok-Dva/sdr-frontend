@@ -21,6 +21,7 @@ export type Tutorial = {
   image?: string;
   content: string;
   views: number;
+  upvote: number;
   slug: string;
   createdAt: Date;
 };
