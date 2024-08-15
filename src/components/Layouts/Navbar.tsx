@@ -118,6 +118,10 @@ const menus = [
         link: '/admin/users',
       },
       {
+        label: 'Add Tutorial',
+        link: '/admin/tutorials/add',
+      },
+      {
         label: 'Dreams',
         link: '/admin/dreams/',
       },
