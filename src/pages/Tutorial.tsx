@@ -6,35 +6,40 @@ import { Link, useParams } from 'react-router-dom'
 import CommentsArea from '../components/News/CommentsArea'
 import { Img as Image } from 'react-image'
 
+import { type Tutorial } from 'pages/Tutorials'
 import blogDetailImg from '../assets/images/choose-imgs.png'
 import PageBanner from 'components/Common/PageBanner'
 import { Container, Spinner } from 'reactstrap'
-import { Tutorial } from 'pages/Tutorials'
-import { FaEye } from 'react-icons/fa6'
+import { FaEye, FaThumbsUp } from 'react-icons/fa6'
 import { useUser } from 'context/UserContext'
 import NotFound from 'components/ErrorPage/404'
 import { toast } from 'react-toastify'
 import { ToastOptionsDefault } from 'utils/toastOptions'
+import { useAuth } from 'context/AuthContext'
 
 
 const TutorialPage: React.FC = () => {
   const { user } = useUser()
-  const [tutorial, setTutorial] = useState<Tutorial>()
+  const { token } = useAuth()
+  const [tutorial, setTutorial] = useState<Tutorial | null>(null)
   const [loading, setLoading] = useState(true)
-  const { id} = useParams<{ id: string; }>()
+  const { id } = useParams<{ id: string }>()
   
   useEffect(() => {
     const fetchTutorial = async () => {
       try {
         const response = await fetch(`/api/tutorials/${id}`)
+        if (!response.ok) {
+          throw new Error('Failed to fetch tutorial')
+        }
         const data: Tutorial = await response.json()
         setTutorial(data)
-        setLoading(false)
       } catch (error) {
         toast.error('Une erreur est survenue dans la récupération du tutoriel.',
           ToastOptionsDefault
         )
         console.error(error)
+      } finally {
         setLoading(false)
       }
     }
@@ -42,15 +47,42 @@ const TutorialPage: React.FC = () => {
     fetchTutorial()
   }, [id])
   
+  const handleUpvote = async () => {
+    try {
+      if (!user) return
+      const response = await fetch(`/api/tutorials/${id}/upvote`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      
+      if (!response.ok) {
+        throw new Error('Failed to upvote tutorial')
+      }
+      
+      const updatedTutorial = await response.json()
+      setTutorial(updatedTutorial)
+    } catch (error) {
+      toast.error('Une erreur est survenue lors de l\'ajout de votre like.',
+        ToastOptionsDefault
+      )
+      console.error('Failed to upvote tutorial:', error)
+    }
+  }
+  
   if (loading) {
-    return <Container className="loader-container">
-      <div className="spinner-wrapper">
-        <Spinner animation="border" role="status" className="custom-spinner">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-        <div className="loading-text">Loading</div>
-      </div>
-    </Container>
+    return (
+      <Container className="loader-container">
+        <div className="spinner-wrapper">
+          <Spinner animation="border" role="status" className="custom-spinner">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+          <div className="loading-text">Loading</div>
+        </div>
+      </Container>
+    )
   }
   
   if (!tutorial) {
@@ -89,35 +121,42 @@ const TutorialPage: React.FC = () => {
                           </li>
                           <li>
                             <span>Posté par:</span>
-                            <Link to="#">{ tutorial.userId }</Link>
+                            <Link to="#">{tutorial.userId}</Link>
                           </li>
                           <li>
                             <span><FaEye /></span>
-                            <Link to="#">{ tutorial.views }</Link>
+                            <Link to="#">{tutorial.views}</Link>
                           </li>
                         </ul>
-                        { user?.isAdmin &&
+                        {user?.isAdmin &&
                           <>
                             <Link className="btn btn-outline-warning edit-button"
                               to={`/admin/tutorials/${tutorial.id}/edit`}>Modifier</Link>
                           </>}
                       </div>
                       
-                      <h1 className="pt-70">{ tutorial.title }</h1>
+                      <h1 className="pt-70">{tutorial.title}</h1>
                       
                       <div className="pt-5"
-                        dangerouslySetInnerHTML={ { __html: tutorial.content.replace(/(<? *script)/gi, 'illegalscript') } }>
+                        dangerouslySetInnerHTML={{
+                          __html: tutorial.content
+                            ? tutorial.content.replace(/(<? *script)/gi, 'illegalscript')
+                            : ''
+                        }}>
                       </div>
                     </div>
                     
                     <div className="article-footer">
                       <div className="article-tags">
+                        <button onClick={handleUpvote} className="upvote-button">
+                          <FaThumbsUp /> {tutorial.upvote}
+                        </button>
                         <span>
                           <i className="bx bx-share-alt"></i>
                         </span>
                         <Link to="#">Partager</Link>
                       </div>
-                  
+                      
                       <div className="article-share">
                         <ul className="social">
                           <li>
@@ -143,7 +182,7 @@ const TutorialPage: React.FC = () => {
                         </ul>
                       </div>
                     </div>
-                
+                    
                     <div className="post-navigation">
                       <div className="navigation-links">
                         <div className="nav-previous">
@@ -151,19 +190,19 @@ const TutorialPage: React.FC = () => {
                             <i className="bx bx-left-arrow-alt"></i> Tutoriel précédent
                           </Link>
                         </div>
-                    
+                        
                         <div className="nav-next">
                           <Link to="#">
-                       Tutoriel suivant <i className="bx bx-right-arrow-alt"></i>
+                            Tutoriel suivant <i className="bx bx-right-arrow-alt"></i>
                           </Link>
                         </div>
                       </div>
                     </div>
-                
+                    
                     <CommentsArea />
                   </div>
                 </div>
-            
+                
                 <div className="col-lg-4 col-md-12">
                   <NewsSidebar />
                 </div>
