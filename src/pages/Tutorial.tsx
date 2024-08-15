@@ -1,7 +1,7 @@
 'use client'
 import '../styles/Tutorial.css'
 import React, { useEffect, useState } from 'react'
-import NewsSidebar from '../components/News/NewsSidebar'
+import NewsSidebar from 'components/News/TutorialsSidebar'
 import { Link, useParams } from 'react-router-dom'
 import CommentsArea from '../components/News/CommentsArea'
 import { Img as Image } from 'react-image'
