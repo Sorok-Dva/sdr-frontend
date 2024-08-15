@@ -44,6 +44,8 @@ import ServiceUnavailable from 'pages/ServiceUnavailable'
 import { ToastContainer } from 'react-toastify'
 import HomePage from 'pages/HomePage'
 import AdminNavbar from 'components/Layouts/AdminNavbar'
+import AddCategory from 'pages/admin/AddCategory'
+import ListCategories from 'pages/admin/ListCategories'
 
 const theme = {
   colors: {
@@ -100,6 +102,8 @@ const AppContent: React.FC = () => {
                 <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
                 <Route path="tutorials/add" element={<AddTutorial />} />
                 <Route path="tutorials/:id/edit" element={<EditTutorial />} />
+                <Route path="categories/add" element={<AddCategory />} />
+                <Route path="categories/list" element={<ListCategories />} />
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />
