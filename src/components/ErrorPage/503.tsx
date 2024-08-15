@@ -38,7 +38,7 @@ const CustomErrorContent: React.FC = () => {
                 <Button color="success" onClick={ handleReload } className="col-md-3">
                   <FaRotateRight/> Actualiser
                 </Button>
-                <Button color="primary" href="https://discord.gg/sdr" className="col-md-3">
+                <Button color="primary" href="https://discord.gg/J7urdBrNcn" className="col-md-3">
                   <FaDiscord/> Rejoindre le serveur discord
                 </Button>
               </Col>
