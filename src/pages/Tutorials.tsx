@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import NewsSidebar from '../components/News/NewsSidebar'
+import TutorialsSidebar from 'components/News/TutorialsSidebar'
 import { Link } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 import PageBanner from 'components/Common/PageBanner'
@@ -159,7 +159,7 @@ const TutorialsList: React.FC = () => {
               </div>
             </div>
             <div className="col-lg-4 col-md-12">
-              <NewsSidebar />
+              <TutorialsSidebar />
             </div>
           </div>
         </div>
