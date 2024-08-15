@@ -47,6 +47,7 @@ const CommentsArea: React.FC = () => {
   const handleAddComment = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      if (!user) return
       const response = await fetch('/api/comments', {
         method: 'POST',
         headers: {
@@ -78,6 +79,7 @@ const CommentsArea: React.FC = () => {
   
   const handleUpvote = async (commentId: number) => {
     try {
+      if (!user) return
       const response = await fetch(`/api/comments/${commentId}/upvote`, {
         method: 'POST',
         headers: {
