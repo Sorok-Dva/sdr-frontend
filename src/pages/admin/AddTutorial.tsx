@@ -3,6 +3,10 @@ import styled from 'styled-components'
 import { useAuth } from 'context/AuthContext'
 import { Editor } from '@tinymce/tinymce-react'
 import PageBanner from 'components/Common/PageBanner'
+import { toast } from 'react-toastify'
+import { ToastOptionsDefault } from 'utils/toastOptions'
+import { slugify } from 'utils/slugify'
+import { useNavigate } from 'react-router-dom'
 
 const AdminContainer = styled.div`
   padding: 2rem;
@@ -59,6 +63,7 @@ const PreviewContainer = styled.div`
 
 const AddTutorial = () => {
   const { token } = useAuth()
+  const navigate = useNavigate()
   const [title, setTitle] = useState('')
   const [categoryId, setCategoryId] = useState('')
   const [content, setContent] = useState('')
@@ -86,12 +91,18 @@ const AddTutorial = () => {
       })
       
       if (response.ok) {
-        alert('Tutoriel ajouté avec succès')
         setTitle('')
         setCategoryId('')
         setContent('')
+        toast.success('Tutoriel ajouté avec succès !',
+          ToastOptionsDefault
+        )
+        console.log('RESPONSE', response)
+        // navigate(`/tutorial/${response.id}/${slugify(title)}`)
       } else {
-        alert('Erreur lors de l\'ajout du tutoriel')
+        toast.error('Erreur lors de l\'ajout du tutoriel.',
+          ToastOptionsDefault
+        )
       }
     } catch (error) {
       console.error('Erreur lors de la requête', error)
