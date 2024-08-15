@@ -21,6 +21,7 @@ import AdminRoute from 'components/AdminRoute'
 
 import AddTutorial from 'pages/admin/AddTutorial'
 import DreamDiary from 'pages/DreamDiary'
+import EditTutorial from 'pages/admin/EditTutorial'
 import LandingPage from 'pages/LandingPage'
 import Login from './components/Auth/LoginForm'
 import Register from './pages/Register'
@@ -98,6 +99,7 @@ const AppContent: React.FC = () => {
                 <Route path="reports" element={<ReportsList />} />
                 <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
                 <Route path="tutorials/add" element={<AddTutorial />} />
+                <Route path="tutorials/:id/edit" element={<EditTutorial />} />
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />
