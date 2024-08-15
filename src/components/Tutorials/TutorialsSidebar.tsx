@@ -31,7 +31,7 @@ const TutorialsSidebar: React.FC = () => {
           <div className="post-wrap">
             {popularTutorials.map((tutorial) => (
               <article key={tutorial.id} className="item">
-                <Link to={`/tutorials/${tutorial.id}/${slugify(tutorial.title)}`} className="thumb">
+                <Link to={`/tutorial/${tutorial.id}/${slugify(tutorial.title)}`} className="thumb">
                   <span
                     className="fullimage cover"
                     role="img"
@@ -43,7 +43,7 @@ const TutorialsSidebar: React.FC = () => {
                 <div className="info">
                   <time>{new Date(tutorial.createdAt).toLocaleDateString('fr-FR')}</time>
                   <h4 className="title usmall">
-                    <Link to={`/tutorials/${tutorial.id}/${slugify(tutorial.title)}`}>
+                    <Link to={`/tutorial/${tutorial.id}/${slugify(tutorial.title)}`}>
                       {tutorial.title}
                     </Link>
                   </h4>
