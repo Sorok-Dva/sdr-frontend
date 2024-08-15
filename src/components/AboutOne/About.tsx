@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 
 import aboutImg from '../../assets/images/dreaming.png'
+import { Button } from 'reactstrap'
+import { FaDiscord } from 'react-icons/fa6'
 
 const About: React.FC = () => {
   return (
@@ -86,6 +88,24 @@ const About: React.FC = () => {
                 <Link to="/register" className="default-btn">
                   Nous rejoindre
                 </Link>
+                
+                <Button
+                  href="https://discord.gg/J7urdBrNcn"
+                  target="_blank"
+                  style={ {
+                    backgroundColor: '#7289da',
+                    border: 'none',
+                    color: 'white',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: '2rem',
+                    padding: '0.5rem 1rem',
+                  } }
+                >
+                  <FaDiscord size={ 24 } style={ { marginRight: '8px' } }/>
+                  Rejoindre le serveur discord
+                </Button>
               </div>
             </div>
           </div>

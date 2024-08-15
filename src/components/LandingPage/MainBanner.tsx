@@ -18,6 +18,7 @@ import animateShape2 from '../../assets/images/landing-page/shape/animate2.png'
 import animateShape3 from '../../assets/images/landing-page/shape/animate3.png'
 
 import bottomShape from '../../assets/images/landing-page/bottom-shape.png'
+import { FaDiscord } from 'react-icons/fa6'
 
 const MainBanner: React.FC = () => {
   return (
@@ -56,8 +57,8 @@ const MainBanner: React.FC = () => {
                     En savoir plus
                   </Link>
 
-                  <Link to="/contact" className="default-btn">
-                    Rejoindre le serveur discord
+                  <Link to="https://discord.gg/J7urdBrNcn" className="default-btn">
+                    <FaDiscord style={ { marginRight: '8px' } }/> Rejoindre le serveur discord
                   </Link>
                 </div>
               </div>

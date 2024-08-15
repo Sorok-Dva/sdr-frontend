@@ -1,6 +1,6 @@
 import '../../styles/Upvote.css'
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 import { useUser } from 'context/UserContext'
 import { useAuth } from 'context/AuthContext'

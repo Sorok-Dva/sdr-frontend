@@ -26,8 +26,6 @@ import LandingPage from 'pages/LandingPage'
 import Login from './components/Auth/LoginForm'
 import Register from './pages/Register'
 import AboutPage from './pages/About'
-import FAQPage from './pages/FAQ'
-import HelpPage from './pages/Help'
 import PrivacyPolicyPage from './pages/PrivacyPolicy'
 import TOSPage from './pages/TermsOfService'
 import Tutorial from 'pages/Tutorial'
@@ -85,10 +83,8 @@ const AppContent: React.FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/help" element={<HelpPage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="/terms-of-service" element={<TOSPage />} />
-            <Route path="/faq" element={<FAQPage />} />
             <Route path="/user/:nickname" element={<UserProfile />} />
             <Route path="/dream-diary" element={<DreamDiary />} />
             <Route path="/tutorials" element={<TutorialsList />} />

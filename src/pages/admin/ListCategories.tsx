@@ -60,12 +60,14 @@ const DeleteButton = styled(Button)`
   }
 `
 
+/*
 const EditButton = styled(Button)`
   background-color: #3498db;
   &:hover {
     background-color: #2980b9;
   }
 `
+*/
 
 const CategoryList: React.FC = () => {
   const { token } = useAuth()
@@ -116,17 +118,17 @@ const CategoryList: React.FC = () => {
     }
   }
   
-  const handleEdit = (categoryId: number) => {
+  /*  const handleEdit = (categoryId: number) => {
     navigate(`/admin/categories/${categoryId}/edit`)
-  }
+  }*/
   
   return (
     <>
       <PageBanner
         pageTitle="Liste des Catégories"
-        homePageUrl="/"
-        homePageText="Accueil"
-        activePageText="Catégories"
+        homePageUrl="/admin"
+        homePageText="Admin"
+        activePageText="Catégories de tutos"
       />
       <div className="pt-50 pb-70">
         <div className="container">
