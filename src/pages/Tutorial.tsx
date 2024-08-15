@@ -1,5 +1,5 @@
 'use client'
-
+import '../styles/Tutorial.css'
 import React, { useEffect, useState } from 'react'
 import NewsSidebar from '../components/News/NewsSidebar'
 import { Link, useParams } from 'react-router-dom'
