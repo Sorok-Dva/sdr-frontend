@@ -140,11 +140,11 @@ const CommentsArea: React.FC = () => {
                 <button onClick={ () => handleUpvote(comment.id) } className="upvote-button">
                   <FaThumbsUp/> { comment.upvote }
                 </button>
-                <div className="reply">
-                  <Link to="#" className="comment-reply-link">
-                    Reply
-                  </Link>
-                </div>
+                {/*<div className="reply">*/}
+                {/*  <Link to="#" className="comment-reply-link">*/}
+                {/*    Reply*/}
+                {/*  </Link>*/}
+                {/*</div>*/}
               </div>
             </div>
           </li>
