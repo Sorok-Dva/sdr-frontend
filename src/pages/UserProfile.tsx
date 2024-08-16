@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { Button, Card, Container, Row, Col, Spinner } from 'reactstrap'
 import { toast } from 'react-toastify'
-import { ToastOptionsDefault } from 'utils/toastOptions'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 import NotFound from '../components/ErrorPage/404'
 
 interface UserProfile {
@@ -46,7 +46,7 @@ const Profile: React.FC = () => {
         
       } catch (err) {
         toast.error(`Failed to retrieve ${nickname} profile.`,
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
       }
     }

@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { ToastOptionsDefault } from 'utils/toastOptions'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 
 const RecoverPasswordForm: React.FC = () => {
   const [email, setEmail] = useState('')
@@ -24,12 +24,12 @@ const RecoverPasswordForm: React.FC = () => {
       })
       
       if (response.ok) {
-        toast.success('Lien de réinitialisation du mot de passe envoyé à votre adresse e-mail', ToastOptionsDefault)
+        toast.success('Lien de réinitialisation du mot de passe envoyé à votre adresse e-mail', ToastDefaultOptions)
       } else if (response.status === 400) {
         const errorData = await response.json()
         if (errorData.errors && Array.isArray(errorData.errors)) {
           errorData.errors.forEach((error : { msg : string }) => {
-            toast.error(error.msg, ToastOptionsDefault)
+            toast.error(error.msg, ToastDefaultOptions)
           })
         }
       } else {
@@ -37,7 +37,7 @@ const RecoverPasswordForm: React.FC = () => {
         toast.error(error)
       }
     } catch (error) {
-      toast.error('Une erreur s\'est produite. Veuillez réessayer.', ToastOptionsDefault)
+      toast.error('Une erreur s\'est produite. Veuillez réessayer.', ToastDefaultOptions)
       console.error('Error:', error)
     }
   }

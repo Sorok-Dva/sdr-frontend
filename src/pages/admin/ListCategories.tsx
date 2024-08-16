@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useAuth } from 'context/AuthContext'
 import PageBanner from 'components/Common/PageBanner'
 import { toast } from 'react-toastify'
-import { ToastOptionsDefault } from 'utils/toastOptions'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 // import { useNavigate } from 'react-router-dom'
 
 const ListContainer = styled.div`
@@ -88,7 +88,7 @@ const CategoryList: React.FC = () => {
         const data = await response.json()
         setCategories(data)
       } catch (error) {
-        toast.error('Erreur lors de la récupération des catégories', ToastOptionsDefault)
+        toast.error('Erreur lors de la récupération des catégories', ToastDefaultOptions)
       }
     }
     
@@ -107,13 +107,13 @@ const CategoryList: React.FC = () => {
         
         if (response.ok) {
           setCategories(categories.filter(category => category.id !== categoryId))
-          toast.success('Catégorie supprimée avec succès', ToastOptionsDefault)
+          toast.success('Catégorie supprimée avec succès', ToastDefaultOptions)
         } else {
-          toast.error('Erreur lors de la suppression de la catégorie', ToastOptionsDefault)
+          toast.error('Erreur lors de la suppression de la catégorie', ToastDefaultOptions)
         }
       } catch (error) {
         console.error('Erreur lors de la requête', error)
-        toast.error('Erreur lors de la requête', ToastOptionsDefault)
+        toast.error('Erreur lors de la requête', ToastDefaultOptions)
       }
     }
   }

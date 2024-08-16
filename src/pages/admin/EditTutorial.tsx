@@ -6,7 +6,7 @@ import PageBanner from 'components/Common/PageBanner'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Tutorial } from 'pages/Tutorials'
 import { toast } from 'react-toastify'
-import { ToastOptionsDefault } from 'utils/toastOptions'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 import { slugify } from 'utils/slugify'
 import { Container, Modal, ModalBody, ModalFooter, ModalHeader, Spinner } from 'reactstrap'
 import { FaTrash } from 'react-icons/fa'
@@ -92,12 +92,12 @@ const AddTutorial = () => {
         },
       })
       toast.success('Tutorial successfully deleted.',
-        ToastOptionsDefault
+        ToastDefaultOptions
       )
       navigate('/tutorials')
     } catch (err) {
       toast.error('Failed to delete tutorial.',
-        ToastOptionsDefault
+        ToastDefaultOptions
       )
       console.error('Failed to delete tutorial', err)
     }
@@ -124,17 +124,17 @@ const AddTutorial = () => {
       
       if (response.ok) {
         toast.success('Tutorial successfully updated.',
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
         navigate(`/tutorial/${id}/${slugify(title)}`)
       } else {
         toast.error('Tutorial failed to be updated.',
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
       }
     } catch (error) {
       toast.error('Error with request.',
-        ToastOptionsDefault
+        ToastDefaultOptions
       )
     }
   }

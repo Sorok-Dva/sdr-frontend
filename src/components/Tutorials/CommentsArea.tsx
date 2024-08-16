@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 import { useUser } from 'context/UserContext'
 import { useAuth } from 'context/AuthContext'
-import { ToastOptionsDefault } from 'utils/toastOptions'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 import { toast } from 'react-toastify'
 import { FaThumbsUp } from 'react-icons/fa6'
 
@@ -63,13 +63,13 @@ const CommentsArea: React.FC = () => {
       if (response.ok) {
         const data = await response.json()
         toast.success('Commentaire ajouté avec succès !',
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
         setComments([...comments, data])
         setNewComment('')
       } else {
         toast.error('Erreur lors de l\'ajout de votre commentaire.',
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
       }
     } catch (error) {
@@ -90,7 +90,7 @@ const CommentsArea: React.FC = () => {
       
       if (!response.ok) {
         toast.error('Une erreur est survenue lors de l\'ajout de votre like.',
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
       }
       
@@ -103,7 +103,7 @@ const CommentsArea: React.FC = () => {
       setComments(updatedComments)
     } catch (error) {
       toast.error('Une erreur est survenue lors de l\'ajout de votre like.',
-        ToastOptionsDefault
+        ToastDefaultOptions
       )
       console.error('Failed to upvote comment:', error)
     }

@@ -14,7 +14,7 @@ import { FaEye, FaThumbsUp } from 'react-icons/fa6'
 import { useUser } from 'context/UserContext'
 import NotFound from 'components/ErrorPage/404'
 import { toast } from 'react-toastify'
-import { ToastOptionsDefault } from 'utils/toastOptions'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 import { useAuth } from 'context/AuthContext'
 
 
@@ -36,7 +36,7 @@ const TutorialPage: React.FC = () => {
         setTutorial(data)
       } catch (error) {
         toast.error('Une erreur est survenue dans la récupération du tutoriel.',
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
         console.error(error)
       } finally {
@@ -66,7 +66,7 @@ const TutorialPage: React.FC = () => {
       setTutorial(updatedTutorial)
     } catch (error) {
       toast.error('Une erreur est survenue lors de l\'ajout de votre like.',
-        ToastOptionsDefault
+        ToastDefaultOptions
       )
       console.error('Failed to upvote tutorial:', error)
     }

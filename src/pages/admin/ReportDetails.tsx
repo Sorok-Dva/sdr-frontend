@@ -21,7 +21,7 @@ import { useAuth } from 'context/AuthContext'
 import { FaArrowLeft, FaXmark } from 'react-icons/fa6'
 import { FaTrashAlt } from 'react-icons/fa'
 import { toast } from 'react-toastify'
-import { ToastOptionsDefault } from 'utils/toastOptions'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 
 interface ReportDetail {
   reason : string;
@@ -99,11 +99,11 @@ const ReportDetails : React.FC = () => {
    
       if (!response.ok) {
         toast.error(`Failed to close report. Please try again later (${response.statusText}).`,
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
       } else {
         toast.success('Report closed successfully.',
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
       }
    
@@ -116,7 +116,7 @@ const ReportDetails : React.FC = () => {
   const handleDeleteScreenshot = async () => {
     if (!selectedReason) {
       toast.error('Please select a reason to resolve the report.',
-        ToastOptionsDefault
+        ToastDefaultOptions
       )
       return
     }
@@ -133,11 +133,11 @@ const ReportDetails : React.FC = () => {
    
       if (!response.ok) {
         toast.error(`Failed to delete the dream. (${response.statusText}).`,
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
       } else {
         toast.success('The dream has been successfully deleted and report marked as solved.',
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
       }
    

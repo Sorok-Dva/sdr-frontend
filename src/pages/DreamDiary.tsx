@@ -4,7 +4,7 @@ import PageBanner from 'components/Common/PageBanner'
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa'
 import { useAuth } from 'context/AuthContext'
 import { toast } from 'react-toastify'
-import { ToastOptionsDefault } from 'utils/toastOptions'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 
 export type Dream = {
   title: string;
@@ -282,22 +282,22 @@ const Journal = () => {
           const updatedDreams = [...dreams, { ...newDreamFromServer, date: formattedDate }]
           setDreams(updatedDreams)
           setNewDream({ title: '', content: '', privacy: 'private' })
-          toast.success('Rêve enregistré avec succès', ToastOptionsDefault)
+          toast.success('Rêve enregistré avec succès', ToastDefaultOptions)
         } else if (response.status === 400) {
           const errorData = await response.json()
           if (errorData.errors && Array.isArray(errorData.errors)) {
             errorData.errors.forEach((error: { msg: string }) => {
-              toast.error(error.msg, ToastOptionsDefault)
+              toast.error(error.msg, ToastDefaultOptions)
             })
           } else {
-            toast.error('Erreur lors de la validation des données', ToastOptionsDefault)
+            toast.error('Erreur lors de la validation des données', ToastDefaultOptions)
           }
         } else {
-          toast.error('Erreur lors de la sauvegarde du rêve', ToastOptionsDefault)
+          toast.error('Erreur lors de la sauvegarde du rêve', ToastDefaultOptions)
           console.error('Erreur lors de la sauvegarde du rêve')
         }
       } catch (error) {
-        toast.error('Erreur lors de la requête', ToastOptionsDefault)
+        toast.error('Erreur lors de la requête', ToastDefaultOptions)
         console.error('Erreur lors de la requête', error)
       }
     }

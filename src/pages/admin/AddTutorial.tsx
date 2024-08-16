@@ -5,7 +5,7 @@ import { useAuth } from 'context/AuthContext'
 import { Editor } from '@tinymce/tinymce-react'
 import PageBanner from 'components/Common/PageBanner'
 import { toast } from 'react-toastify'
-import { ToastOptionsDefault } from 'utils/toastOptions'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 import { slugify } from 'utils/slugify'
 import { useNavigate } from 'react-router-dom'
 
@@ -90,7 +90,7 @@ const AddTutorial = () => {
         const data = await response.json()
         setCategories(data)
       } catch (error) {
-        toast.error('Failed to fetch categories', ToastOptionsDefault)
+        toast.error('Failed to fetch categories', ToastDefaultOptions)
       }
     }
     
@@ -122,13 +122,13 @@ const AddTutorial = () => {
         setCategoryId('')
         setContent('')
         toast.success('Tutoriel ajouté avec succès !',
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
         const res = await response.json()
         navigate(`/tutorial/${res.id}/${slugify(title)}`)
       } else {
         toast.error('Erreur lors de l\'ajout du tutoriel.',
-          ToastOptionsDefault
+          ToastDefaultOptions
         )
       }
     } catch (error) {

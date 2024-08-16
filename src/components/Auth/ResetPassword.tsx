@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { ToastOptionsDefault } from 'utils/toastOptions'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 
 const ResetPassword: React.FC = () => {
   const { token } = useParams<{ token: string }>()
@@ -24,7 +24,7 @@ const ResetPassword: React.FC = () => {
     e.preventDefault()
     
     if (password !== confirmPassword) {
-      toast.error('Les mots de passe ne correspondent pas.', ToastOptionsDefault)
+      toast.error('Les mots de passe ne correspondent pas.', ToastDefaultOptions)
       return
     }
     
@@ -38,19 +38,19 @@ const ResetPassword: React.FC = () => {
       })
       
       if (response.ok) {
-        toast.success('Réinitialisation du mot de passe réussie ! Veuillez vous connecter avec votre nouveau mot de passe.', ToastOptionsDefault)
+        toast.success('Réinitialisation du mot de passe réussie ! Veuillez vous connecter avec votre nouveau mot de passe.', ToastDefaultOptions)
         navigate('/login')
       } else {
         const data = await response.json()
         if (data.error) {
-          toast.error(data.error, ToastOptionsDefault)
+          toast.error(data.error, ToastDefaultOptions)
         } else {
-          toast.error('Impossible de réinitialiser le mot de passe. Veuillez réessayer.', ToastOptionsDefault)
+          toast.error('Impossible de réinitialiser le mot de passe. Veuillez réessayer.', ToastDefaultOptions)
         }
       }
     } catch (error) {
       console.error('Error:', error)
-      toast.error('An error occurred. Please try again.', ToastOptionsDefault)
+      toast.error('An error occurred. Please try again.', ToastDefaultOptions)
     }
   }
   

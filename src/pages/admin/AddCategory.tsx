@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useAuth } from 'context/AuthContext'
 import PageBanner from 'components/Common/PageBanner'
 import { toast } from 'react-toastify'
-import { ToastOptionsDefault } from 'utils/toastOptions'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 
 const AdminContainer = styled.div`
   padding: 2rem;
@@ -76,13 +76,13 @@ const AddCategory: React.FC = () => {
       if (response.ok) {
         setTitle('')
         setDescription('')
-        toast.success('Catégorie ajoutée avec succès !', ToastOptionsDefault)
+        toast.success('Catégorie ajoutée avec succès !', ToastDefaultOptions)
       } else {
-        toast.error('Erreur lors de l\'ajout de la catégorie.', ToastOptionsDefault)
+        toast.error('Erreur lors de l\'ajout de la catégorie.', ToastDefaultOptions)
       }
     } catch (error) {
       console.error('Erreur lors de la requête', error)
-      toast.error('Erreur lors de la requête', ToastOptionsDefault)
+      toast.error('Erreur lors de la requête', ToastDefaultOptions)
     }
   }
   
