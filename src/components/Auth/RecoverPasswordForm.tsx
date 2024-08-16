@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { ToastOptionsDefault } from 'utils/toastOptions'
 
 const RecoverPasswordForm: React.FC = () => {
   const [email, setEmail] = useState('')
@@ -10,10 +12,34 @@ const RecoverPasswordForm: React.FC = () => {
     setEmail(e.target.value)
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log(email)
+    try {
+      const response = await fetch('/api/auth/forgot-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      })
+      
+      if (response.ok) {
+        toast.success('Lien de réinitialisation du mot de passe envoyé à votre adresse e-mail', ToastOptionsDefault)
+      } else if (response.status === 400) {
+        const errorData = await response.json()
+        if (errorData.errors && Array.isArray(errorData.errors)) {
+          errorData.errors.forEach((error : { msg : string }) => {
+            toast.error(error.msg, ToastOptionsDefault)
+          })
+        }
+      } else {
+        const { error } = await response.json()
+        toast.error(error)
+      }
+    } catch (error) {
+      toast.error('Une erreur s\'est produite. Veuillez réessayer.', ToastOptionsDefault)
+      console.error('Error:', error)
+    }
   }
 
   return (
