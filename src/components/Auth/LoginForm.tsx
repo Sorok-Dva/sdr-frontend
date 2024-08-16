@@ -6,6 +6,7 @@ import { useUser } from 'context/UserContext'
 import { toast } from 'react-toastify'
 import { Button, Form, FormGroup, Input, InputGroup, InputGroupText } from 'reactstrap'
 import PageBanner from '../Common/PageBanner'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 
 const LoginForm: React.FC = () => {
   const { login } = useUser()
@@ -38,34 +39,41 @@ const LoginForm: React.FC = () => {
         body: JSON.stringify({ username, password }),
       })
       
-      if (!response.ok) {
-        throw new Error('Failed to login')
+      if (response.ok) {
+        const data = await response.json()
+        const token = data.token
+        localStorage.setItem('token', token)
+        const payload = JSON.parse(atob(token.split('.')[1]))
+        login({
+          id: payload.id,
+          email: payload.email,
+          nickname: payload.nickname,
+          avatar: payload.avatar,
+          roleId: payload.roleId,
+          isAdmin: payload.isAdmin,
+        }, token)
+        
+        toast.success(`Vous êtes maintenant connecté ! Bienvenue ${payload.nickname}.`, {
+          position: 'bottom-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: 'colored',
+        })
+        
+        navigate('/')
+      } else if (response.status === 400) {
+        const errorData = await response.json()
+        if (errorData.errors && Array.isArray(errorData.errors)) {
+          errorData.errors.forEach((error : { msg : string }) => {
+            toast.error(error.msg, ToastDefaultOptions)
+          })
+        } else if (errorData.error) {
+          toast.error(errorData.error, { ...ToastDefaultOptions, autoClose: 30000 })
+        }
       }
-      
-      const data = await response.json()
-      const token = data.token
-      localStorage.setItem('token', token)
-      const payload = JSON.parse(atob(token.split('.')[1]))
-      login({
-        id: payload.id,
-        email: payload.email,
-        nickname: payload.nickname,
-        avatar: payload.avatar,
-        roleId: payload.roleId,
-        isAdmin: payload.isAdmin,
-      }, token)
-      
-      toast.success(`Vous êtes maintenant connecté ! Bienvenue ${payload.nickname}.`, {
-        position: 'bottom-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: 'colored',
-      })
-      
-      navigate('/')
     } catch (err) {
       console.log(err)
       setError('An error occurred while attempting to log you in.')
@@ -91,7 +99,7 @@ const LoginForm: React.FC = () => {
                 { error && <div className="alert alert-danger text-center">{ error }</div> }
                 <Form role="form" onSubmit={ handleSubmit }>
                   <div className="row">
-                    <div className="col-lg-4 col-md-4 col-sm-12">
+                    {/*<div className="col-lg-4 col-md-4 col-sm-12">
                       <a
                         href="https://www.google.com/"
                         className="default-btn mb-30"
@@ -119,7 +127,7 @@ const LoginForm: React.FC = () => {
                       >
                         <i className="bx bxl-twitter"></i> Twitter
                       </a>
-                    </div>
+                    </div>*/}
                     
                     <div className="col-12">
                       <FormGroup className="mb-3">
