@@ -46,6 +46,7 @@ import HomePage from 'pages/HomePage'
 import AdminNavbar from 'components/Layouts/AdminNavbar'
 import AddCategory from 'pages/admin/AddCategory'
 import ListCategories from 'pages/admin/ListCategories'
+import ValidateUser from 'pages/ValidateUser'
 
 const theme = {
   colors: {
@@ -98,7 +99,7 @@ const AppContent: React.FC = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                {/*<Route path="/users/validate/:token" element={<ValidateUser />} />*/}
+                <Route path="/users/validate/:token" element={<ValidateUser />} />
                 <Route path="/recover-password" element={<RecoverPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} />
               </>
