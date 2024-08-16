@@ -13,7 +13,6 @@ import {
   InputGroupText,
   Row,
 } from 'reactstrap'
-import { useUser } from 'context/UserContext'
 import PasswordStrengthChecker from '../components/PasswordStrengthChecker'
 import PageBanner from 'components/Common/PageBanner'
 import { toast } from 'react-toastify'
