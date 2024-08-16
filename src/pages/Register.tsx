@@ -16,9 +16,10 @@ import {
 import { useUser } from 'context/UserContext'
 import PasswordStrengthChecker from '../components/PasswordStrengthChecker'
 import PageBanner from 'components/Common/PageBanner'
+import { toast } from 'react-toastify'
+import { ToastDefaultOptions } from 'utils/toastOptions'
 
 const Register : React.FC = () => {
-  const { login } = useUser()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -83,24 +84,12 @@ const Register : React.FC = () => {
       })
    
       if (!response.ok) {
-        throw new Error('Failed to register')
+        toast.success('Une erreur est survenue lors de votre inscription. Veuillez réessayer.',
+          ToastDefaultOptions)
       }
    
-      const data = await response.json()
-      const token = data.token
-      localStorage.setItem('token', token)
-      const payload = JSON.parse(atob(token.split('.')[1]))
-      login(
-        {
-          id: payload.id,
-          email: payload.email,
-          nickname: payload.nickname,
-          avatar: payload.avatar,
-          roleId: payload.roleId,
-          isAdmin: payload.isAdmin,
-        },
-        token,
-      )
+      toast.success('Inscription réussie ! Veuillez vérifier votre email pour valider votre compte et finaliser la connexion.',
+        ToastDefaultOptions)
       navigate('/')
     } catch (err) {
       setError('Email in use or invalid data')
