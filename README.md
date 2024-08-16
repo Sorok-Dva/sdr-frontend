@@ -1,46 +1,127 @@
-# Getting Started with Create React App
+<div align="center">
+    <img src="https://raw.githubusercontent.com/Sorok-Dva/sdr-frontend/main/public/img/logo.png" alt="sdr-frontend Logo">
+  <h1>Le Sentier des Rêves</h1>
+  <blockquote>Réveillez le rêveur en vous.</blockquote>
+  <img src="https://hits.dwyl.com/Sorok-Dva/sdr-frontend.svg?style=flat-square" alt="Views"><br />
+  <img src="https://img.shields.io/github/downloads/Sorok-Dva/sdr-frontend/total.svg?style=for-the-badge" alt="Total downloads">
+  <!--<a href="https://shields.io/community#sponsors" alt="Sponsors">
+    <img src="https://img.shields.io/opencollective/sponsors/Sorok-Dva.svg?style=for-the-badge" />
+  </a>-->
+  <a href="https://github.com/Sorok-Dva/sdr-frontend/pulse" alt="Activity">
+    <img src="https://img.shields.io/github/commit-activity/m/Sorok-Dva/sdr-frontend.svg?style=for-the-badge" />
+  </a>
+  <br />
+  <a href="https://github.com/sponsors/Sorok-Dva">
+    <img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA" alt="Sponsor Me">
+  </a>
+  <a href="https://patreon.com/sorokdva">
+    <img src="https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white" alt="Support Me on Patreon">
+  </a>
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Le Sentier des Rêves - frontend app
+
+This project is the frontend of a dream journaling and tutorial platform called "Le Sentier des Rêves".
+It is built using React and is designed to provide a user-friendly interface for interacting with the backend services.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [Project Structure](#project-structure)
+- [Available Scripts](#available-scripts)
+- [Environment Variables](#environment-variables)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+To install the dependencies, you can use `npm` or `yarn`.
+
+```bash
+npm install
+# or
+yarn install
+```
+
+## Running the Application
+
+To start the application in development mode, run:
+
+```bash
+npm start
+# or
+yarn start
+```
+
+The application will be available at `http://localhost:3000`.
+
+## Project Structure
+
+- **public/**: Contains the static assets, such as `index.html` and images.
+- **src/**: Contains the source code for the React application.
+    - **components/**: Reusable components used across the application.
+    - **pages/**: The main pages/routes of the application.
+    - **context/**: Context providers for global state management.
+    - **assets/**: Images, icons, and other static resources.
+    - **styles/**: Global and component-specific styles.
+    - **utils/**: Utility functions and helpers.
+    - **App.tsx**: The main component that sets up the routes.
+    - **index.tsx**: The entry point for the React application.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+- **`npm start`**: Runs the app in development mode.
+- **`npm build`**: Builds the app for production.
+- **`npm test`**: Launches the test runner.
+- **`npm eject`**: Ejects the app configuration.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Environment Variables
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The following environment variables are used in the project:
 
-### `npm test`
+- **REACT_APP_API_URL**: The base URL for the backend API.
+- **REACT_APP_TINYMCE_API_KEY**: The API key for TinyMCE editor.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You can create a `.env` file in the root of the project to define these variables.
 
-### `npm run build`
+## Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A superset of JavaScript that adds static typing.
+- **React Router**: A library for managing navigation in React applications.
+- **Styled Components**: A library for styling React components using tagged template literals.
+- **TinyMCE**: A WYSIWYG editor for rich text editing.
+- **React Toastify**: A library for displaying notifications and alerts.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Contributing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you'd like to contribute to this project, please follow these steps:
 
-### `npm run eject`
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Make your changes and commit them.
+4. Push your branch to your fork.
+5. Open a pull request to the main repository.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Acknowledgments
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Developed by [Сорок два](https://github.com/Sorok-Dva). All rights reserved.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### License
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International** - see the [LICENSE](LICENSE) file for details.
 
-## Learn More
+## Contributors
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<a href="https://github.com/sorok-dva/sdr-frontend/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=sorok-dva/sdr-frontend" />
+</a>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contact
+
+For any inquiries or feedback, please visit our [GitHub Repository](https://github.com/Sorok-Dva/sdr-frontend) or contact the developers directly.
+
