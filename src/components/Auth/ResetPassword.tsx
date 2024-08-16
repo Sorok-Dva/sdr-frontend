@@ -1,0 +1,112 @@
+'use client'
+
+import React, { useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { ToastOptionsDefault } from 'utils/toastOptions'
+
+const ResetPassword: React.FC = () => {
+  const { token } = useParams<{ token: string }>()
+  const navigate = useNavigate()
+  
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value)
+  }
+  
+  const handleChangeConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(e.target.value)
+  }
+  
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    
+    if (password !== confirmPassword) {
+      toast.error('Les mots de passe ne correspondent pas.', ToastOptionsDefault)
+      return
+    }
+    
+    try {
+      const response = await fetch(`/api/auth/reset-password/${token}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password }),
+      })
+      
+      if (response.ok) {
+        toast.success('Réinitialisation du mot de passe réussie ! Veuillez vous connecter avec votre nouveau mot de passe.', ToastOptionsDefault)
+        navigate('/login')
+      } else {
+        const data = await response.json()
+        if (data.error) {
+          toast.error(data.error, ToastOptionsDefault)
+        } else {
+          toast.error('Impossible de réinitialiser le mot de passe. Veuillez réessayer.', ToastOptionsDefault)
+        }
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      toast.error('An error occurred. Please try again.', ToastOptionsDefault)
+    }
+  }
+  
+  return (
+    <div className="user-area-all-style recover-password-area ptb-100">
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <div className="contact-form-action">
+              <div className="form-heading text-center">
+                <h3 className="form-title">Réinitialiser votre mot de passe</h3>
+                <p className="reset-desc">
+                  Saisissez votre nouveau mot de passe ci-dessous.
+                </p>
+              </div>
+              
+              <form method="post" onSubmit={handleSubmit}>
+                <div className="row">
+                  <div className="col-12">
+                    <div className="form-group">
+                      <input
+                        className="form-control"
+                        type="password"
+                        name="password"
+                        value={password}
+                        onChange={handleChangePassword}
+                        placeholder="Nouveau mot de passe"
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <input
+                        className="form-control"
+                        type="password"
+                        name="confirmPassword"
+                        value={confirmPassword}
+                        onChange={handleChangeConfirmPassword}
+                        placeholder="Confirmer le nouveau mot de passe"
+                        required
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="col-12">
+                    <button className="default-btn btn-two" type="submit">
+                      Réinitialiser le mot de passe
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default ResetPassword

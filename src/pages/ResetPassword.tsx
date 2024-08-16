@@ -1,6 +1,6 @@
 import React from 'react'
 import PageBanner from '../components/Common/PageBanner'
-import RecoverPasswordForm from 'components/Auth/RecoverPasswordForm'
+import ResetPassword from 'components/Auth/ResetPassword'
 
 export default function RecoverPassword () {
   return (
@@ -12,7 +12,7 @@ export default function RecoverPassword () {
         activePageText="Réinitialiser votre mot de passe"
       />
       
-      <RecoverPasswordForm />
+      <ResetPassword />
     </>
   )
 }

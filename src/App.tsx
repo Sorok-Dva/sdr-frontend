@@ -38,6 +38,7 @@ import AdminUserProfile from 'pages/admin/UserProfile'
 import AdminDashboard from 'pages/admin/Dashboard'
 import ReportsList from 'pages/admin/ReportList'
 import ReportDetails from 'pages/admin/ReportDetails'
+import ResetPassword from 'pages/ResetPassword'
 import ServiceUnavailable from 'pages/ServiceUnavailable'
 
 import { ToastContainer } from 'react-toastify'
@@ -97,7 +98,9 @@ const AppContent: React.FC = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                {/*<Route path="/users/validate/:token" element={<ValidateUser />} />*/}
                 <Route path="/recover-password" element={<RecoverPassword />} />
+                <Route path="/reset-password/:token" element={<ResetPassword />} />
               </>
             )}
             <Route path="/about" element={<AboutPage />} />
