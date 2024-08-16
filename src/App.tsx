@@ -25,6 +25,7 @@ import EditTutorial from 'pages/admin/EditTutorial'
 import LandingPage from 'pages/LandingPage'
 import Login from './components/Auth/LoginForm'
 import Register from './pages/Register'
+import RecoverPassword from 'pages/RecoverPassword'
 import AboutPage from './pages/About'
 import PrivacyPolicyPage from './pages/PrivacyPolicy'
 import TOSPage from './pages/TermsOfService'
@@ -74,34 +75,37 @@ const AppContent: React.FC = () => {
             {user ? (
               <>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/dream-diary" element={<DreamDiary />} />
+                { user.isAdmin && (
+                  <Route element={<AdminRoute />}>
+                    <Route path="/admin" element={<AdminLayout />}>
+                      <Route path="home" element={<AdminDashboard />} />
+                      <Route path="users" element={<UserList />} />
+                      <Route path="users/:id" element={<AdminUserProfile />} />
+                      <Route path="reports" element={<ReportsList />} />
+                      <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
+                      <Route path="tutorials/add" element={<AddTutorial />} />
+                      <Route path="tutorials/:id/edit" element={<EditTutorial />} />
+                      <Route path="categories/add" element={<AddCategory />} />
+                      <Route path="categories/list" element={<ListCategories />} />
+                    </Route>
+                  </Route>
+                )}
               </>
             ) : (
               <>
                 <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/recover-password" element={<RecoverPassword />} />
               </>
             )}
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="/terms-of-service" element={<TOSPage />} />
             <Route path="/user/:nickname" element={<UserProfile />} />
-            <Route path="/dream-diary" element={<DreamDiary />} />
             <Route path="/tutorials" element={<TutorialsList />} />
             <Route path="/tutorial/:id/:slug" element={<Tutorial />} />
-            <Route element={<AdminRoute />}>
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route path="home" element={<AdminDashboard />} />
-                <Route path="users" element={<UserList />} />
-                <Route path="users/:id" element={<AdminUserProfile />} />
-                <Route path="reports" element={<ReportsList />} />
-                <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
-                <Route path="tutorials/add" element={<AddTutorial />} />
-                <Route path="tutorials/:id/edit" element={<EditTutorial />} />
-                <Route path="categories/add" element={<AddCategory />} />
-                <Route path="categories/list" element={<ListCategories />} />
-              </Route>
-            </Route>
             <Route path="*" element={<NotFound />} />
           </>
         )}
