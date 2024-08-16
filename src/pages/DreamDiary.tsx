@@ -25,7 +25,6 @@ const JournalContainer = styled.div`
 const Book = styled.div`
   width: 90%;
   max-width: 60rem;
-  height: 500px;
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -34,47 +33,85 @@ const Book = styled.div`
   flex-direction: row;
   overflow: hidden;
   position: relative;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 1rem;
+  }
 `
 
 const Page = styled.div`
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
+
   &:first-child {
     border-right: 1px solid #ccc;
+
+    @media (max-width: 768px) {
+      border-right: none;
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem 0;
   }
 `
 
 const PageTitle = styled.h2`
   margin-bottom: 1rem;
   font-family: 'Georgia', serif;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    text-align: left;
+  }
 `
 
 const DreamEntry = styled.div`
   margin-bottom: 1rem;
   padding: 1rem;
   border-bottom: 1px solid #ddd;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
 `
 
 const EntryTitle = styled.h3`
   margin: 0;
   font-size: 1.2rem;
   color: #333;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `
 
 const EntryDate = styled.p`
   font-size: 0.9rem;
   color: #666;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `
 
 const EntryContent = styled.p`
   font-size: 1rem;
   color: #444;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `
 
 const NewDreamForm = styled.form`
   display: flex;
   flex-direction: column;
+  margin-bottom: 2rem;
 `
 
 const TextInput = styled.input`
@@ -83,6 +120,10 @@ const TextInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `
 
 const TextArea = styled.textarea`
@@ -92,6 +133,10 @@ const TextArea = styled.textarea`
   border-radius: 5px;
   font-size: 1rem;
   height: 150px;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `
 
 const Button = styled.button`
@@ -101,34 +146,14 @@ const Button = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+
   &:hover {
     background-color: #555;
   }
-`
 
-const PaginationControls = styled.div`
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 96%;
-`
-
-const PageButton = styled.button`
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  &:hover {
-    background-color: #555;
-  }
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
   }
 `
 
@@ -141,6 +166,48 @@ const CheckboxContainer = styled.div`
 const Label = styled.label`
   margin-left: 0.5rem;
   font-size: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+`
+
+const PaginationControls = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96%;
+
+  @media (max-width: 768px) {
+    position: static;
+    transform: none;
+    margin-top: 1rem;
+  }
+`
+
+const PageButton = styled.button`
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #555;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.4rem 0.8rem;
+  }
 `
 
 const Journal = () => {
@@ -259,51 +326,27 @@ const Journal = () => {
           <JournalContainer>
             <Book>
               <Page>
-                <PageTitle>Vos Rêves</PageTitle>
-                {dreams.length === 0 ? (
-                  <p>Vous n'avez enregistré aucun rêve pour le moment.</p>
-                ) : (
-                  currentDreams.map((dream, index) => (
-                    <DreamEntry key={index}>
-                      <EntryTitle>{dream.title}</EntryTitle>
-                      <EntryDate>{dream.date}</EntryDate>
-                      <EntryContent>{dream.content}</EntryContent>
-                    </DreamEntry>
-                  ))
-                )}
-                {dreams.length > 0 && (
-                  <PaginationControls>
-                    <PageButton onClick={prevPage} disabled={currentPage === 0}>
-                      <FaLongArrowAltLeft />
-                    </PageButton>
-                    <PageButton onClick={nextPage} disabled={(currentPage + 1) * dreamsPerPage >= dreams.length}>
-                      <FaLongArrowAltRight />
-                    </PageButton>
-                  </PaginationControls>
-                )}
-              </Page>
-              <Page>
                 <PageTitle>Écrire un Nouveau Rêve</PageTitle>
-                <NewDreamForm onSubmit={handleFormSubmit}>
+                <NewDreamForm onSubmit={ handleFormSubmit }>
                   <TextInput
                     type="text"
                     name="title"
                     placeholder="Titre du rêve"
-                    value={newDream.title}
-                    onChange={handleInputChange}
+                    value={ newDream.title }
+                    onChange={ handleInputChange }
                   />
                   <TextArea
                     name="content"
                     placeholder="Décrivez votre rêve..."
-                    value={newDream.content}
-                    onChange={handleInputChange}
+                    value={ newDream.content }
+                    onChange={ handleInputChange }
                   />
                   <CheckboxContainer>
                     <input
                       type="checkbox"
                       id="privacy"
-                      checked={newDream.privacy === 'public'}
-                      onChange={handlePrivacyChange}
+                      checked={ newDream.privacy === 'public' }
+                      onChange={ handlePrivacyChange }
                     />
                     <Label htmlFor="privacy">
                       Rendre ce rêve public
@@ -311,6 +354,30 @@ const Journal = () => {
                   </CheckboxContainer>
                   <Button type="submit">Enregistrer</Button>
                 </NewDreamForm>
+              </Page>
+              <Page>
+                <PageTitle>Vos Rêves</PageTitle>
+                { dreams.length === 0 ? (
+                  <p>Vous n'avez enregistré aucun rêve pour le moment.</p>
+                ): (
+                  currentDreams.map((dream, index) => (
+                    <DreamEntry key={ index }>
+                      <EntryTitle>{ dream.title }</EntryTitle>
+                      <EntryDate>{ dream.date }</EntryDate>
+                      <EntryContent>{ dream.content }</EntryContent>
+                    </DreamEntry>
+                  ))
+                ) }
+                { dreams.length > 0 && (
+                  <PaginationControls>
+                    <PageButton onClick={ prevPage } disabled={ currentPage === 0 }>
+                      <FaLongArrowAltLeft/>
+                    </PageButton>
+                    <PageButton onClick={ nextPage } disabled={ (currentPage + 1) * dreamsPerPage >= dreams.length }>
+                      <FaLongArrowAltRight/>
+                    </PageButton>
+                  </PaginationControls>
+                ) }
               </Page>
             </Book>
           </JournalContainer>
