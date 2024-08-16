@@ -17,6 +17,7 @@ const menus = [
   {
     label: 'Mon journal de rêves',
     link: '/dream-diary',
+    needAuth: true,
   },
   {
     label: 'Tutoriels',

@@ -16,14 +16,19 @@ interface MenuItemProps {
   }[];
   children?: React.ReactNode;
   isAdmin?: boolean;
+  needAuth?: boolean;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ label, link, submenu, isAdmin }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ label, link, submenu, isAdmin, needAuth }) => {
   const { user } = useUser()
   const location = useLocation()
   const pathname = location.pathname
   
   if (isAdmin && !user?.isAdmin) {
+    return null
+  }
+  
+  if (needAuth && !user) {
     return null
   }
   
