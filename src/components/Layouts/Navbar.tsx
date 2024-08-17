@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { Img as Image } from 'react-image'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import MenuItem from './MenuItem'
 
 const StyledUl = styled.ul`
@@ -88,15 +88,21 @@ import styled from 'styled-components'
 const Navbar: React.FC = () => {
   const { user, logout } = useUser()
   const [menu, setMenu] = useState<boolean>(true)
+  const location = useLocation()
   
   const handleLogout = () => {
     logout()
     localStorage.removeItem('token')
+    setMenu(true)
   }
   
   const toggleNavbar = () => {
     setMenu(!menu)
   }
+  
+  useEffect(() => {
+    setMenu(true)
+  }, [location])
   
   useEffect(() => {
     const elementId = document.getElementById('navbar')
@@ -143,7 +149,7 @@ const Navbar: React.FC = () => {
             <div className={classOne} id="navbarSupportedContent">
               <StyledUl className="navbar-nav m-auto">
                 {menus.map((menuItem) => (
-                  <MenuItem key={menuItem.label} {...menuItem} />
+                  <MenuItem key={menuItem.label} {...menuItem} onClick={toggleNavbar} />
                 ))}
               </StyledUl>
               
@@ -168,29 +174,29 @@ const Navbar: React.FC = () => {
                             {
                               label: 'Déconnexion',
                               link: '/',
-                              onClick: handleLogout
+                              onClick: handleLogout,
                             },
                           ],
                         },
                       ].map((menuItem) => (
-                        <MenuItem key={ user.nickname } { ...menuItem }>
-                          { menuItem.submenu.map((subItem) => (
-                            <li key={ subItem.label }>
-                              <Link to={ subItem.link } onClick={ subItem.onClick }>
-                                { subItem.label }
+                        <MenuItem key={user.nickname} {...menuItem} onClick={toggleNavbar}>
+                          {menuItem.submenu.map((subItem) => (
+                            <li key={subItem.label}>
+                              <Link to={subItem.link} onClick={subItem.onClick || toggleNavbar}>
+                                {subItem.label}
                               </Link>
                             </li>
-                          )) }
+                          ))}
                         </MenuItem>
-                      )) }
+                      ))}
                     </ul>
                   </>
-                ): (
+                ) : (
                   <>
-                    <Link to="/register/" className="primary-btn">
+                    <Link to="/register/" className="primary-btn" onClick={toggleNavbar}>
                       Inscription <i className="bx bx-user-plus"></i>
                     </Link>{' '}
-                    <Link to="/login/" className="default-btn">
+                    <Link to="/login/" className="default-btn" onClick={toggleNavbar}>
                       Connexion <i className="bx bx-log-in-circle"></i>
                     </Link>
                   </>
