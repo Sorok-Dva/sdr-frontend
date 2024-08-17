@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { ToastDefaultOptions } from 'utils/toastOptions'
+import PasswordStrengthChecker from 'components/PasswordStrengthChecker'
+import { Button } from 'reactstrap'
 
 const ResetPassword: React.FC = () => {
   const { token } = useParams<{ token: string }>()
@@ -20,6 +22,18 @@ const ResetPassword: React.FC = () => {
     setConfirmPassword(e.target.value)
   }
   
+  const validatePassword = (password : string) => {
+    const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    return re.test(password)
+  }
+  
+  const isFormValid = () => {
+    return (
+      validatePassword(password) &&
+      (password === confirmPassword)
+    )
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     
@@ -94,10 +108,12 @@ const ResetPassword: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="col-12">
-                    <button className="default-btn btn-two" type="submit">
+                  <PasswordStrengthChecker password={password} />
+                  
+                  <div className="col-12 text-center">
+                    <Button className="mt-4" color="primary" type="submit" disabled={!isFormValid()}>
                       Réinitialiser le mot de passe
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </form>
