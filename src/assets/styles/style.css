@@ -546,6 +546,67 @@ Default Btn Area Style
 .default-btn:hover::after {
   right: 200px;
 }
+/*
+Default Btn Area Style
+======================================================*/
+.primary-btn {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 18px 35px;
+  line-height: 1;
+  transition: all 0.6s ease;
+  z-index: 1;
+  text-transform: capitalize;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: #0653dc;
+  display: inline-block;
+}
+.primary-btn::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 10px;
+  height: 100px;
+  background-color: #ffffff;
+  opacity: 0.5;
+  transition: all 0.6s ease;
+  transform: rotate(45deg);
+}
+.primary-btn::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -40px;
+  width: 10px;
+  height: 100px;
+  background-color: #ffffff;
+  opacity: 0.5;
+  transition: all 0.6s ease;
+  transform: rotate(45deg);
+}
+.primary-btn.active {
+  background-color: #ffffff;
+  color: #0653dc;
+}
+.primary-btn.active:hover {
+  color: #ffffff;
+  background-color: #0653dc;
+}
+.primary-btn:hover {
+  color: #ffffff;
+  transition: all 0.6s ease;
+}
+.primary-btn:hover::before {
+  left: 200px;
+}
+.primary-btn:hover::after {
+  right: 200px;
+}
 
 .popup-youtube {
   cursor: pointer;
@@ -1012,10 +1073,10 @@ jumpx Nav Area Style
   position: relative;
   top: 3px;
 }
-.navbar-area .others-options .default-btn {
+.navbar-area .others-options .default-btn,.primary-btn {
   padding: 15px 35px;
 }
-.navbar-area .others-options .default-btn i {
+.navbar-area .others-options .default-btn,.primary-btn i {
   position: relative;
   top: 1px;
   margin-left: 5px;

@@ -187,6 +187,9 @@ const Navbar: React.FC = () => {
                   </>
                 ): (
                   <>
+                    <Link to="/register/" className="primary-btn">
+                      Inscription <i className="bx bx-user-plus"></i>
+                    </Link>{' '}
                     <Link to="/login/" className="default-btn">
                       Connexion <i className="bx bx-log-in-circle"></i>
                     </Link>
