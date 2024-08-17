@@ -93,7 +93,7 @@ const LoginForm: React.FC = () => {
             <div className="col-12">
               <div className="contact-form-action">
                 <div className="form-heading text-center">
-                  <h3 className="form-title">Login to your account!</h3>
+                  <h3 className="form-title">Se connecter</h3>
                 </div>
                 
                 { error && <div className="alert alert-danger text-center">{ error }</div> }
@@ -136,7 +136,7 @@ const LoginForm: React.FC = () => {
                             <i className="ni ni-email-83"/>
                           </InputGroupText>
                           <Input
-                            placeholder="Email or username"
+                            placeholder="Email ou pseudo"
                             type="text"
                             value={ username }
                             onChange={ (e) => setUsername(e.target.value) }
@@ -152,7 +152,7 @@ const LoginForm: React.FC = () => {
                             <i className="ni ni-lock-circle-open"/>
                           </InputGroupText>
                           <Input
-                            placeholder="Password"
+                            placeholder="Mot de passe"
                             type={ showPassword ? 'text': 'password' }
                             autoComplete="off"
                             value={ password }
