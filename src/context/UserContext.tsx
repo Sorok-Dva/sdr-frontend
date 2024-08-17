@@ -48,10 +48,15 @@ export const UserProvider : React.FC<{ children : ReactNode }> = ({ children }) 
         .then((data) => {
           setUser(data)
         })
-        .catch((err) => {
-          setServerError(err)
-          setUser(null)
-          setStopRequest(true)
+        .catch((error) => {
+          const forbidden = error.message.includes('403')
+          if (forbidden) {
+            logout()
+          } else {
+            setServerError(error)
+            setUser(null)
+            setStopRequest(true)
+          }
         })
     }
   }, [setServerError, user, callApi, stopRequest])
