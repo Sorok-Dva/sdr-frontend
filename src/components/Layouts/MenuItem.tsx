@@ -14,6 +14,7 @@ interface MenuItemProps {
     className?: string;
     onClick?: () => void;
   }[];
+  onClick?: () => void;
   children?: React.ReactNode;
   isAdmin?: boolean;
   needAuth?: boolean;
@@ -38,7 +39,6 @@ const MenuItem: React.FC<MenuItemProps> = ({ label, link, submenu, isAdmin, need
         <Link
           to={link}
           className="nav-link"
-          onClick={(e) => e.preventDefault()}
         >
           {label} <i className="bx bx-chevron-down"></i>
         </Link>
