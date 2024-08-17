@@ -16,6 +16,7 @@ interface User {
   roleId: string;
   dreamsCount: number;
   points: number;
+  validated: boolean;
   createdAt: Date;
 }
 
@@ -111,30 +112,34 @@ const UserList: React.FC = () => {
           <Table hover>
             <thead>
               <tr>
-                <th onClick={() => handleSort('nickname')}>
-              Username {sortedField === 'nickname' && (isAsc ? '↑' : '↓')}
+                <th onClick={ () => handleSort('nickname') }>
+                Username { sortedField === 'nickname' && (isAsc ? '↑': '↓') }
                 </th>
-                <th onClick={() => handleSort('email')}>
-              Email {sortedField === 'email' && (isAsc ? '↑' : '↓')}
+                <th onClick={ () => handleSort('email') }>
+                Email { sortedField === 'email' && (isAsc ? '↑': '↓') }
                 </th>
-                <th onClick={() => handleSort('dreamsCount')}>
-              Dreams {sortedField === 'dreamsCount' && (isAsc ? '↑' : '↓')}
+                <th onClick={ () => handleSort('dreamsCount') }>
+                Dreams { sortedField === 'dreamsCount' && (isAsc ? '↑': '↓') }
                 </th>
-                <th onClick={() => handleSort('points')}>
-              Points {sortedField === 'points' && (isAsc ? '↑' : '↓')}
+                <th onClick={ () => handleSort('points') }>
+                Points { sortedField === 'points' && (isAsc ? '↑': '↓') }
                 </th>
-                <th onClick={() => handleSort('createdAt')}>
-              Created At {sortedField === 'createdAt' && (isAsc ? '↑' : '↓')}
+                <th onClick={ () => handleSort('validated') }>
+               Validated { sortedField === 'validated' && (isAsc ? '↑': '↓') }
+                </th>
+                <th onClick={ () => handleSort('createdAt') }>
+                Created At { sortedField === 'createdAt' && (isAsc ? '↑': '↓') }
                 </th>
               </tr>
             </thead>
             <tbody>
-              {currentUsers.map((user) => (
-                <tr key={user.id}>
+              { currentUsers.map((user) => (
+                <tr key={ user.id }>
                   <td><Link to={`/admin/users/${user.id}`}>{user.nickname}</Link></td>
                   <td>{user.email}</td>
                   <td>{user.dreamsCount}</td>
                   <td>{user.points}</td>
+                  <td>{user.validated ? 'Yes' : 'No'}</td>
                   <td>{new Date(user.createdAt).toLocaleDateString()}</td>
                 </tr>
               ))}
