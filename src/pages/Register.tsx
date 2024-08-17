@@ -69,7 +69,7 @@ const Register : React.FC = () => {
     e.preventDefault()
   
     if (!isChecked) {
-      setError('You must agree to the terms and privacy policy.')
+      setError('Vous devez accepter les conditions générales d\'utilisation et la politique de confidentialité.')
       return
     }
   
