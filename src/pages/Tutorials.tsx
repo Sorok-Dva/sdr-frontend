@@ -34,7 +34,7 @@ const TutorialsList: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
   const tutorialsPerPage = 6
-  
+
   useEffect(() => {
     const fetchTutorials = async () => {
       try {
@@ -47,20 +47,24 @@ const TutorialsList: React.FC = () => {
         setLoading(false)
       }
     }
-    
+
     fetchTutorials()
   }, [])
-  
+
   const indexOfLastTutorial = currentPage * tutorialsPerPage
   const indexOfFirstTutorial = indexOfLastTutorial - tutorialsPerPage
   const currentTutorials = tutorials.slice(indexOfFirstTutorial, indexOfLastTutorial)
-  
+
   const totalPages = Math.ceil(tutorials.length / tutorialsPerPage)
-  
+
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   }
-  
+
   if (loading) {
     return (
       <div className="spinner-container">
@@ -70,7 +74,7 @@ const TutorialsList: React.FC = () => {
       </div>
     )
   }
-  
+
   return (
     <>
       <PageBanner

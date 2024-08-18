@@ -28,7 +28,7 @@ const ReportsList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [rowsPerPage, setRowsPerPage] = useState<number>(10)
   const [searchTerm, setSearchTerm] = useState<string>('')
-  
+
   useEffect(() => {
     const fetchReports = async () => {
       try {
@@ -43,10 +43,10 @@ const ReportsList: React.FC = () => {
         console.error('Failed to fetch reports', err)
       }
     }
-    
+
     fetchReports()
   }, [token])
-  
+
   const handleSort = (field: keyof AggregatedReport) => {
     if (sortedField === field) {
       setIsAsc(!isAsc)
@@ -55,18 +55,22 @@ const ReportsList: React.FC = () => {
       setIsAsc(true)
     }
   }
-  
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
     setCurrentPage(1)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   }
-  
+
   const filteredReports = reports.filter((report) =>
     report.reportedBy.toLowerCase().includes(searchTerm.toLowerCase()) ||
     report.reportCount.toString().includes(searchTerm) ||
     new Date(report.earliestReportDate).toLocaleDateString().includes(searchTerm)
   )
-  
+
   const sortedReports = [...filteredReports].sort((a, b) => {
     if (sortedField) {
       if (a[sortedField] < b[sortedField]) {
@@ -78,15 +82,15 @@ const ReportsList: React.FC = () => {
     }
     return 0
   })
-  
+
   const indexOfLastReport = currentPage * rowsPerPage
   const indexOfFirstReport = indexOfLastReport - rowsPerPage
   const currentReports = sortedReports.slice(indexOfFirstReport, indexOfLastReport)
-  
+
   const totalPages = Math.ceil(filteredReports.length / rowsPerPage)
-  
+
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
-  
+
   return (
     <>
       <PageBanner
@@ -174,13 +178,13 @@ const ReportsList: React.FC = () => {
                       <i className="bx bx-chevrons-left"></i>
                     </Link>
                   </li>
-                  
+
                   <li className={ `page-item ${ currentPage === 1 ? 'disabled': '' }` }>
                     <Link to="#" className="page-link" onClick={ () => paginate(currentPage - 1) }>
                       <i className="bx bx-chevron-left"></i>
                     </Link>
                   </li>
-                  
+
                   { [...Array(totalPages)].map((_, index) => (
                     <li key={ index } className={ `page-item ${ index + 1 === currentPage ? 'active': '' }` }>
                       <Link to="#" className="page-link" onClick={ () => paginate(index + 1) }>
@@ -188,13 +192,13 @@ const ReportsList: React.FC = () => {
                       </Link>
                     </li>
                   )) }
-                  
+
                   <li className={ `page-item ${ currentPage === totalPages ? 'disabled': '' }` }>
                     <Link to="#" className="page-link" onClick={ () => paginate(currentPage + 1) }>
                       <i className="bx bx-chevron-right"></i>
                     </Link>
                   </li>
-                  
+
                   <li className={ `page-item ${ currentPage === totalPages ? 'disabled': '' }` }>
                     <Link to="#" className="page-link page-links" onClick={ () => paginate(totalPages) }>
                       <i className="bx bx-chevrons-right"></i>
@@ -202,7 +206,7 @@ const ReportsList: React.FC = () => {
                   </li>
                 </ul>
               </nav>
-              
+
               <div className="col">
                 <select
                   value={ rowsPerPage }

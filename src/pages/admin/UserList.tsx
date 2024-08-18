@@ -28,7 +28,7 @@ const UserList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [rowsPerPage, setRowsPerPage] = useState<number>(10)
   const [searchTerm, setSearchTerm] = useState<string>('')
-  
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -43,10 +43,10 @@ const UserList: React.FC = () => {
         console.error('Failed to fetch users', err)
       }
     }
-    
+
     fetchUsers()
   }, [token])
-  
+
   const handleSort = (field: keyof User) => {
     if (sortedField === field) {
       setIsAsc(!isAsc)
@@ -55,16 +55,16 @@ const UserList: React.FC = () => {
       setIsAsc(true)
     }
   }
-  
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
   }
-  
+
   const filteredUsers = users.filter((user) =>
     user.nickname.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
   )
-  
+
   const sortedUsers = [...filteredUsers].sort((a, b) => {
     if (sortedField) {
       if (a[sortedField] < b[sortedField]) {
@@ -76,15 +76,21 @@ const UserList: React.FC = () => {
     }
     return 0
   })
-  
+
   const indexOfLastUser = currentPage * rowsPerPage
   const indexOfFirstUser = indexOfLastUser - rowsPerPage
   const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser)
-  
+
   const totalPages = Math.ceil(filteredUsers.length / rowsPerPage)
-  
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
-  
+
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }
+
   return (
     <>
       <PageBanner
@@ -154,13 +160,13 @@ const UserList: React.FC = () => {
                       <i className="bx bx-chevrons-left"></i>
                     </Link>
                   </li>
-                  
+
                   <li className={ `page-item ${ currentPage === 1 ? 'disabled': '' }` }>
                     <Link to="#" className="page-link" onClick={ () => paginate(currentPage - 1) }>
                       <i className="bx bx-chevron-left"></i>
                     </Link>
                   </li>
-                  
+
                   { [...Array(totalPages)].map((_, index) => (
                     <li key={ index } className={ `page-item ${ index + 1 === currentPage ? 'active': '' }` }>
                       <Link to="#" className="page-link" onClick={ () => paginate(index + 1) }>
@@ -168,13 +174,13 @@ const UserList: React.FC = () => {
                       </Link>
                     </li>
                   )) }
-                  
+
                   <li className={ `page-item ${ currentPage === totalPages ? 'disabled': '' }` }>
                     <Link to="#" className="page-link" onClick={ () => paginate(currentPage + 1) }>
                       <i className="bx bx-chevron-right"></i>
                     </Link>
                   </li>
-                  
+
                   <li className={ `page-item ${ currentPage === totalPages ? 'disabled': '' }` }>
                     <Link to="#" className="page-link page-links" onClick={ () => paginate(totalPages) }>
                       <i className="bx bx-chevrons-right"></i>
@@ -182,7 +188,7 @@ const UserList: React.FC = () => {
                   </li>
                 </ul>
               </nav>
-              
+
               <div className="col">
                 <select
                   value={ rowsPerPage }
