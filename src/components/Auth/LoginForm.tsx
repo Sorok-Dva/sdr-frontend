@@ -26,10 +26,10 @@ const LoginForm: React.FC = () => {
       mainRef.current.scrollTop = 0
     }
   }, [])
-  
+
   const handleSubmit = async (e : React.FormEvent) => {
     e.preventDefault()
-    
+
     try {
       const response = await fetch('/api/users/login', {
         method: 'POST',
@@ -38,11 +38,10 @@ const LoginForm: React.FC = () => {
         },
         body: JSON.stringify({ username, password }),
       })
-      
+
       if (response.ok) {
         const data = await response.json()
         const token = data.token
-        localStorage.setItem('token', token)
         const payload = JSON.parse(atob(token.split('.')[1]))
         login({
           id: payload.id,
@@ -52,7 +51,7 @@ const LoginForm: React.FC = () => {
           roleId: payload.roleId,
           isAdmin: payload.isAdmin,
         }, token)
-        
+
         toast.success(`Vous êtes maintenant connecté ! Bienvenue ${payload.nickname}.`, {
           position: 'bottom-right',
           autoClose: 3000,
@@ -62,7 +61,7 @@ const LoginForm: React.FC = () => {
           draggable: true,
           theme: 'colored',
         })
-        
+
         navigate('/')
       } else if (response.status === 400) {
         const errorData = await response.json()
@@ -95,7 +94,7 @@ const LoginForm: React.FC = () => {
                 <div className="form-heading text-center">
                   <h3 className="form-title">Se connecter</h3>
                 </div>
-                
+
                 { error && <div className="alert alert-danger text-center">{ error }</div> }
                 <Form role="form" onSubmit={ handleSubmit }>
                   <div className="row">
@@ -108,7 +107,7 @@ const LoginForm: React.FC = () => {
                         <i className="bx bxl-google"></i> Google
                       </a>
                     </div>
-                    
+
                     <div className="col-lg-4 col-md-4 col-sm-12">
                       <a
                         href="https://www.facebook.com/"
@@ -118,7 +117,7 @@ const LoginForm: React.FC = () => {
                         <i className="bx bxl-facebook"></i> Facebook
                       </a>
                     </div>
-                    
+
                     <div className="col-lg-4 col-md-4 col-sm-12">
                       <a
                         href="https://www.twitter.com/"
@@ -128,7 +127,7 @@ const LoginForm: React.FC = () => {
                         <i className="bx bxl-twitter"></i> Twitter
                       </a>
                     </div>*/}
-                    
+
                     <div className="col-12">
                       <FormGroup className="mb-3">
                         <InputGroup className="input-group-alternative">
@@ -144,7 +143,7 @@ const LoginForm: React.FC = () => {
                         </InputGroup>
                       </FormGroup>
                     </div>
-                    
+
                     <div className="col-12">
                       <FormGroup>
                         <InputGroup className="input-group-alternative">
@@ -170,7 +169,7 @@ const LoginForm: React.FC = () => {
                         </InputGroup>
                       </FormGroup>
                     </div>
-                    
+
                     <div className="col-lg-6 col-sm-6 form-condition">
                       <div className="agree-label">
                         <div className="form-check">
@@ -189,19 +188,19 @@ const LoginForm: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="col-lg-6 col-sm-6">
                       <Link to="/recover-password" className="forget">
                         Mot de passe oublié ?
                       </Link>
                     </div>
-                    
+
                     <div className="col-12">
                       <button className="default-btn btn-two" type="submit">
                         Connexion
                       </button>
                     </div>
-                    
+
                     <div className="col-12">
                       <p className="account-desc">
                         Pas encore membre ?

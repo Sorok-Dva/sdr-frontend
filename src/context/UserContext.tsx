@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from './AuthContext'
 import { useError } from './ErrorContext'
 import useApi from '../hooks/useApi'
 
@@ -25,20 +26,21 @@ const UserContext = createContext<UserContextType | undefined>(undefined)
 
 export const UserProvider : React.FC<{ children : ReactNode }> = ({ children }) => {
   console.log('Initializing UserProvider')
- 
+
   const [user, setUser] = useState<User | null>(null)
   const navigate = useNavigate()
   const [stopRequest, setStopRequest] = useState(false)
   const { setServerError } = useError()
+  const { setToken } = useAuth()
   const callApi = useApi()
- 
+
   const navigateTo = (path : string) => {
     navigate(path)
   }
- 
+
   useEffect(() => {
     const token = localStorage.getItem('token')
-  
+
     if (token && !user && !stopRequest) {
       callApi('/api/users/me', {
         headers: {
@@ -60,21 +62,22 @@ export const UserProvider : React.FC<{ children : ReactNode }> = ({ children }) 
         })
     }
   }, [setServerError, user, callApi, stopRequest])
- 
+
   const logout = () => {
     setUser(null)
     localStorage.removeItem('token')
     navigateTo('/')
   }
- 
-  const login = (user : User, token : string) => {
+
+  const login = (user: User, token: string) => {
     setUser(user)
+    setToken(token)
     localStorage.setItem('token', token)
     navigateTo('/')
   }
- 
+
   const isAdmin = user?.roleId === 1
- 
+
   return (
     <UserContext.Provider value={ { user, setUser, logout, login, isAdmin, navigateTo } }>
       { children }
