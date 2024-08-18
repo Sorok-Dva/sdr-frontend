@@ -11,7 +11,7 @@ import shapeImg4 from '../../assets/images/shape/services-shape/4.png'
 import shapeImg5 from '../../assets/images/shape/services-shape/5.png'
 import shapeImg6 from '../../assets/images/shape/services-shape/6.png'
 
-const servicesData = [
+const featuresData = [
   {
     iconName: 'fa fa-moon-stars',
     title: 'Guides de Rêves Lucides',
@@ -62,7 +62,7 @@ const servicesData = [
   },
 ]
 
-const Services: React.FC = () => {
+const Features: React.FC = () => {
   return (
     <>
       <div className="offer-area pt-100 pb-70">
@@ -74,10 +74,10 @@ const Services: React.FC = () => {
               "Le Sentier des Rêves" vous offre une gamme de services pour vous aider à explorer, comprendre, et partager vos expériences oniriques. Que vous soyez novice ou expert, nous avons quelque chose pour vous.
             </p>
           </div>
-          
+
           <div className="row justify-content-center">
-            {servicesData &&
-              servicesData.slice(0, 6).map((value, i) => (
+            {featuresData &&
+              featuresData.slice(0, 6).map((value, i) => (
                 <div
                   className="col-lg-4 col-sm-6"
                   key={i}
@@ -96,7 +96,7 @@ const Services: React.FC = () => {
               ))}
           </div>
         </div>
-        
+
         <div className="offer-shape">
           <Image src={shapeImg1} alt="Image" width={300} height={375} />
           <Image src={shapeImg2} alt="Image" width={300} height={375} />
@@ -110,4 +110,4 @@ const Services: React.FC = () => {
   )
 }
 
-export default Services
+export default Features

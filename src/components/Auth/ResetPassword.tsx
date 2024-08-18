@@ -4,29 +4,29 @@ import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { ToastDefaultOptions } from 'utils/toastOptions'
-import PasswordStrengthChecker from 'components/PasswordStrengthChecker'
+import PasswordStrengthChecker from 'components/Common/PasswordStrengthChecker'
 import { Button } from 'reactstrap'
 
 const ResetPassword: React.FC = () => {
   const { token } = useParams<{ token: string }>()
   const navigate = useNavigate()
-  
+
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  
+
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
-  
+
   const handleChangeConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(e.target.value)
   }
-  
+
   const validatePassword = (password : string) => {
     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
     return re.test(password)
   }
-  
+
   const isFormValid = () => {
     return (
       validatePassword(password) &&
@@ -36,12 +36,12 @@ const ResetPassword: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
+
     if (password !== confirmPassword) {
       toast.error('Les mots de passe ne correspondent pas.', ToastDefaultOptions)
       return
     }
-    
+
     try {
       const response = await fetch(`/api/auth/reset-password/${token}`, {
         method: 'POST',
@@ -50,7 +50,7 @@ const ResetPassword: React.FC = () => {
         },
         body: JSON.stringify({ password }),
       })
-      
+
       if (response.ok) {
         toast.success('Réinitialisation du mot de passe réussie ! Veuillez vous connecter avec votre nouveau mot de passe.', ToastDefaultOptions)
         navigate('/login')
@@ -67,7 +67,7 @@ const ResetPassword: React.FC = () => {
       toast.error('An error occurred. Please try again.', ToastDefaultOptions)
     }
   }
-  
+
   return (
     <div className="user-area-all-style recover-password-area ptb-100">
       <div className="container">
@@ -80,7 +80,7 @@ const ResetPassword: React.FC = () => {
                   Saisissez votre nouveau mot de passe ci-dessous.
                 </p>
               </div>
-              
+
               <form method="post" onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-12">
@@ -107,9 +107,9 @@ const ResetPassword: React.FC = () => {
                       />
                     </div>
                   </div>
-                  
+
                   <PasswordStrengthChecker password={password} />
-                  
+
                   <div className="col-12 text-center">
                     <Button className="mt-4" color="primary" type="submit" disabled={!isFormValid()}>
                       Réinitialiser le mot de passe

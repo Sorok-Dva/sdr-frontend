@@ -1,15 +1,15 @@
 import React from 'react'
 import MainBanner from '../components/LandingPage/MainBanner'
-import Services from '../components/LandingPage/Services'
+import Features from 'components/LandingPage/Features'
 // import Newsletter from '../components/Common/Newsletter'
-import LastTutorials from 'components/Common/LastTutorials'
+import LastTutorials from 'components/Tutorials/LastTutorials'
 const LandingPage : React.FC = () => {
 
   return (
     <>
       <MainBanner />
 
-      <Services />
+      <Features />
 
       {/*<Newsletter />*/}
 

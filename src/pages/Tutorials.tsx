@@ -9,7 +9,7 @@ import { Spinner } from 'reactstrap'
 import { slugify } from 'utils/slugify'
 import blogDetailImg from 'assets/images/choose-imgs.png'
 import { stripHtmlTags } from 'utils/stripHtmlTags'
-import ImageLoader from 'components/ImageLoader'
+import ImageLoader from 'components/Common/ImageLoader'
 
 export type Tutorial = {
   id: number;

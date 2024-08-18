@@ -13,7 +13,7 @@ import {
   InputGroupText,
   Row,
 } from 'reactstrap'
-import PasswordStrengthChecker from '../components/PasswordStrengthChecker'
+import PasswordStrengthChecker from '../components/Common/PasswordStrengthChecker'
 import PageBanner from 'components/Common/PageBanner'
 import { toast } from 'react-toastify'
 import { ToastDefaultOptions } from 'utils/toastOptions'
@@ -29,7 +29,7 @@ const Register : React.FC = () => {
   const [, setIsPolicyClicked] = useState(false)
   const [, setIsTermsClicked] = useState(false)
   const mainRef = useRef<HTMLDivElement>(null)
- 
+
   useEffect(() => {
     if (mainRef.current) {
       document.documentElement.scrollTop = 0
@@ -39,21 +39,21 @@ const Register : React.FC = () => {
       mainRef.current.scrollTop = 0
     }
   }, [])
- 
+
   const validateEmail = (email : string) => {
     const re = /\S+@\S+\.\S+/
     return re.test(email)
   }
- 
+
   const validateUsername = (username : string) => {
     return username.length > 4 && username.length < 15
   }
- 
+
   const validatePassword = (password : string) => {
     const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[\W_]).{8,}$/gm
     return re.test(password)
   }
- 
+
   const isFormValid = () => {
     return (
       validateUsername(nickname) &&
@@ -64,15 +64,15 @@ const Register : React.FC = () => {
       isTermsClicked*/
     )
   }
- 
+
   const handleSubmit = async (e : React.FormEvent) => {
     e.preventDefault()
-  
+
     if (!isChecked) {
       setError('Vous devez accepter les conditions générales d\'utilisation et la politique de confidentialité.')
       return
     }
-  
+
     try {
       const response = await fetch('/api/users/register', {
         method: 'POST',
@@ -81,12 +81,12 @@ const Register : React.FC = () => {
         },
         body: JSON.stringify({ email, password, nickname }),
       })
-   
+
       if (!response.ok) {
         toast.success('Une erreur est survenue lors de votre inscription. Veuillez réessayer.',
           ToastDefaultOptions)
       }
-   
+
       toast.success('Inscription réussie ! Veuillez vérifier votre email pour valider votre compte et finaliser la connexion.',
         ToastDefaultOptions)
       navigate('/')
@@ -94,15 +94,15 @@ const Register : React.FC = () => {
       setError('Email in use or invalid data')
     }
   }
- 
+
   const handlePolicyClick = () => {
     setIsPolicyClicked(true)
   }
- 
+
   const handleTermsClick = () => {
     setIsTermsClicked(true)
   }
- 
+
   return (
     <>
       <PageBanner
@@ -136,7 +136,7 @@ const Register : React.FC = () => {
                           />
                         </InputGroup>
                       </FormGroup>
-                      
+
                       <FormGroup className={validateEmail(email) ? 'has-success' : 'has-danger'}>
                         <InputGroup className={`input-group-alternative mb-3 ${validateEmail(email) ? 'is-valid' : 'is-invalid'}`}>
                           <InputGroupText>
@@ -151,7 +151,7 @@ const Register : React.FC = () => {
                           />
                         </InputGroup>
                       </FormGroup>
-                      
+
                       <FormGroup className={validatePassword(password) ? 'has-success' : 'has-danger'}>
                         <InputGroup className="input-group-alternative">
                           <InputGroupText>
@@ -167,9 +167,9 @@ const Register : React.FC = () => {
                           />
                         </InputGroup>
                       </FormGroup>
-                      
+
                       <PasswordStrengthChecker password={password} />
-                      
+
                       <Row className="my-4">
                         <Col xs="12">
                           <div className="custom-control custom-control-alternative custom-checkbox">
@@ -195,7 +195,7 @@ const Register : React.FC = () => {
                           </div>
                         </Col>
                       </Row>
-                      
+
                       <div className="text-center">
                         {error && <div className="alert alert-danger text-center">{error}</div>}
                         <Button className="mt-4" color="primary" type="submit" disabled={!isFormValid()}>

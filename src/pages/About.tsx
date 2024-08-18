@@ -1,8 +1,8 @@
 import React from 'react'
 import PageBanner from '../components/Common/PageBanner'
-import About from '../components/AboutOne/About'
+import About from '../components/About/About'
 // import Testimonials from '../components/Common/Testimonials'
-import Team from '../components/Common/TeamTwo'
+import Team from 'components/Common/Contributors'
 // import Partner from '../components/Common/Partner'
 
 export default function Page() {

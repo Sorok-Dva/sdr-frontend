@@ -5,7 +5,7 @@ import { Img as Image } from 'react-image'
 
 import teamShape from '../../assets/images/team/team-shape.png'
 
-const teamData = [
+const contributors = [
   {
     image: '/images/team/42.png',
     name: 'Sorok-Dva',
@@ -25,7 +25,7 @@ const teamData = [
   },
 ]
 
-const TeamTwo: React.FC = () => {
+const Contributors: React.FC = () => {
   return (
     <>
       <div className="team-area pb-70">
@@ -43,8 +43,8 @@ const TeamTwo: React.FC = () => {
           </div>
 
           <div className="row justify-content-center">
-            {teamData &&
-              teamData.slice(0, 3).map((value, i) => (
+            {contributors &&
+              contributors.slice(0, 3).map((value, i) => (
                 <div
                   className="col-lg-4 col-sm-6"
                   data-aos="fade-up"
@@ -95,4 +95,4 @@ const TeamTwo: React.FC = () => {
   )
 }
 
-export default TeamTwo
+export default Contributors
