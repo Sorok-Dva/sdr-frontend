@@ -1,4 +1,4 @@
-import '../../styles/Tutorial.css'
+import '../../../styles/Tutorial.css'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useAuth } from 'context/AuthContext'
@@ -76,9 +76,9 @@ const AddTutorial = () => {
   const [content, setContent] = useState('')
   const [isPreview, setIsPreview] = useState(false)
   const [categories, setCategories] = useState<Category[]>([])
-  
+
   const API_KEY=process.env.REACT_APP_TINYMCE_API_KEY
-  
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -93,20 +93,20 @@ const AddTutorial = () => {
         toast.error('Failed to fetch categories', ToastDefaultOptions)
       }
     }
-    
+
     fetchCategories()
   }, [token])
-  
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     const tutorialData = {
       title,
       image,
       categoryId: parseInt(categoryId),
       content,
     }
-    
+
     try {
       const response = await fetch('/api/admin/tutorials', {
         method: 'POST',
@@ -116,7 +116,7 @@ const AddTutorial = () => {
         },
         body: JSON.stringify(tutorialData),
       })
-      
+
       if (response.ok) {
         setTitle('')
         setCategoryId('')
@@ -135,7 +135,7 @@ const AddTutorial = () => {
       console.error('Erreur lors de la requête', error)
     }
   }
-  
+
   return (
     <>
       <PageBanner
@@ -159,7 +159,7 @@ const AddTutorial = () => {
                   required
                 />
               </FormGroup>
-              
+
               <FormGroup>
                 <Label htmlFor="image">Image d'illustration</Label>
                 <Input
@@ -170,7 +170,7 @@ const AddTutorial = () => {
                   required
                 />
               </FormGroup>
-              
+
               <FormGroup>
                 <Label htmlFor="category">Catégorie</Label>
                 <Select
@@ -187,10 +187,10 @@ const AddTutorial = () => {
                   ))}
                 </Select>
               </FormGroup>
-              
+
               <FormGroup>
                 <Label htmlFor="content">Contenu du Tutoriel</Label>
-                
+
                 <Editor
                   apiKey={API_KEY}
                   value={content}
@@ -208,13 +208,13 @@ const AddTutorial = () => {
                   }}
                 />
               </FormGroup>
-              
+
               <Button type="button" onClick={() => setIsPreview(!isPreview)}>
                 {isPreview ? 'Retour à l\'édition' : 'Aperçu'}
               </Button>
               {!isPreview && <Button type="submit">Ajouter le Tutoriel</Button>}
             </form>
-            
+
             {isPreview && (
               <PreviewContainer>
                 <h3>{title}</h3>
