@@ -62,7 +62,7 @@ const AppContent: React.FC = () => {
   const { user } = useUser()
   const location = useLocation()
   const isAdminRoute = location.pathname.startsWith('/admin')
-  
+
   return (
     <>
       {!isAdminRoute ? (<Navbar />) : (<AdminNavbar />) }
@@ -124,12 +124,12 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <ErrorProvider>
-        <UserProvider>
-          <AuthProvider>
+        <AuthProvider>
+          <UserProvider>
             <GoogleTagManager />
             <AppContent />
-          </AuthProvider>
-        </UserProvider>
+          </UserProvider>
+        </AuthProvider>
       </ErrorProvider>
     </ThemeProvider>
   )

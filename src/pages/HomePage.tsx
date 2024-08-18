@@ -66,7 +66,7 @@ const HomePage = () => {
   const { token } = useAuth()
   const [dream, setDream] = useState<Dream>()
   const [tutorials, setTutorials] = useState<Tutorial[]>([])
-  
+
   useEffect(() => {
     const fetchDream = async () => {
       try {
@@ -81,7 +81,7 @@ const HomePage = () => {
         console.error('Failed to fetch dreams', err)
       }
     }
-    
+
     const fetchTopTutorials = async () => {
       try {
         const response = await fetch('/api/tutorials/top', {
@@ -95,11 +95,11 @@ const HomePage = () => {
         console.error('Failed to fetch tutorials', err)
       }
     }
-    
+
     fetchDream()
     fetchTopTutorials()
   }, [token])
-  
+
   return (
     <>
       <MainBanner />
@@ -108,7 +108,7 @@ const HomePage = () => {
         <WelcomeMessage id="dashboard">
           <h2>Explorez vos rêves d'aujourd'hui et connectez-vous avec la communauté.</h2>
         </WelcomeMessage>
-        
+
         <GridContainer>
           <Section>
             <SectionTitle>Votre Journal de Rêves</SectionTitle>
@@ -122,7 +122,7 @@ const HomePage = () => {
               Voir tout le journal
             </Link>
           </Section>
-          
+
           <Section>
             <SectionTitle>Tutoriels Recommandés</SectionTitle>
             {tutorials.map((tutorial: Tutorial, index) => (
@@ -130,14 +130,14 @@ const HomePage = () => {
                 <Link to={`/tutorial/${tutorial.id}/${tutorial.slug}`}>
                   <p>{ tutorial.title }</p>
                 </Link>
-              
+
               </TutorialItem>
             ))}
             <Link to="/tutorials" className="btn btn-outline-primary">
               Voir tous les tutoriels
             </Link>
           </Section>
-          
+
           <Section>
             <SectionTitle>Activité de la Communauté</SectionTitle>
             <CommunityPost>
@@ -150,7 +150,7 @@ const HomePage = () => {
               Voir toute l'activité
             </Link>
           </Section>
-          
+
           <Section>
             <SectionTitle>Objectifs de Rêves Lucides</SectionTitle>
             <ProgressTracker>
