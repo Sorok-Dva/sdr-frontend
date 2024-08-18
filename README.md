@@ -90,6 +90,8 @@ You can create a `.env` file in the root of the project to define these variable
 
 ## Technologies Used
 
+![langs](https://skillicons.dev/icons?i=typescript,react,mysql,ubuntu,docker,sass&perline=)
+
 - **React**: A JavaScript library for building user interfaces.
 - **TypeScript**: A superset of JavaScript that adds static typing.
 - **React Router**: A library for managing navigation in React applications.
@@ -110,6 +112,7 @@ If you'd like to contribute to this project, please follow these steps:
 ### Acknowledgments
 
 - Developed by [Сорок два](https://github.com/Sorok-Dva). All rights reserved.
+- Developed with love through ![langs](https://skillicons.dev/icons?i=webstorm&perline=)
 
 ### License
 
