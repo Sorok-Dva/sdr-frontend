@@ -48,6 +48,7 @@ const MainBanner: React.FC = () => {
                   data-aos="fade-up"
                   data-aos-duration="800"
                   data-aos-delay="200"
+                  className="text-center"
                 >
                   Explorez vos rêves d'aujourd'hui et connectez-vous avec la communauté. <br/>
                   <b>Votre aventure démarre maintenant !</b>
