@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from 'context/AuthContext'
 import {
   Button,
   Card,
@@ -49,7 +49,7 @@ const UserProfile : React.FC = () => {
   const [user, setUser] = useState<User | null>(null)
   const [roles, setRoles] = useState<Role[]>([])
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
- 
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -64,7 +64,7 @@ const UserProfile : React.FC = () => {
         console.error('Failed to fetch user', err)
       }
     }
-  
+
     const fetchRoles = async () => {
       try {
         const response = await fetch('/api/admin/roles', {
@@ -78,11 +78,11 @@ const UserProfile : React.FC = () => {
         console.error('Failed to fetch roles', err)
       }
     }
-  
+
     fetchUser()
     fetchRoles()
   }, [id, token])
- 
+
   const handleDelete = async () => {
     try {
       await fetch(`/api/admin/users/${ id }`, {
@@ -96,7 +96,7 @@ const UserProfile : React.FC = () => {
       console.error('Failed to delete user', err)
     }
   }
- 
+
   const handleUpdate = async (e : React.FormEvent) => {
     e.preventDefault()
     try {
@@ -115,7 +115,7 @@ const UserProfile : React.FC = () => {
       console.error('Failed to update user', err)
     }
   }
- 
+
   const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setUser((prevUser) => {
@@ -125,7 +125,7 @@ const UserProfile : React.FC = () => {
       return prevUser
     })
   }
- 
+
   const handleRoleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     const roleId = Number(e.target.value)
     const selectedRole = roles.find((role) => role.id === roleId)
@@ -137,13 +137,13 @@ const UserProfile : React.FC = () => {
       }))
     }
   }
- 
+
   const getProgressBarClass = (points : number) => {
     if (points < 250) return 'bg-gradient-danger'
     if (points < 500) return 'bg-gradient-warning'
     return 'bg-gradient-success'
   }
- 
+
   if (!user) return <Container className="loader-container">
     <div className="spinner-wrapper">
       <Spinner animation="border" role="status" className="custom-spinner">
@@ -152,7 +152,7 @@ const UserProfile : React.FC = () => {
       <div className="loading-text">Loading</div>
     </div>
   </Container>
- 
+
   return (
     <>
       <PageBanner
@@ -352,7 +352,7 @@ const UserProfile : React.FC = () => {
               </Card>
             </Col>
           </Row>
-   
+
           <Modal isOpen={ isDeleteModalOpen } toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
             <ModalHeader toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
           Confirm Delete

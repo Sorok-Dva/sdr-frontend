@@ -7,7 +7,7 @@ import { Img as Image } from 'react-image'
 import PageBanner from 'components/Common/PageBanner'
 import { Spinner } from 'reactstrap'
 import { slugify } from 'utils/slugify'
-import blogDetailImg from 'assets/images/choose-imgs.png'
+import defaultTutoImg from '../assets/images/defaultTuto.png'
 import { stripHtmlTags } from 'utils/stripHtmlTags'
 import ImageLoader from 'components/Common/ImageLoader'
 
@@ -97,7 +97,7 @@ const TutorialsList: React.FC = () => {
                         <div className="blog-img">
                           <Link to={`/tutorial/${tutorial.id}/${slugify(tutorial.title)}`}>
                             <Image
-                              src={tutorial.image ?? blogDetailImg}
+                              src={tutorial.image ?? defaultTutoImg}
                               alt="Image"
                               width={570}
                               height={400}
