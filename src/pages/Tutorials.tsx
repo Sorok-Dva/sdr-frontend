@@ -9,6 +9,7 @@ import { Spinner } from 'reactstrap'
 import { slugify } from 'utils/slugify'
 import blogDetailImg from 'assets/images/choose-imgs.png'
 import { stripHtmlTags } from 'utils/stripHtmlTags'
+import ImageLoader from 'components/ImageLoader'
 
 export type Tutorial = {
   id: number;
@@ -96,6 +97,8 @@ const TutorialsList: React.FC = () => {
                               alt="Image"
                               width={570}
                               height={400}
+                              loader={<ImageLoader height="200px" width="360px" />}
+                              loading="lazy"
                             />
                           </Link>
                           <div className="dates">
