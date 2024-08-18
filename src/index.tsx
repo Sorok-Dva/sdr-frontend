@@ -20,7 +20,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import * as Sentry from '@sentry/react'
 
-Sentry.init({
+if (process.env.REACT_APP_SENTRY_DSN) Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
   environment: process.env.NODE_ENV,
   debug: false,
