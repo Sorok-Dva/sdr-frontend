@@ -40,6 +40,7 @@ const MainBanner: React.FC = () => {
                   data-aos="fade-in"
                   data-aos-duration="800"
                   data-aos-delay="200"
+                  className="text-center"
                 >
                   <b>Explorez les mystères de vos nuits et transformez vos rêves en aventures.</b><br />
                   "Le Sentier des Rêves" est une application dédiée aux explorateurs du sommeil, vous offrant des outils pour maîtriser l'art du rêve lucide,
