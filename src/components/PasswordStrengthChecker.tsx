@@ -9,7 +9,7 @@ const PasswordStrengthChecker : React.FC<PasswordStrengthCheckerProps> = ({ pass
   const hasUpperCase = /[A-Z]/.test(password)
   const hasLowerCase = /[a-z]/.test(password)
   const hasNumber = /\d/.test(password)
-  const hasSpecialChar = /[@$!%*?&]/.test(password)
+  const hasSpecialChar = /(?=.*[\W_])/.test(password)
   const isValidLength = password.length >= 8
   
   return (
