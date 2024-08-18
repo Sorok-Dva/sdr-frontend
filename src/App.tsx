@@ -44,6 +44,7 @@ import ReportsList from 'pages/admin/reports/ReportList'
 import ReportDetails from 'pages/admin/reports/ReportDetails'
 import ResetPassword from 'pages/ResetPassword'
 import ServiceUnavailable from 'pages/ServiceUnavailable'
+import UserSettingsPage from 'pages/UserSettings'
 import ValidateUser from 'pages/ValidateUser'
 
 import { ToastContainer } from 'react-toastify'
@@ -77,6 +78,7 @@ const AppContent: React.FC = () => {
             {user ? (
               <>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/settings" element={<UserSettingsPage />} />
                 <Route path="/dream-diary" element={<DreamDiary />} />
                 { user.isAdmin && (
                   <Route element={<AdminRoute />}>
