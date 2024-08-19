@@ -67,14 +67,32 @@ const TutorialsList: React.FC = () => {
 
   if (loading) {
     return (
-      <Container className="loader-container">
-        <div className="spinner-wrapper">
-          <Spinner animation="border" role="status" className="custom-spinner">
-            <span className="sr-only">Chargement...</span>
-          </Spinner>
-          <div className="loading-text">Chargement...</div>
+      <>
+        <PageBanner
+          pageTitle="Liste des tutoriels"
+          homePageUrl="/"
+          homePageText="Accueil"
+          activePageText="Liste des tutoriels"
+        />
+        <div className="news-details-area news-right-sidebar-area ptb-100">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-8 col-md-12">
+                <div className="row">
+                  <Container className="loader-container">
+                    <div className="spinner-wrapper">
+                      <Spinner animation="border" role="status" className="custom-spinner">
+                        <span className="sr-only">Chargement...</span>
+                      </Spinner>
+                      <div className="loading-text">Chargement...</div>
+                    </div>
+                  </Container>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </Container>
+      </>
     )
   }
 
