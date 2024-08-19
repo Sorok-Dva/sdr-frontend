@@ -5,7 +5,7 @@ import TutorialsSidebar from 'components/Tutorials/TutorialsSidebar'
 import { Link } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 import PageBanner from 'components/Common/PageBanner'
-import { Spinner } from 'reactstrap'
+import { Container, Spinner } from 'reactstrap'
 import { slugify } from 'utils/slugify'
 import defaultTutoImg from '../assets/images/defaultTutoImg.png'
 import { stripHtmlTags } from 'utils/stripHtmlTags'
@@ -67,11 +67,14 @@ const TutorialsList: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="spinner-container">
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      </div>
+      <Container className="loader-container">
+        <div className="spinner-wrapper">
+          <Spinner animation="border" role="status" className="custom-spinner">
+            <span className="sr-only">Chargement...</span>
+          </Spinner>
+          <div className="loading-text">Chargement...</div>
+        </div>
+      </Container>
     )
   }
 
