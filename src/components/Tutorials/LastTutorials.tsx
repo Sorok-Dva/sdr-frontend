@@ -6,6 +6,7 @@ import { Img as Image } from 'react-image'
 import { Tutorial } from 'pages/Tutorials'
 import { stripHtmlTags } from 'utils/stripHtmlTags'
 import { slugify } from 'utils/slugify'
+import ImageLoader from 'components/Common/ImageLoader'
 
 const LastTutorials: React.FC = () => {
   const [tutorials, setTutorials] = useState<Tutorial[]>([])
@@ -58,6 +59,8 @@ const LastTutorials: React.FC = () => {
                         alt="Image"
                         width={570}
                         height={400}
+                        loader={<ImageLoader height="200px" width="360px" />}
+                        loading="lazy"
                       />
                     </Link>
                     
