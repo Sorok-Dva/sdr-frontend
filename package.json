@@ -49,6 +49,7 @@
     "bootstrap": "^5.3.3",
     "chart.js": "^3.5.1",
     "clsx": "^2.1.1",
+    "firebase": "^10.13.0",
     "framer-motion": "^11.3.22",
     "fslightbox-react": "^1.7.6",
     "http-proxy-middleware": "^3.0.0",
@@ -79,6 +80,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/chart.js": "^2.9.41",
+    "@types/firebase": "^2.4.32",
     "@types/headroom.js": "^0.12.4",
     "@types/markerclustererplus": "2.1.33",
     "@types/react": "18.3.3",

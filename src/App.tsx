@@ -5,9 +5,10 @@ import './index.css'
 import 'styles/Toastify.css'
 import 'styles/Spinner.css'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
+import { messaging } from './firebase'
 
 import { UserProvider, useUser } from 'context/UserContext'
 import { AuthProvider } from 'context/AuthContext'
@@ -62,6 +63,18 @@ const AppContent: React.FC = () => {
   const { user } = useUser()
   const location = useLocation()
   const isAdminRoute = location.pathname.startsWith('/admin')
+
+  useEffect(() => {
+    // La logique pour demander la permission de notifications et obtenir le token a déjà été gérée dans firebase.ts
+    // Nous nous concentrons donc ici sur la gestion des notifications entrantes dans l'application.
+
+    // Exemple pour gérer les messages lorsqu'ils arrivent lorsque l'application est au premier plan
+    messaging.onMessage((payload) => {
+      console.log('Message reçu en premier plan:', payload)
+      // Affichez la notification ou mettez à jour l'interface utilisateur en fonction du message reçu.
+    })
+  }, [])
+
 
   return (
     <>

@@ -20,7 +20,10 @@
     "noEmit": true,
     "jsx": "preserve",
     "baseUrl": "src",
-    "sourceMap": true
+    "sourceMap": true,
+    "types": [
+      "firebase",
+    ]
   },
   "include": [
     "src"

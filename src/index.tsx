@@ -19,6 +19,7 @@ import ScrollToTopHook from 'hooks/scrollToTop'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import * as Sentry from '@sentry/react'
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 if (process.env.REACT_APP_SENTRY_DSN) Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -61,6 +62,15 @@ root.render(
   </Sentry.ErrorBoundary>
 )
 
+serviceWorkerRegistration.register({
+  onUpdate: (registration: { waiting: { postMessage: (arg0: { type: string }) => void } }) => {
+    if (registration.waiting) {
+      // Par exemple, forcer l'actualisation de l'application lorsqu'une mise à jour est disponible
+      registration.waiting.postMessage({ type: 'SKIP_WAITING' })
+      window.location.reload()
+    }
+  },
+})
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
