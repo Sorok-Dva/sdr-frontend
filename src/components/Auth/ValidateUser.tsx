@@ -11,7 +11,7 @@ const ValidateUser: React.FC = () => {
   const { token } = useParams<{ token: string }>()
   const navigate = useNavigate()
   const { login } = useUser()
-  
+
   useEffect(() => {
     const validateUser = async () => {
       try {
@@ -21,11 +21,11 @@ const ValidateUser: React.FC = () => {
             'Content-Type': 'application/json',
           },
         })
-        
+
         if (response.ok) {
           const data = await response.json()
           toast.success('Votre compte a été validé avec succès !', ToastDefaultOptions)
-          
+
           if (data.token) {
             const token = data.token
             localStorage.setItem('token', token)
@@ -33,10 +33,13 @@ const ValidateUser: React.FC = () => {
             login({
               id: payload.id,
               email: payload.email,
+              oldEmail: payload.oldEmail,
               nickname: payload.nickname,
               avatar: payload.avatar,
               roleId: payload.roleId,
               isAdmin: payload.isAdmin,
+              validated: payload.validated,
+              lastNicknameChange: payload.lastNicknameChange,
             }, token)
             navigate('/')
           }
@@ -50,10 +53,10 @@ const ValidateUser: React.FC = () => {
         navigate('/login')
       }
     }
-    
+
     validateUser()
   }, [token, login, navigate])
-  
+
   return (
     <Container className="loader-container">
       <div className="spinner-wrapper">

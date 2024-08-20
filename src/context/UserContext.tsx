@@ -7,10 +7,13 @@ import useApi from '../hooks/useApi'
 export interface User {
   id : number;
   email : string;
+  oldEmail : string;
   nickname : string;
   avatar : string;
   roleId : number;
   isAdmin : boolean;
+  validated : boolean;
+  lastNicknameChange: Date;
 }
 
 interface UserContextType {

@@ -6,8 +6,10 @@ import { toast } from 'react-toastify'
 import { ToastDefaultOptions } from 'utils/toastOptions'
 import PasswordStrengthChecker from 'components/Common/PasswordStrengthChecker'
 import { Button } from 'reactstrap'
+import { useUser } from 'context/UserContext'
 
 const ResetPassword: React.FC = () => {
+  const { user } = useUser()
   const { token } = useParams<{ token: string }>()
   const navigate = useNavigate()
 
@@ -53,7 +55,8 @@ const ResetPassword: React.FC = () => {
 
       if (response.ok) {
         toast.success('Réinitialisation du mot de passe réussie ! Veuillez vous connecter avec votre nouveau mot de passe.', ToastDefaultOptions)
-        navigate('/login')
+        if (!user) navigate('/login')
+        else navigate('/settings')
       } else {
         const data = await response.json()
         if (data.error) {
