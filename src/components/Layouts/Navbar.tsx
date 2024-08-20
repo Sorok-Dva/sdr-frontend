@@ -11,11 +11,7 @@ const StyledUl = styled.ul`
 
 const menus = [
   {
-    label: 'Accueil',
-    link: '/',
-  },
-  {
-    label: 'Mon journal de rêves',
+    label: 'Mon JDR',
     link: '/dream-diary',
     needAuth: true,
   },
@@ -89,21 +85,21 @@ const Navbar: React.FC = () => {
   const { user, logout } = useUser()
   const [menu, setMenu] = useState<boolean>(true)
   const location = useLocation()
-  
+
   const handleLogout = () => {
     logout()
     localStorage.removeItem('token')
     setMenu(true)
   }
-  
+
   const toggleNavbar = () => {
     setMenu(!menu)
   }
-  
+
   useEffect(() => {
     setMenu(true)
   }, [location])
-  
+
   useEffect(() => {
     const elementId = document.getElementById('navbar')
     document.addEventListener('scroll', () => {
@@ -114,14 +110,14 @@ const Navbar: React.FC = () => {
       }
     })
   }, [])
-  
+
   const classOne = menu
     ? 'collapse navbar-collapse'
     : 'collapse navbar-collapse show'
   const classTwo = menu
     ? 'navbar-toggler navbar-toggler-right collapsed'
     : 'navbar-toggler navbar-toggler-right'
-  
+
   return (
     <>
       <div id="navbar" className="navbar-area fixed-top">
@@ -130,7 +126,7 @@ const Navbar: React.FC = () => {
             <Link to="/" className="navbar-brand">
               <Image src={logo} alt="logo" width={300} height={50} />
             </Link>
-            
+
             <button
               onClick={toggleNavbar}
               className={classTwo}
@@ -145,14 +141,14 @@ const Navbar: React.FC = () => {
               <span className="icon-bar middle-bar"></span>
               <span className="icon-bar bottom-bar"></span>
             </button>
-            
+
             <div className={classOne} id="navbarSupportedContent">
               <StyledUl className="navbar-nav m-auto">
                 {menus.map((menuItem) => (
                   <MenuItem key={menuItem.label} {...menuItem} onClick={toggleNavbar} />
                 ))}
               </StyledUl>
-              
+
               <div className="others-options">
                 {user ? (
                   <>
