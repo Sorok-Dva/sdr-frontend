@@ -35,3 +35,11 @@ code {
 .edit-button {
   margin-left: auto; /* This ensures the button is pushed to the right */
 }
+
+.tabs_item {
+  display: none;
+}
+
+.tabs_item.active {
+  display: block;
+}
