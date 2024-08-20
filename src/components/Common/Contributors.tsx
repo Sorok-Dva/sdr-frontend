@@ -72,8 +72,8 @@ const Contributors: React.FC = () => {
                     </div>
 
                     <div className="team-content">
-                      <h3>{value.name}</h3>
-                      <span>{value.designation}</span>
+                      <h3 style={{ color: 'black'}}>{value.name}</h3>
+                      <span style={{ color: 'black'}}>{value.designation}</span>
 
                       <ul>
                         {value.socialLinks.map((value, i) => (
