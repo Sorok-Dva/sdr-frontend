@@ -10,7 +10,7 @@ import { useUser } from 'context/UserContext'
 const ValidateUser: React.FC = () => {
   const { token } = useParams<{ token: string }>()
   const navigate = useNavigate()
-  const { login } = useUser()
+  const { user, login } = useUser()
 
   useEffect(() => {
     const validateUser = async () => {
@@ -41,7 +41,8 @@ const ValidateUser: React.FC = () => {
               validated: payload.validated,
               lastNicknameChange: payload.lastNicknameChange,
             }, token)
-            navigate('/')
+            if (!user) navigate('/')
+            else navigate('/settings')
           }
         } else {
           const data = await response.json()
