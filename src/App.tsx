@@ -103,7 +103,6 @@ const AppContent: React.FC = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/users/validate/:token" element={<ValidateUser />} />
                 <Route path="/recover-password" element={<RecoverPassword />} />
-                <Route path="/reset-password/:token" element={<ResetPassword />} />
               </>
             )}
             <Route path="/about" element={<AboutPage />} />
@@ -112,6 +111,7 @@ const AppContent: React.FC = () => {
             <Route path="/user/:nickname" element={<UserProfile />} />
             <Route path="/tutorials" element={<TutorialsList />} />
             <Route path="/tutorial/:id/:slug" element={<Tutorial />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="*" element={<NotFound />} />
           </>
         )}
