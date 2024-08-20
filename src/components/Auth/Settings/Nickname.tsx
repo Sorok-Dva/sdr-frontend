@@ -33,7 +33,6 @@ const calculateDaysUntilNextChange = (lastNicknameChange: Date) => {
   return daysDifference > 0 ? daysDifference : 0
 }
 
-
 const Nickname: React.FC = () => {
   const { token } = useAuth()
   const { user, setUser } = useUser()
@@ -111,8 +110,6 @@ const Nickname: React.FC = () => {
     }
   }
 
-  // @ts-ignore
-  // @ts-ignore
   return (
     <>
       <div className="row align-items-center">
@@ -160,7 +157,7 @@ const Nickname: React.FC = () => {
 
             </Row>
 
-            {(canChangeIn === 0 ) ? (
+            {(canChangeIn === 0  || !canChangeIn) ? (
               <form onSubmit={ handleNicknameChange }>
                 <FormGroup>
                   <Input
