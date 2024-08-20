@@ -46,10 +46,13 @@ const LoginForm: React.FC = () => {
         login({
           id: payload.id,
           email: payload.email,
+          oldEmail: payload.oldEmail,
           nickname: payload.nickname,
           avatar: payload.avatar,
           roleId: payload.roleId,
           isAdmin: payload.isAdmin,
+          validated: payload.validated,
+          lastNicknameChange: payload.lastNicknameChange,
         }, token)
 
         toast.success(`Vous êtes maintenant connecté ! Bienvenue ${payload.nickname}.`, {

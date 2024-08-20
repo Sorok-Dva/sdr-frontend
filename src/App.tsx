@@ -44,6 +44,7 @@ import ReportsList from 'pages/admin/reports/ReportList'
 import ReportDetails from 'pages/admin/reports/ReportDetails'
 import ResetPassword from 'pages/ResetPassword'
 import ServiceUnavailable from 'pages/ServiceUnavailable'
+import UserSettingsPage from 'pages/UserSettings'
 import ValidateUser from 'pages/ValidateUser'
 
 import { ToastContainer } from 'react-toastify'
@@ -77,6 +78,7 @@ const AppContent: React.FC = () => {
             {user ? (
               <>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/settings" element={<UserSettingsPage />} />
                 <Route path="/dream-diary" element={<DreamDiary />} />
                 { user.isAdmin && (
                   <Route element={<AdminRoute />}>
@@ -99,9 +101,7 @@ const AppContent: React.FC = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/users/validate/:token" element={<ValidateUser />} />
                 <Route path="/recover-password" element={<RecoverPassword />} />
-                <Route path="/reset-password/:token" element={<ResetPassword />} />
               </>
             )}
             <Route path="/about" element={<AboutPage />} />
@@ -110,6 +110,8 @@ const AppContent: React.FC = () => {
             <Route path="/user/:nickname" element={<UserProfile />} />
             <Route path="/tutorials" element={<TutorialsList />} />
             <Route path="/tutorial/:id/:slug" element={<Tutorial />} />
+            <Route path="/users/validate/:token" element={<ValidateUser />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="*" element={<NotFound />} />
           </>
         )}
