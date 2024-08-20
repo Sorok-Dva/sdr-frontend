@@ -25,3 +25,7 @@ yarn-error.log*
 
 # Sentry Config File
 .sentryclirc
+
+# Firebase config
+public/env.development.js
+

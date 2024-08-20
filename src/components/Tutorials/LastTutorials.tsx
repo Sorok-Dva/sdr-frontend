@@ -6,11 +6,12 @@ import { Img as Image } from 'react-image'
 import { Tutorial } from 'pages/Tutorials'
 import { stripHtmlTags } from 'utils/stripHtmlTags'
 import { slugify } from 'utils/slugify'
+import ImageLoader from 'components/Common/ImageLoader'
 
 const LastTutorials: React.FC = () => {
   const [tutorials, setTutorials] = useState<Tutorial[]>([])
   const [loading, setLoading] = useState(true)
-  
+
   useEffect(() => {
     const fetchLatestTutorials = async () => {
       try {
@@ -23,14 +24,14 @@ const LastTutorials: React.FC = () => {
         setLoading(false)
       }
     }
-    
+
     fetchLatestTutorials()
   }, [])
-  
+
   if (loading) {
     return <div>Loading...</div>
   }
-  
+
   return (
     <>
       <div className="news-area pt-100 pb-70">
@@ -40,7 +41,7 @@ const LastTutorials: React.FC = () => {
             <h2>Nos derniers tutoriels</h2>
             <p>Découvrez nos derniers tutoriels sur les rêves lucides !</p>
           </div>
-          
+
           <div className="row justify-content-center">
             {tutorials.map((tutorial, index) => (
               <div
@@ -52,20 +53,22 @@ const LastTutorials: React.FC = () => {
               >
                 <div className="single-news">
                   <div className="blog-img">
-                    <Link to={`/tutorial/${tutorial.id}/${tutorial.slug}`}>
+                    <Link to={`/tutorial/${tutorial.id}/${slugify(tutorial.title)}`}>
                       <Image
                         src={tutorial.image ?? 'path/to/default/image.png'}
                         alt="Image"
                         width={570}
                         height={400}
+                        loader={<ImageLoader height="200px" width="360px" />}
+                        loading="lazy"
                       />
                     </Link>
-                    
+
                     <div className="dates">
                       <span>{new Date(tutorial.createdAt).toLocaleDateString('fr-FR')}</span>
                     </div>
                   </div>
-                  
+
                   <div className="news-content-wrap">
                     <ul>
                       <li>
@@ -80,15 +83,15 @@ const LastTutorials: React.FC = () => {
                         <i className="fa fa-heart"></i> { tutorial.upvote } likes
                       </li>
                     </ul>
-                    
+
                     <Link to={ `/tutorial/${ tutorial.id }/${ slugify(tutorial.title) }` }>
                       <h3>{tutorial.title}</h3>
                     </Link>
-                    
+
                     <p>
                       {stripHtmlTags(tutorial.content).substring(0, 150)}...
                     </p>
-                    
+
                     <Link to={`/tutorial/${tutorial.id}/${slugify(tutorial.title)}`} className="read-more">
                       Lire la suite <i className="bx bx-plus"></i>
                     </Link>
