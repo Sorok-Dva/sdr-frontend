@@ -1,18 +1,23 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { Button, Card, Container, Row, Col, Spinner } from 'reactstrap'
+import { Container, Spinner } from 'reactstrap'
 import { toast } from 'react-toastify'
 import { ToastDefaultOptions } from 'utils/toastOptions'
 import NotFound from '../components/ErrorPage/404'
+import { Img as Image } from 'react-image'
+import teamShape from 'assets/images/team/team-shape.png'
+import PageBanner from 'components/Common/PageBanner'
 
 interface UserProfile {
   id: number,
   nickname: string,
   avatar: string,
+  points: number,
   isAdmin: boolean,
   validated: boolean,
-  totalScreenshots: number,
-  publicScreenshots: number,
+  createdAt: Date,
+  totalDreams: number,
+  publicDreams: number,
   totalViews: number,
 }
 
@@ -21,7 +26,7 @@ const Profile: React.FC = () => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [notFound, setNotFound] = useState<boolean>(false)
   const main = useRef<HTMLDivElement>(null)
-  
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -30,40 +35,36 @@ const Profile: React.FC = () => {
             Authorization: `Bearer ${ localStorage.getItem('token') }`,
           },
         })
-        
+
         if (!response.ok) {
           setNotFound(true)
           return
         }
-        
+
         const data = await response.json()
-        
-        if (data.nickname === 'Anonymous') {
-          setNotFound(true)
-          return
-        }
+        console.log(data)
         setUserProfile(data)
-        
+
       } catch (err) {
         toast.error(`Failed to retrieve ${nickname} profile.`,
           ToastDefaultOptions
         )
       }
     }
-    
+
     fetchUserProfile()
   }, [nickname])
-  
+
   useEffect(() => {
     document.documentElement.scrollTop = 0
     document.scrollingElement?.scrollTop && (document.scrollingElement.scrollTop = 0)
     main.current && (main.current.scrollTop = 0)
   }, [])
-  
+
   if (notFound) {
     return <NotFound/>
   }
-  
+
   if (!userProfile) {
     return (
       <Container className="loader-container">
@@ -76,114 +77,58 @@ const Profile: React.FC = () => {
       </Container>
     )
   }
-  
+
   return (
     <>
-      <main className="profile-page mt--150" ref={main}>
-        <section className="section-profile-cover section-shaped my-0">
-          <div className="shape shape-style-1 shape-default alpha-4">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="separator separator-bottom separator-skew">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="none"
-              version="1.1"
-              viewBox="0 0 2560 100"
-              x="0"
-              y="0"
+      <PageBanner
+        pageTitle={ `Profil de ${userProfile.nickname}` }
+        homePageUrl="/"
+        homePageText="Accueil"
+        activePageText={ `Profil de ${userProfile.nickname}`}
+      />
+      <div className="pt-50 pb-70">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div
+              className="col-lg-6"
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="100"
             >
-              <polygon className="fill-white" points="2560 0 2560 100 0 100" />
-            </svg>
-          </div>
-        </section>
-        <section className="section">
-          <Container>
-            <Card className="card-profile shadow mt--300">
-              <div className="px-4">
-                <Row className="justify-content-center">
-                  <Col className="order-lg-2" lg="3">
-                    <div className="card-profile-image">
-                      <a href="#avatar" onClick={(e) => e.preventDefault()}>
-                        <img
-                          alt={`${userProfile.nickname}'s avatar`}
-                          className="rounded-circle"
-                          src={userProfile.avatar}
-                        />
-                      </a>
-                    </div>
-                  </Col>
-                  <Col className="order-lg-3 text-lg-right align-self-lg-center" lg="4">
-                    <div className="card-profile-actions py-4 mt-lg-0">
-                      <Button
-                        className="mr-4"
-                        color="info"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                        size="sm"
-                      >
-                        Connect
-                      </Button>
-                      <Button
-                        className="float-right"
-                        color="default"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                        size="sm"
-                      >
-                        Message
-                      </Button>
-                    </div>
-                  </Col>
-                  <Col className="order-lg-1" lg="4">
-                    <div className="card-profile-stats d-flex justify-content-center">
-                      <div>
-                        <span className="heading">{ userProfile.totalScreenshots }</span>
-                        <span className="description">Screenshots uploaded</span>
-                      </div>
-                      <div>
-                        <span className="heading">{ userProfile.publicScreenshots }</span>
-                        <span className="description">Public screenshots</span>
-                      </div>
-                      <div>
-                        <span className="heading">{ userProfile.totalViews }</span>
-                        <span className="description">Total views</span>
-                      </div>
-                    </div>
-                  </Col>
-                </Row>
-                <div className="text-center mt-5">
-                  <h3>
-                    {userProfile.nickname}{' '}
-                    <span className="font-weight-light">, </span>
-                  </h3>
-                  <div className="h6 mt-4">
-                    <i className="ni business_briefcase-24 mr-2" />
-                    ...
-                  </div>
-                  <div>
-                    <i className="ni education_hat mr-2" />
-                    Joined at
+              <div className="single-team active">
+                <div className="team-single-img">
+                  <Image
+                    src={ userProfile.avatar }
+                    alt="Image"
+                    width={ 140 }
+                    height={ 140 }
+                  />
+
+                  <div className="team-img">
+                    <Image
+                      src={ teamShape }
+                      alt="Image"
+                      width={ 208 }
+                      height={ 198 }
+                    />
                   </div>
                 </div>
-                <div className="mt-5 py-5 border-top text-center">
-                  <Row className="justify-content-center">
-                    <Col lg="9">
-                      <p>...</p>
-                    </Col>
-                  </Row>
+
+                <div className="team-content">
+                  <h3 style={ { color: 'black' } }>{ userProfile.nickname }</h3>
+                  <span
+                    style={ { color: 'black' } }>A rejoint le Sentier des Rêves le { new Date(userProfile.createdAt).toLocaleDateString() }
+                  </span>
+                  <ul>
+                    <li>{userProfile.totalDreams} rêves (dont {userProfile.publicDreams} publiques)</li>
+                  </ul>
+                  <span>{ userProfile.points } points de succès</span>
                 </div>
               </div>
-            </Card>
-          </Container>
-        </section>
-      </main>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }
