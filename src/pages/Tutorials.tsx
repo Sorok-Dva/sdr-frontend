@@ -23,6 +23,7 @@ export type Tutorial = {
   slug: string;
   createdAt: Date;
   commentCount: number;
+  validated: boolean;
   user?: {
     nickname: string;
     avatar: string;
