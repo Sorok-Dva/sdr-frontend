@@ -8,8 +8,17 @@ import { Tutorial } from 'pages/Tutorials'
 import { toast } from 'react-toastify'
 import { ToastDefaultOptions } from 'utils/toastOptions'
 import { slugify } from 'utils/slugify'
-import { Container, Modal, ModalBody, ModalFooter, ModalHeader, Spinner } from 'reactstrap'
+import {
+  Button,
+  Container,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Spinner,
+} from 'reactstrap'
 import { FaTrash } from 'react-icons/fa'
+import { FaArrowLeft } from 'react-icons/fa6'
 
 const AdminContainer = styled.div`
   padding: 2rem;
@@ -60,11 +69,11 @@ const AddTutorial = () => {
   const [isPreview, setIsPreview] = useState(false)
   const [loading, setLoading] = useState(true)
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
-  
+
   const { id } = useParams<{ id: string; }>()
-  
+
   const API_KEY= process.env.REACT_APP_TINYMCE_API_KEY
-  
+
   useEffect(() => {
     const fetchTutorial = async () => {
       try {
@@ -79,10 +88,10 @@ const AddTutorial = () => {
         setLoading(false)
       }
     }
-    
+
     fetchTutorial()
   }, [id])
-  
+
   const handleDelete = async () => {
     try {
       await fetch(`/api/admin/tutorials/${ id }`, {
@@ -102,16 +111,16 @@ const AddTutorial = () => {
       console.error('Failed to delete tutorial', err)
     }
   }
-  
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     const tutorialData = {
       title,
       categoryId: parseInt(categoryId),
       content,
     }
-    
+
     try {
       const response = await fetch(`/api/admin/tutorials/${id}`, {
         method: 'PATCH',
@@ -121,7 +130,7 @@ const AddTutorial = () => {
         },
         body: JSON.stringify(tutorialData),
       })
-      
+
       if (response.ok) {
         toast.success('Tutorial successfully updated.',
           ToastDefaultOptions
@@ -138,7 +147,7 @@ const AddTutorial = () => {
       )
     }
   }
-  
+
   if (loading) {
     return <Container className="loader-container">
       <div className="spinner-wrapper">
@@ -149,7 +158,7 @@ const AddTutorial = () => {
       </div>
     </Container>
   }
-  
+
   return (
     <>
       <PageBanner
@@ -160,6 +169,9 @@ const AddTutorial = () => {
       />
       <div className="pt-50 pb-70">
         <div className="container">
+          <Button color="default" className="mb-3 p-5" href="/admin/tutorials/">
+            <FaArrowLeft/> Back to Tutorials list
+          </Button>
           <AdminContainer>
             <h2>Edit a Tutorial</h2>
             <form onSubmit={handleFormSubmit}>
@@ -173,7 +185,7 @@ const AddTutorial = () => {
                   required
                 />
               </FormGroup>
-              
+
               <FormGroup>
                 <Label htmlFor="category">Catégorie</Label>
                 <Select
@@ -187,10 +199,10 @@ const AddTutorial = () => {
                   <option value="2">Catégorie 2</option>
                 </Select>
               </FormGroup>
-              
+
               <FormGroup>
                 <Label htmlFor="content">Content</Label>
-                
+
                 <Editor
                   apiKey={API_KEY}
                   value={content}
@@ -208,7 +220,7 @@ const AddTutorial = () => {
                   }}
                 />
               </FormGroup>
-              
+
               <Link to="#" className="btn btn-outline-secondary" type="button" onClick={() => setIsPreview(!isPreview)}>
                 {isPreview ? 'Back' : 'Preview'}
               </Link>
@@ -217,7 +229,7 @@ const AddTutorial = () => {
                 <FaTrash/> Delete
               </Link>
             </form>
-            
+
             {isPreview && (
               <PreviewContainer>
                 <h3>{title}</h3>

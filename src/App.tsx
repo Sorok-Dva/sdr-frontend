@@ -27,6 +27,7 @@ import EditTutorial from 'pages/admin/tutorials/EditTutorial'
 import HomePage from 'pages/HomePage'
 import LandingPage from 'pages/LandingPage'
 import ListCategories from 'pages/admin/categories/ListCategories'
+import ListTutorials from 'pages/admin/tutorials/ListTutorial'
 import Login from './components/Auth/LoginForm'
 import Register from './pages/Register'
 import RecoverPassword from 'pages/RecoverPassword'
@@ -88,6 +89,7 @@ const AppContent: React.FC = () => {
                       <Route path="users/:id" element={<AdminUserProfile />} />
                       <Route path="reports" element={<ReportsList />} />
                       <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
+                      <Route path="tutorials" element={<ListTutorials />} />
                       <Route path="tutorials/add" element={<AddTutorial />} />
                       <Route path="tutorials/:id/edit" element={<EditTutorial />} />
                       <Route path="categories/add" element={<AddCategory />} />

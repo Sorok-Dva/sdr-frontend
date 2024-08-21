@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { Img as Image } from 'react-image'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import MenuItem from './MenuItem'
 
 const StyledUl = styled.ul`
@@ -31,12 +31,12 @@ const menus = [
     isAdmin: true,
     submenu: [
       {
-        label: 'Add',
-        link: '/admin/tutorials/add',
-      },
-      {
         label: 'List',
         link: '/admin/tutorials/',
+      },
+      {
+        label: 'Add',
+        link: '/admin/tutorials/add',
       },
       {
         label: 'Approval queue',
@@ -58,27 +58,8 @@ const menus = [
         link: '/admin/categories/list',
       },
     ],
-  },
-  {
-    label: 'News',
-    link: '#',
-    submenu: [
-      {
-        label: 'Tutorials Grid',
-        link: '/news/',
-      },
-      {
-        label: 'Tutorials Right Sidebar',
-        link: '/news/news-right-sidebar/',
-      },
-      {
-        label: 'Tutorials Details',
-        link: '/news/news-details/',
-      },
-    ],
-  },
+  }
 ]
-
 
 import logo from '../../assets/img/logo.png'
 import { useUser } from 'context/UserContext'
@@ -87,16 +68,20 @@ import styled from 'styled-components'
 const Navbar: React.FC = () => {
   const { user, logout } = useUser()
   const [menu, setMenu] = useState<boolean>(true)
-  
+  const location = useLocation()
   const handleLogout = () => {
     logout()
     localStorage.removeItem('token')
   }
-  
+
   const toggleNavbar = () => {
     setMenu(!menu)
   }
-  
+
+  useEffect(() => {
+    setMenu(true)
+  }, [location])
+
   useEffect(() => {
     const elementId = document.getElementById('navbar')
     document.addEventListener('scroll', () => {
@@ -106,15 +91,15 @@ const Navbar: React.FC = () => {
         elementId?.classList.remove('is-sticky')
       }
     })
-  }, [])
-  
+  }, [location])
+
   const classOne = menu
     ? 'collapse navbar-collapse'
     : 'collapse navbar-collapse show'
   const classTwo = menu
     ? 'navbar-toggler navbar-toggler-right collapsed'
     : 'navbar-toggler navbar-toggler-right'
-  
+
   return (
     <>
       <div id="navbar" className="navbar-area fixed-top">
@@ -123,7 +108,7 @@ const Navbar: React.FC = () => {
             <Link to="/" className="navbar-brand">
               <Image src={logo} alt="logo" width={300} height={50} />
             </Link>
-            
+
             <button
               onClick={toggleNavbar}
               className={classTwo}
@@ -138,14 +123,14 @@ const Navbar: React.FC = () => {
               <span className="icon-bar middle-bar"></span>
               <span className="icon-bar bottom-bar"></span>
             </button>
-            
+
             <div className={classOne} id="navbarSupportedContent">
               <StyledUl className="navbar-nav m-auto">
                 {menus.map((menuItem) => (
                   <MenuItem key={menuItem.label} {...menuItem} />
                 ))}
               </StyledUl>
-              
+
               <div className="others-options">
                 <ul className="navbar-nav m-auto">
                   { [
