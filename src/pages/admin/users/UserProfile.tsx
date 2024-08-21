@@ -21,6 +21,7 @@ import {
 } from 'reactstrap'
 import { FaSave, FaTrash } from 'react-icons/fa'
 import PageBanner from 'components/Common/PageBanner'
+import NicknameChanges from 'components/Admin/Users/NicknameChanges'
 
 interface User {
   id : number;
@@ -49,6 +50,7 @@ const UserProfile : React.FC = () => {
   const [user, setUser] = useState<User | null>(null)
   const [roles, setRoles] = useState<Role[]>([])
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
+  const [nicknameChanges, setNicknameChanges] = useState<[]>([])
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -60,6 +62,7 @@ const UserProfile : React.FC = () => {
         })
         const data = await response.json()
         setUser(data)
+        setNicknameChanges(data.nicknameChanges)
       } catch (err) {
         console.error('Failed to fetch user', err)
       }
@@ -352,6 +355,7 @@ const UserProfile : React.FC = () => {
               </Card>
             </Col>
           </Row>
+          <NicknameChanges nicknameChanges={nicknameChanges} />
 
           <Modal isOpen={ isDeleteModalOpen } toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
             <ModalHeader toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
