@@ -77,7 +77,7 @@ const AddTutorial = () => {
   const [isPreview, setIsPreview] = useState(false)
   const [categories, setCategories] = useState<Category[]>([])
 
-  const API_KEY=process.env.REACT_APP_TINYMCE_API_KEY
+  const API_KEY= process.env.REACT_APP_TINYMCE_API_KEY
 
   useEffect(() => {
     const fetchCategories = async () => {
