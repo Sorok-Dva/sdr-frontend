@@ -157,7 +157,7 @@ const Nickname: React.FC = () => {
 
             </Row>
 
-            {(canChangeIn === 0  || !canChangeIn) ? (
+            {(canChangeIn === 0  || !canChangeIn || user?.isAdmin)  ? (
               <form onSubmit={ handleNicknameChange }>
                 <FormGroup>
                   <Input
