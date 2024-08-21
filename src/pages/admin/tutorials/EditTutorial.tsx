@@ -19,6 +19,8 @@ import {
 } from 'reactstrap'
 import { FaTrash } from 'react-icons/fa'
 import { FaArrowLeft } from 'react-icons/fa6'
+import { Img as Image } from 'react-image'
+import { Category } from 'pages/admin/tutorials/AddTutorial'
 
 const AdminContainer = styled.div`
   padding: 2rem;
@@ -64,6 +66,9 @@ const AddTutorial = () => {
   const navigate = useNavigate()
   const { token } = useAuth()
   const [title, setTitle] = useState('')
+  const [illustration, setIllustration] = useState<string | undefined>('')
+  const [categories, setCategories] = useState<Category[]>([])
+
   const [categoryId, setCategoryId] = useState('')
   const [content, setContent] = useState('')
   const [isPreview, setIsPreview] = useState(false)
@@ -75,6 +80,24 @@ const AddTutorial = () => {
   const API_KEY= process.env.REACT_APP_TINYMCE_API_KEY
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('/api/tutorials/categories', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        const data = await response.json()
+        setCategories(data)
+      } catch (error) {
+        toast.error('Failed to fetch categories', ToastDefaultOptions)
+      }
+    }
+
+    fetchCategories()
+  }, [token])
+
+  useEffect(() => {
     const fetchTutorial = async () => {
       try {
         const response = await fetch(`/api/tutorials/${id}`)
@@ -82,6 +105,7 @@ const AddTutorial = () => {
         setTitle(data.title)
         setContent(data.content)
         setCategoryId(data.categoryId)
+        setIllustration(data.image)
         setLoading(false)
       } catch (error) {
         console.error('Error fetching the tutorial:', error)
@@ -187,6 +211,16 @@ const AddTutorial = () => {
               </FormGroup>
 
               <FormGroup>
+                <Label htmlFor="image">Image</Label>
+                <Input
+                  type="text"
+                  id="image"
+                  value={illustration}
+                  onChange={(e) => setIllustration(e.target.value)}
+                />
+              </FormGroup>
+
+              <FormGroup>
                 <Label htmlFor="category">Catégorie</Label>
                 <Select
                   id="category"
@@ -194,9 +228,12 @@ const AddTutorial = () => {
                   onChange={(e) => setCategoryId(e.target.value)}
                   required
                 >
-                  <option value="">Choose category</option>
-                  <option value="1">Catégorie 1</option> {/* Remplacez par vos catégories réelles */}
-                  <option value="2">Catégorie 2</option>
+                  <option value="">Sélectionnez une catégorie</option>
+                  {categories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.title}
+                    </option>
+                  ))}
                 </Select>
               </FormGroup>
 
@@ -232,23 +269,47 @@ const AddTutorial = () => {
 
             {isPreview && (
               <PreviewContainer>
-                <h3>{title}</h3>
-                <div dangerouslySetInnerHTML={{ __html: content }} />
+                <div className="col-lg-8 col-md-12">
+                  <div className="blog-details-desc">
+                    { illustration && (
+                      <div className="d-flex justify-content-center">
+                        <Image
+                          src={ illustration }
+                          alt="Image"
+                          width={ 900 }
+                          height={ 500 }
+                          className="mx-auto d-block"
+                        />
+                      </div>
+                    ) }
+                  </div>
+                </div>
+                <h1 style={ { marginTop: '1rem' } }>{ title }</h1>
+
+                <div className="pt-5"
+                  dangerouslySetInnerHTML={ {
+                    __html: content.replace(/(<? *script)/gi, 'illegalscript')
+                  } }>
+                </div>
               </PreviewContainer>
-            )}
+            ) }
           </AdminContainer>
-          <Modal isOpen={ isDeleteModalOpen } toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
-            <ModalHeader toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
+          <Modal isOpen={ isDeleteModalOpen }
+            toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
+            <ModalHeader
+              toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
               Confirm Delete
             </ModalHeader>
             <ModalBody>
               Are you sure you want to delete this tutorial ?
             </ModalBody>
             <ModalFooter>
-              <Link to="#" className="btn btn-outline-danger" onClick={ handleDelete }>
+              <Link to="#" className="btn btn-outline-danger"
+                onClick={ handleDelete }>
                 Delete
               </Link>{ ' ' }
-              <Link to="#" className="btn btn-outline-warning" onClick={ () => setDeleteModalOpen(false) }>
+              <Link to="#" className="btn btn-outline-warning"
+                onClick={ () => setDeleteModalOpen(false) }>
                 Cancel
               </Link>
             </ModalFooter>
