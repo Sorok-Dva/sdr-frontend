@@ -7,28 +7,10 @@ import { Img as Image } from 'react-image'
 import PageBanner from 'components/Common/PageBanner'
 import { Container, Spinner } from 'reactstrap'
 import { slugify } from 'utils/slugify'
-import defaultTutoImg from '../assets/images/defaultTutoImg.png'
+import defaultTutoImg from 'assets/images/defaultTutoImg.png'
 import { stripHtmlTags } from 'utils/stripHtmlTags'
 import ImageLoader from 'components/Common/ImageLoader'
-
-export type Tutorial = {
-  id: number;
-  userId: number;
-  categoryId: string;
-  title: string;
-  image?: string;
-  content: string;
-  views: number;
-  upvote: number;
-  slug: string;
-  createdAt: Date;
-  commentCount: number;
-  validated: boolean;
-  user?: {
-    nickname: string;
-    avatar: string;
-  }
-};
+import { Tutorial } from 'types/tutorial'
 
 const TutorialsList: React.FC = () => {
   const [tutorials, setTutorials] = useState<Tutorial[]>([])
@@ -134,7 +116,7 @@ const TutorialsList: React.FC = () => {
                         <div className="news-content-wrap">
                           <ul>
                             <li>
-                              <Link to="#">
+                              <Link to={ tutorial.user?.nickname ? (`/user/${tutorial.user?.nickname}`) : ('#') }>
                                 <i className="flaticon-user"></i> {tutorial.user?.nickname ?? 'Unknown'}
                               </Link>
                             </li>

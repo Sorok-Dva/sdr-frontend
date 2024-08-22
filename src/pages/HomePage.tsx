@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import MainBanner from 'components/HomePage/MainBanner'
 import Features from 'components/HomePage/Features'
 import { useAuth } from 'context/AuthContext'
-import { Dream } from 'pages/DreamDiary'
-import { Tutorial } from 'pages/Tutorials'
+import type { Dream } from 'pages/DreamDiary'
+import type { Tutorial } from 'types/tutorial'
 
 const DashboardContainer = styled.div`
   padding: 2rem;

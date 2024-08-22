@@ -2,13 +2,12 @@
 
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { type Tutorial } from 'pages/Tutorials'
+import type { Tutorial } from 'types/tutorial'
 import { slugify } from 'utils/slugify'
-
 
 const TutorialsSidebar: React.FC = () => {
   const [popularTutorials, setPopularTutorials] = useState<Tutorial[]>([])
-  
+
   useEffect(() => {
     const fetchPopularTutorials = async () => {
       try {
@@ -19,10 +18,10 @@ const TutorialsSidebar: React.FC = () => {
         console.error('Failed to fetch popular tutorials:', error)
       }
     }
-    
+
     fetchPopularTutorials()
   }, [])
-  
+
   return (
     <>
       <div className="widget-area" id="secondary">
@@ -57,10 +56,10 @@ const TutorialsSidebar: React.FC = () => {
               </article>
             )) }
           </div>
-          
+
           <div className="widget widget_categories">
             <h3 className="widget-title">Categories</h3>
-            
+
             <div className="post-wrap">
               <ul>
                 <li>

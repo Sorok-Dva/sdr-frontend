@@ -1,13 +1,13 @@
 'use client'
-import '../styles/Tutorial.css'
+import 'styles/Tutorial.css'
 import React, { useEffect, useState } from 'react'
 import NewsSidebar from 'components/Tutorials/TutorialsSidebar'
 import { Link, useParams } from 'react-router-dom'
-import CommentsArea from '../components/Tutorials/CommentsArea'
+import CommentsArea from 'components/Tutorials/CommentsArea'
 import { Img as Image } from 'react-image'
 
-import { type Tutorial } from 'pages/Tutorials'
-import blogDetailImg from '../assets/images/choose-imgs.png'
+import type { Tutorial } from 'types/tutorial'
+import blogDetailImg from 'assets/images/choose-imgs.png'
 import PageBanner from 'components/Common/PageBanner'
 import { Container, Spinner } from 'reactstrap'
 import { FaEye, FaThumbsUp } from 'react-icons/fa6'
@@ -17,14 +17,13 @@ import { toast } from 'react-toastify'
 import { ToastDefaultOptions } from 'utils/toastOptions'
 import { useAuth } from 'context/AuthContext'
 
-
 const TutorialPage: React.FC = () => {
   const { user } = useUser()
   const { token } = useAuth()
   const [tutorial, setTutorial] = useState<Tutorial | null>(null)
   const [loading, setLoading] = useState(true)
   const { id } = useParams<{ id: string }>()
-  
+
   useEffect(() => {
     const fetchTutorial = async () => {
       try {
@@ -43,10 +42,10 @@ const TutorialPage: React.FC = () => {
         setLoading(false)
       }
     }
-    
+
     fetchTutorial()
   }, [id])
-  
+
   const handleUpvote = async () => {
     try {
       if (!user) return
@@ -57,11 +56,11 @@ const TutorialPage: React.FC = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      
+
       if (!response.ok) {
         throw new Error('Failed to upvote tutorial')
       }
-      
+
       const updatedTutorial = await response.json()
       setTutorial(updatedTutorial)
     } catch (error) {
@@ -71,7 +70,7 @@ const TutorialPage: React.FC = () => {
       console.error('Failed to upvote tutorial:', error)
     }
   }
-  
+
   if (loading) {
     return (
       <Container className="loader-container">
@@ -84,11 +83,11 @@ const TutorialPage: React.FC = () => {
       </Container>
     )
   }
-  
+
   if (!tutorial) {
     return <NotFound />
   }
-  
+
   return (
     <>
       <PageBanner
@@ -112,7 +111,7 @@ const TutorialPage: React.FC = () => {
                         height={500}
                       />
                     </div>
-                    
+
                     <div className="article-content pb-70">
                       <div className="entry-meta">
                         <ul className="meta-list" style={{ fontWeight: 'bold', fontSize: '14px' }}>
@@ -136,7 +135,7 @@ const TutorialPage: React.FC = () => {
                       </div>
                       <hr/>
                       <h1 style={{ marginTop: '1rem' }}>{tutorial.title}</h1>
-                      
+
                       <div className="pt-5"
                         dangerouslySetInnerHTML={{
                           __html: tutorial.content
@@ -145,7 +144,7 @@ const TutorialPage: React.FC = () => {
                         }}>
                       </div>
                     </div>
-                    
+
                     <div className="article-footer">
                       <div className="article-tags">
                         <button onClick={handleUpvote} className="upvote-button">
@@ -156,7 +155,7 @@ const TutorialPage: React.FC = () => {
                         </span>
                         <Link to="#">Partager</Link>
                       </div>
-                      
+
                       <div className="article-share">
                         <ul className="social">
                           <li>
@@ -182,7 +181,7 @@ const TutorialPage: React.FC = () => {
                         </ul>
                       </div>
                     </div>
-                    
+
                     <div className="post-navigation">
                       <div className="navigation-links">
                         <div className="nav-previous">
@@ -190,7 +189,7 @@ const TutorialPage: React.FC = () => {
                             <i className="bx bx-left-arrow-alt"></i> Tutoriel précédent
                           </Link>
                         </div>
-                        
+
                         <div className="nav-next">
                           <Link to="#">
                             Tutoriel suivant <i className="bx bx-right-arrow-alt"></i>
@@ -198,11 +197,11 @@ const TutorialPage: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                     <CommentsArea />
                   </div>
                 </div>
-                
+
                 <div className="col-lg-4 col-md-12">
                   <NewsSidebar />
                 </div>
