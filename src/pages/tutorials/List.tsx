@@ -7,7 +7,7 @@ import { Img as Image } from 'react-image'
 import PageBanner from 'components/Common/PageBanner'
 import { Container, Spinner } from 'reactstrap'
 import { slugify } from 'utils/slugify'
-import defaultTutoImg from '../assets/images/defaultTutoImg.png'
+import defaultTutoImg from 'assets/images/defaultTutoImg.png'
 import { stripHtmlTags } from 'utils/stripHtmlTags'
 import ImageLoader from 'components/Common/ImageLoader'
 
