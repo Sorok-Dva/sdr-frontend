@@ -2,9 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { type Tutorial } from 'pages/tutorials/List'
+import type { Tutorial } from 'types/tutorial'
 import { slugify } from 'utils/slugify'
-
 
 const TutorialsSidebar: React.FC = () => {
   const [popularTutorials, setPopularTutorials] = useState<Tutorial[]>([])

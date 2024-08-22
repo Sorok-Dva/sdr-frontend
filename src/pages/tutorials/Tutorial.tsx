@@ -6,7 +6,7 @@ import { Link, useParams } from 'react-router-dom'
 import CommentsArea from 'components/Tutorials/CommentsArea'
 import { Img as Image } from 'react-image'
 
-import { type Tutorial } from 'pages/tutorials/List'
+import type { Tutorial } from 'types/tutorial'
 import blogDetailImg from 'assets/images/choose-imgs.png'
 import PageBanner from 'components/Common/PageBanner'
 import { Container, Spinner } from 'reactstrap'

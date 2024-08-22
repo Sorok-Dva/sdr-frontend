@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Img as Image } from 'react-image'
-import { Tutorial } from 'pages/tutorials/List'
+import type { Tutorial } from 'types/tutorial'
 import { stripHtmlTags } from 'utils/stripHtmlTags'
 import { slugify } from 'utils/slugify'
 import ImageLoader from 'components/Common/ImageLoader'
