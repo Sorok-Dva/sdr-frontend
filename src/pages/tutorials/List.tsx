@@ -116,7 +116,7 @@ const TutorialsList: React.FC = () => {
                         <div className="news-content-wrap">
                           <ul>
                             <li>
-                              <Link to="#">
+                              <Link to={ tutorial.user?.nickname ? (`/user/${tutorial.user?.nickname}`) : ('#') }>
                                 <i className="flaticon-user"></i> {tutorial.user?.nickname ?? 'Unknown'}
                               </Link>
                             </li>
