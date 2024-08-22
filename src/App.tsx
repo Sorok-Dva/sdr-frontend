@@ -36,6 +36,8 @@ import PrivacyPolicyPage from 'pages/PrivacyPolicy'
 import TOSPage from 'pages/TermsOfService'
 import Tutorial from 'pages/tutorials/Tutorial'
 import TutorialsList from 'pages/tutorials/List'
+import MostViewed from 'pages/tutorials/MostViewed'
+import MostLiked from 'pages/tutorials/MostLiked'
 import UserProfile from 'pages/UserProfile'
 import AdminLayout from 'layouts/Admin'
 import UserList from 'pages/admin/users/UserList'
@@ -111,6 +113,8 @@ const AppContent: React.FC = () => {
             <Route path="/terms-of-service" element={<TOSPage />} />
             <Route path="/user/:nickname" element={<UserProfile />} />
             <Route path="/tutorials" element={<TutorialsList />} />
+            <Route path="/tutorials/most-viewed" element={<MostViewed />} />
+            <Route path="/tutorials/most-liked" element={<MostLiked />} />
             <Route path="/tutorial/:id/:slug" element={<Tutorial />} />
             <Route path="/users/validate/:token" element={<ValidateUser />} />
             <Route path="/reset-password/:token" element={<ResetPassword />} />
