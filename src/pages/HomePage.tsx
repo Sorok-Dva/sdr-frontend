@@ -5,7 +5,7 @@ import MainBanner from 'components/HomePage/MainBanner'
 import Features from 'components/HomePage/Features'
 import { useAuth } from 'context/AuthContext'
 import { Dream } from 'pages/DreamDiary'
-import { Tutorial } from 'pages/Tutorials'
+import { Tutorial } from 'pages/tutorials/List'
 
 const DashboardContainer = styled.div`
   padding: 2rem;
