@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { ToastDefaultOptions } from 'utils/toastOptions'
 import { slugify } from 'utils/slugify'
 import { useNavigate } from 'react-router-dom'
+import { Img as Image } from 'react-image'
 
 const AdminContainer = styled.div`
   padding: 2rem;
@@ -217,10 +218,30 @@ const AddTutorial = () => {
 
             {isPreview && (
               <PreviewContainer>
-                <h3>{title}</h3>
-                <div dangerouslySetInnerHTML={{ __html: content }} />
+                <div className="col-lg-8 col-md-12">
+                  <div className="blog-details-desc">
+                    { image && (
+                      <div className="d-flex justify-content-center">
+                        <Image
+                          src={ image }
+                          alt="Image"
+                          width={ 900 }
+                          height={ 500 }
+                          className="mx-auto d-block"
+                        />
+                      </div>
+                    ) }
+                  </div>
+                </div>
+                <h1 style={ { marginTop: '1rem' } }>{ title }</h1>
+
+                <div className="pt-5"
+                  dangerouslySetInnerHTML={ {
+                    __html: content.replace(/(<? *script)/gi, 'illegalscript')
+                  } }>
+                </div>
               </PreviewContainer>
-            )}
+            ) }
           </AdminContainer>
         </div>
       </div>
