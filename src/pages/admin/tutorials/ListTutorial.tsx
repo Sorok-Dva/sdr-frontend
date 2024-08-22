@@ -11,7 +11,7 @@ import { useAuth } from 'context/AuthContext'
 import { Link } from 'react-router-dom'
 import { FaEye, FaPencil } from 'react-icons/fa6'
 import PageBanner from 'components/Common/PageBanner'
-import { Tutorial } from 'pages/Tutorials'
+import { Tutorial } from 'pages/tutorials/List'
 import { slugify } from 'utils/slugify'
 
 
