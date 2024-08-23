@@ -51,10 +51,10 @@ const MostLiked: React.FC = () => {
     return (
       <>
         <PageBanner
-          pageTitle="Liste des tutoriels les plus vus"
+          pageTitle="Liste des tutoriels les plus aimés"
           homePageUrl="/"
           homePageText="Accueil"
-          activePageText="Liste des tutoriels les plus vus"
+          activePageText="Liste des tutoriels les plus aimés"
         />
         <div className="news-area ptb-100">
           <div className="container">
@@ -82,10 +82,10 @@ const MostLiked: React.FC = () => {
   return (
     <>
       <PageBanner
-        pageTitle="Liste des tutoriels les plus vus"
+        pageTitle="Liste des tutoriels les plus aimés"
         homePageUrl="/"
         homePageText="Accueil"
-        activePageText="Liste des tutoriels les plus vus"
+        activePageText="Liste des tutoriels les plus aimés"
       />
       <div className="news-area ptb-100">
         <div className="container">
