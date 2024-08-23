@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
+  Badge,
   Col,
   Input,
   Row,
@@ -141,14 +142,21 @@ const UserList: React.FC = () => {
             <tbody>
               { currentUsers.map((user) => (
                 <tr key={ user.id }>
-                  <td><Link to={`/admin/users/${user.id}`}>{user.nickname}</Link></td>
-                  <td>{user.email}</td>
-                  <td>{user.dreamsCount}</td>
-                  <td>{user.points}</td>
-                  <td>{user.validated ? 'Yes' : 'No'}</td>
-                  <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                  <td><Link
+                    to={ `/admin/users/${ user.id }` }>{ user.nickname }</Link>
+                  </td>
+                  <td>{ user.email }</td>
+                  <td>{ user.dreamsCount }</td>
+                  <td>{ user.points }</td>
+                  <td>
+                    <Badge pill
+                      color={ user.validated ? 'success': 'danger' }>
+                      { user.validated ? 'Yes': 'No' }
+                    </Badge>
+                  </td>
+                  <td>{ new Date(user.createdAt).toLocaleDateString() }</td>
                 </tr>
-              ))}
+              )) }
             </tbody>
           </Table>
           <div className="col-lg-12">
