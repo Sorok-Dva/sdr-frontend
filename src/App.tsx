@@ -51,6 +51,7 @@ import UserSettingsPage from 'pages/UserSettings'
 import ValidateUser from 'pages/ValidateUser'
 
 import { ToastContainer } from 'react-toastify'
+import LevelUpNotifier from 'components/LevelUpNotifier'
 
 const theme = {
   colors: {
@@ -135,6 +136,7 @@ const App: React.FC = () => {
         <AuthProvider>
           <UserProvider>
             <GoogleTagManager />
+            <LevelUpNotifier />
             <AppContent />
           </UserProvider>
         </AuthProvider>
