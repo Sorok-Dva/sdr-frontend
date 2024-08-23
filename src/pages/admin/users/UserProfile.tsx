@@ -209,9 +209,10 @@ const UserProfile : React.FC = () => {
                     <div className="col">
                       <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                         <div>
-                          <span className="heading">{ user.dreamsCount }</span>
+                          <span className="heading">{ user.dreamsCount ?? 0 }</span>
                           <span className="description">Dreams</span>
                         </div>
+                        { ' ' }
                         <div>
                           <span className="heading">{ user.totalViews ?? 0 }</span>
                           <span className="description">Total views</span>
