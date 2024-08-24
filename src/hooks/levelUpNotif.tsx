@@ -1,18 +1,35 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
 const Notifications = ({ userId }: Record<string, number>) => {
+  const LevelUpNotif = ({ title }: { title: string }) => {
+    return (
+      <>
+        <div className="msg-container">
+          Félicitations ! Vous êtes maintenant un <b>{ title }</b> ! 🌌
+        </div>
+      </>
+    )
+  }
   useEffect(() => {
-    const eventSource = new EventSource(`/api/notifications?userId=${userId}`)
+    const eventSource = new EventSource(`http://localhost:3010/api/notifications?userId=${userId}`)
 
     eventSource.onmessage = (event) => {
-      console.log('Received event:', event)
       try {
-        const data = JSON.parse(event.data)
-        console.log('Parsed data:', data)
-        if (data.userId === userId) {
-          toast.success(`Félicitations! Vous êtes maintenant un ${data.title}`)
+        const rawData = event.data.replace('data: ', '')
+        const parsedData = JSON.parse(rawData)
+
+        if (typeof parsedData === 'string') {
+          const finalData = JSON.parse(parsedData)
+          if (finalData.userId === userId) {
+            toast.success(<LevelUpNotif title={finalData.title} />)
+          }
+        } else {
+          if (parsedData.userId === userId) {
+            toast.success(<LevelUpNotif title={parsedData.title} />)
+          }
         }
+
       } catch (e) {
         console.error('Error parsing event data:', e)
       }
