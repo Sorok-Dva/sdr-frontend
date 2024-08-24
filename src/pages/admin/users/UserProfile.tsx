@@ -22,6 +22,7 @@ import {
 import { FaSave, FaTrash } from 'react-icons/fa'
 import PageBanner from 'components/Common/PageBanner'
 import NicknameChanges from 'components/Admin/Users/NicknameChanges'
+import type { Level } from '../../../types/level'
 
 interface User {
   id : number;
@@ -29,6 +30,8 @@ interface User {
   nickname : string;
   avatar : string;
   points : number;
+  level : number;
+  title : number;
   dreamsCount : number;
   totalViews : number;
   role : {
@@ -51,7 +54,18 @@ const UserProfile : React.FC = () => {
   const [roles, setRoles] = useState<Role[]>([])
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
   const [nicknameChanges, setNicknameChanges] = useState<[]>([])
+  const [nextLevel, setNextLevel] = useState<Level | null>(null)
 
+  useEffect(() => {
+    const fetchNextLevel = async () => {
+      if (!user?.points) return
+      const response = await fetch(`/api/levels/next?currentPoints=${user?.points}`)
+      const data = await response.json()
+      setNextLevel(data)
+    }
+
+    fetchNextLevel()
+  }, [user?.points])
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -182,7 +196,7 @@ const UserProfile : React.FC = () => {
                     </div>
                   </Col>
                 </Row>
-                <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                <CardHeader className="text-center border-0 pt-8">
                   <div className="d-flex justify-content-between">
                     <Button
                       className="mr-4"
@@ -210,11 +224,11 @@ const UserProfile : React.FC = () => {
                       <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                         <div>
                           <span className="heading">{ user.dreamsCount ?? 0 }</span>
+                          { ' ' }
                           <span className="description">Dreams</span>
-                        </div>
-                        { ' ' }
-                        <div>
+                          { ' ' }
                           <span className="heading">{ user.totalViews ?? 0 }</span>
+                          { ' ' }
                           <span className="description">Total views</span>
                         </div>
                       </div>
@@ -235,13 +249,17 @@ const UserProfile : React.FC = () => {
                     </div>
                     <hr/>
                     <div className="h3 font-weight-300">
+                      <b>Level:</b> { user.level },
+                      { ' ' }
                       <b>Points:</b> { user.points }
-                      <Progress
-                        max="1000"
-                        className="mt-3"
-                        value={ user.points }
-                        barClassName={ getProgressBarClass(user.points) }
-                      />
+                      {nextLevel && (
+                        <div className="progress-bar">
+                          <Progress
+                            value={(user.points / nextLevel.pointsRequired) * 100}
+                          />
+                          <p>{user.points}/{nextLevel.pointsRequired} pour {nextLevel.title}</p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </CardBody>
@@ -312,6 +330,44 @@ const UserProfile : React.FC = () => {
                         </Col>
                       </Row>
                       <Row>
+                        <Col lg="3">
+                          <FormGroup>
+                            <label
+                              className="form-control-label"
+                              htmlFor="input-level"
+                            >
+                              Level
+                            </label>
+                            <Input
+                              className="form-control-alternative"
+                              id="input-level"
+                              placeholder="Level"
+                              type="number"
+                              name="level"
+                              value={ user.level }
+                              onChange={ handleChange }
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col lg="3">
+                          <FormGroup>
+                            <label
+                              className="form-control-label"
+                              htmlFor="input-points"
+                            >
+                              Points
+                            </label>
+                            <Input
+                              className="form-control-alternative"
+                              id="input-points"
+                              placeholder="Points"
+                              type="number"
+                              name="points"
+                              value={ user.points }
+                              onChange={ handleChange }
+                            />
+                          </FormGroup>
+                        </Col>
                         <Col lg="6">
                           <FormGroup>
                             <label
