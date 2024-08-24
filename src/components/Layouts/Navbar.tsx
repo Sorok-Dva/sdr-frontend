@@ -153,7 +153,19 @@ const Navbar: React.FC = () => {
                 {user ? (
                   <>
                     <ul className="navbar-nav m-auto">
-                      {[
+                      <img
+                        src={ user.avatar }
+                        alt={ `Avatar de ${ user.nickname }` }
+                        style={ {
+                          width: '30px',
+                          height: '30px',
+                          borderRadius: '50%',
+                          marginRight: '10px',
+                          verticalAlign: 'middle',
+                          marginTop: '13px',
+                        } }
+                      />
+                      { [
                         {
                           label: user.nickname,
                           link: '#',
@@ -161,39 +173,43 @@ const Navbar: React.FC = () => {
                           submenu: [
                             {
                               label: 'Mon profil',
-                              link: `/user/${user.nickname}`,
+                              link: `/user/${ user.nickname }`
                             },
                             {
                               label: 'Paramètres',
-                              link: '/settings/',
+                              link: '/settings/'
                             },
                             {
                               label: 'Déconnexion',
                               link: '/',
-                              onClick: handleLogout,
-                            },
-                          ],
-                        },
+                              onClick: handleLogout
+                            }
+                          ]
+                        }
                       ].map((menuItem) => (
-                        <MenuItem key={user.nickname} {...menuItem} onClick={toggleNavbar}>
-                          {menuItem.submenu.map((subItem) => (
-                            <li key={subItem.label}>
-                              <Link to={subItem.link} onClick={subItem.onClick || toggleNavbar}>
-                                {subItem.label}
+                        <MenuItem key={ user.nickname } { ...menuItem }
+                          onClick={ toggleNavbar }>
+                          { menuItem.submenu.map((subItem) => (
+                            <li key={ subItem.label }>
+                              <Link to={ subItem.link }
+                                onClick={ subItem.onClick || toggleNavbar }>
+                                { subItem.label }
                               </Link>
                             </li>
-                          ))}
+                          )) }
                         </MenuItem>
-                      ))}
+                      )) }
                     </ul>
                   </>
                 ) : (
                   <>
-                    <Link to="/register/" className="primary-btn" onClick={toggleNavbar}>
+                    <Link to="/register/" className="primary-btn"
+                      onClick={ toggleNavbar }>
                       Inscription <i className="bx bx-user-plus"></i>
-                    </Link>{' '}
-                    <Link to="/login/" className="default-btn" onClick={toggleNavbar}>
-                      Connexion <i className="bx bx-log-in-circle"></i>
+                    </Link>{ ' ' }
+                    <Link to="/login/" className="default-btn"
+                      onClick={ toggleNavbar }>
+                    Connexion <i className="bx bx-log-in-circle"></i>
                     </Link>
                   </>
                 )}
