@@ -1,32 +1,35 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { Container, Spinner } from 'reactstrap'
+import { Badge, Container, Progress, Spinner, Tooltip } from 'reactstrap'
 import { toast } from 'react-toastify'
 import { ToastDefaultOptions } from 'utils/toastOptions'
 import NotFound from '../components/ErrorPage/404'
 import { Img as Image } from 'react-image'
 import teamShape from 'assets/images/team/team-shape.png'
 import PageBanner from 'components/Common/PageBanner'
-
-interface UserProfile {
-  id: number,
-  nickname: string,
-  avatar: string,
-  points: number,
-  isAdmin: boolean,
-  validated: boolean,
-  createdAt: Date,
-  totalDreams: number,
-  publicDreams: number,
-  totalViews: number,
-}
+import type { UserProfile } from 'types/user'
+import type { Level } from 'types/level'
 
 const Profile: React.FC = () => {
   const { nickname } = useParams<{ nickname: string }>()
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [notFound, setNotFound] = useState<boolean>(false)
   const main = useRef<HTMLDivElement>(null)
+  const [tooltipOpen, setTooltipOpen] = useState(false)
+  const [nextLevel, setNextLevel] = useState<Level | null>(null)
 
+  useEffect(() => {
+    const fetchNextLevel = async () => {
+      if (!userProfile?.points) return
+      const response = await fetch(`/api/levels/next?currentPoints=${userProfile?.points}`)
+      const data = await response.json()
+      setNextLevel(data)
+    }
+
+    fetchNextLevel()
+  }, [userProfile?.points])
+
+  const toggle = () => setTooltipOpen(!tooltipOpen)
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -114,16 +117,48 @@ const Profile: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="team-content">
-                  <h3 style={ { color: 'black' } }>{ userProfile.nickname }</h3>
-                  <span
-                    style={ { color: 'black' } }>A rejoint le Sentier des Rêves le { new Date(userProfile.createdAt).toLocaleDateString() }
+                <div className="team-content" style={ {
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center'
+                } }>
+                  <h3 style={ { color: 'black' } }>
+                    { userProfile.nickname },
+                    Niveau { userProfile.level }
+                  </h3>
+                  <Badge pill color='primary' className="w-25"
+                    href="#"
+                    id="points">
+                    {userProfile.title}
+                  </Badge>
+                  <Tooltip
+                    placement="bottom"
+                    isOpen={tooltipOpen}
+                    autohide={true}
+                    target="points"
+                    toggle={toggle}
+                  >
+                    {userProfile.points} points.
+                  </Tooltip>
+                  <span className="mt-3" style={ { color: 'black' } }>
+                    A rejoint le Sentier des Rêves le { new Date(userProfile.createdAt).toLocaleDateString() }
                   </span>
                   <ul>
-                    <li>{userProfile.totalDreams} rêves (dont {userProfile.publicDreams} publiques)</li>
+                    <li>{ userProfile.totalDreams } rêves
+                      (dont { userProfile.publicDreams } publics)
+                    </li>
                   </ul>
                   <span>{ userProfile.points } points de succès</span>
+                  {nextLevel && (
+                    <div className="progress-bar">
+                      <Progress
+                        value={(userProfile.points / nextLevel.pointsRequired) * 100}
+                      />
+                      <p>{userProfile.points}/{nextLevel.pointsRequired} pour {nextLevel.title}</p>
+                    </div>
+                  )}
                 </div>
+
               </div>
             </div>
           </div>

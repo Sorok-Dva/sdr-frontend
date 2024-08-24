@@ -9,17 +9,7 @@ import {
 import { useAuth } from 'context/AuthContext'
 import { Link } from 'react-router-dom'
 import PageBanner from 'components/Common/PageBanner'
-
-interface User {
-  id: number;
-  nickname: string;
-  email: string;
-  roleId: string;
-  dreamsCount: number;
-  points: number;
-  validated: boolean;
-  createdAt: Date;
-}
+import type { User } from 'types/user'
 
 const UserList: React.FC = () => {
   const { token } = useAuth()
@@ -120,22 +110,28 @@ const UserList: React.FC = () => {
             <thead>
               <tr>
                 <th onClick={ () => handleSort('nickname') }>
-                Username { sortedField === 'nickname' && (isAsc ? '↑': '↓') }
+                  Username { sortedField === 'nickname' && (isAsc ? '↑': '↓') }
                 </th>
                 <th onClick={ () => handleSort('email') }>
-                Email { sortedField === 'email' && (isAsc ? '↑': '↓') }
+                  Email { sortedField === 'email' && (isAsc ? '↑': '↓') }
                 </th>
                 <th onClick={ () => handleSort('dreamsCount') }>
-                Dreams { sortedField === 'dreamsCount' && (isAsc ? '↑': '↓') }
+                  Dreams { sortedField === 'dreamsCount' && (isAsc ? '↑': '↓') }
                 </th>
                 <th onClick={ () => handleSort('points') }>
-                Points { sortedField === 'points' && (isAsc ? '↑': '↓') }
+                  Points { sortedField === 'points' && (isAsc ? '↑': '↓') }
+                </th>
+                <th onClick={ () => handleSort('level') }>
+                  Level { sortedField === 'level' && (isAsc ? '↑': '↓') }
+                </th>
+                <th onClick={ () => handleSort('title') }>
+                  Title { sortedField === 'title' && (isAsc ? '↑': '↓') }
                 </th>
                 <th onClick={ () => handleSort('validated') }>
-               Validated { sortedField === 'validated' && (isAsc ? '↑': '↓') }
+                  Validated { sortedField === 'validated' && (isAsc ? '↑': '↓') }
                 </th>
                 <th onClick={ () => handleSort('createdAt') }>
-                Created At { sortedField === 'createdAt' && (isAsc ? '↑': '↓') }
+                  Created At { sortedField === 'createdAt' && (isAsc ? '↑': '↓') }
                 </th>
               </tr>
             </thead>
@@ -148,6 +144,12 @@ const UserList: React.FC = () => {
                   <td>{ user.email }</td>
                   <td>{ user.dreamsCount }</td>
                   <td>{ user.points }</td>
+                  <td>{ user.level }</td>
+                  <td>
+                    <Badge pill color='primary'>
+                      { user.title }
+                    </Badge>
+                  </td>
                   <td>
                     <Badge pill
                       color={ user.validated ? 'success': 'danger' }>
