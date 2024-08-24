@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
 import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
 
 const Notifications = ({ userId }: Record<string, number>) => {
   const LevelUpNotif = ({ title }: { title: string }) => {
     return (
       <>
-        <div className="msg-container">
-          Félicitations ! Vous êtes maintenant un <b>{ title }</b> ! 🌌
-        </div>
+        <Link to="/user/profile">
+          <div className="msg-container">
+            Félicitations ! Vous êtes maintenant un <b>{ title }</b> ! 🌌
+          </div>
+        </Link>
       </>
     )
   }
