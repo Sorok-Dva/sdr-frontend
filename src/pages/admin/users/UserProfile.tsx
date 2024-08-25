@@ -19,10 +19,11 @@ import {
   Row,
   Spinner,
 } from 'reactstrap'
-import { FaSave, FaTrash } from 'react-icons/fa'
+import { FaSave, FaTrash, FaPlus } from 'react-icons/fa'
 import PageBanner from 'components/Common/PageBanner'
 import NicknameChanges from 'components/Admin/Users/NicknameChanges'
 import type { Level } from '../../../types/level'
+import { toast } from 'react-toastify'
 
 interface User {
   id : number;
@@ -53,6 +54,9 @@ const UserProfile : React.FC = () => {
   const [user, setUser] = useState<User | null>(null)
   const [roles, setRoles] = useState<Role[]>([])
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
+  const [isAddPointsModalOpen, setAddPointsModalOpen] = useState(false)
+  const [pointsToAdd, setPointsToAdd] = useState<number>(0)
+  const [reason, setReason] = useState<string>('Event')
   const [nicknameChanges, setNicknameChanges] = useState<[]>([])
   const [nextLevel, setNextLevel] = useState<Level | null>(null)
 
@@ -66,6 +70,7 @@ const UserProfile : React.FC = () => {
 
     fetchNextLevel()
   }, [user?.points])
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -127,7 +132,7 @@ const UserProfile : React.FC = () => {
         },
         body: JSON.stringify(user),
       })
-      alert('User updated successfully')
+      toast.info('User updated successfully')
     } catch (err) {
       console.error('Failed to update user', err)
     }
@@ -152,6 +157,32 @@ const UserProfile : React.FC = () => {
         role: selectedRole,
         roleId,
       }))
+    }
+  }
+
+  const handleAddPoints = async () => {
+    if (!user) return
+    try {
+      const response = await fetch(`/api/admin/users/${id}/add-points`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          points: pointsToAdd,
+          reason,
+        }),
+      })
+      const data = await response.json()
+      setUser((prevUser) => ({
+        ...prevUser!,
+        points: data.points,
+      }))
+      setAddPointsModalOpen(false)
+      toast.info('Points added successfully')
+    } catch (err) {
+      console.error('Failed to add points', err)
     }
   }
 
@@ -205,7 +236,7 @@ const UserProfile : React.FC = () => {
                       onClick={ (e) => e.preventDefault() }
                       size="sm"
                     >
-                    Connect
+                      Connect
                     </Button>
                     <Button
                       className="float-right"
@@ -214,7 +245,7 @@ const UserProfile : React.FC = () => {
                       onClick={ (e) => e.preventDefault() }
                       size="sm"
                     >
-                    Message
+                      Message
                     </Button>
                   </div>
                 </CardHeader>
@@ -278,7 +309,7 @@ const UserProfile : React.FC = () => {
                         href={ '/admin/users/' + id + '/dreams' }
                         size="sm"
                       >
-                      See user dreams diary
+                        See user dreams diary
                       </Button>
                     </Col>
                   </Row>
@@ -286,7 +317,7 @@ const UserProfile : React.FC = () => {
                 <CardBody>
                   <Form onSubmit={ handleUpdate }>
                     <h6 className="heading-small text-muted mb-4">
-                    User information
+                      User information
                     </h6>
                     <div className="pl-lg-4">
                       <Row>
@@ -296,7 +327,7 @@ const UserProfile : React.FC = () => {
                               className="form-control-label"
                               htmlFor="input-username"
                             >
-                            Username
+                              Username
                             </label>
                             <Input
                               className="form-control-alternative"
@@ -315,7 +346,7 @@ const UserProfile : React.FC = () => {
                               className="form-control-label"
                               htmlFor="input-email"
                             >
-                            Email address
+                              Email address
                             </label>
                             <Input
                               className="form-control-alternative"
@@ -374,7 +405,7 @@ const UserProfile : React.FC = () => {
                               className="form-control-label"
                               htmlFor="input-role-name"
                             >
-                            Role
+                              Role
                             </label>
                             <Input
                               type="select"
@@ -396,13 +427,20 @@ const UserProfile : React.FC = () => {
                     </div>
                     <hr className="my-4"/>
                     <div className="d-flex justify-content-between">
-                      <Button color="success" type="submit" className="col-md-6">
+                      <Button color="success" type="submit" className="col-md-3">
                         <FaSave/> Save Changes
+                      </Button>
+                      <Button
+                        color="primary"
+                        onClick={() => setAddPointsModalOpen(true)}
+                        className="col-md-3 ml-2"
+                      >
+                        <FaPlus/> Add Points
                       </Button>
                       <Button
                         color="danger"
                         onClick={ () => setDeleteModalOpen(true) }
-                        className="col-md-6 ml-2"
+                        className="col-md-3 ml-2"
                       >
                         <FaTrash/> Delete User
                       </Button>
@@ -416,17 +454,58 @@ const UserProfile : React.FC = () => {
 
           <Modal isOpen={ isDeleteModalOpen } toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
             <ModalHeader toggle={ () => setDeleteModalOpen(!isDeleteModalOpen) }>
-          Confirm Delete
+              Confirm Delete
             </ModalHeader>
             <ModalBody>
-          Are you sure you want to delete this user?
+              Are you sure you want to delete this user?
             </ModalBody>
             <ModalFooter>
               <Button color="danger" onClick={ handleDelete }>
-            Delete
+                Delete
               </Button>{ ' ' }
               <Button color="secondary" onClick={ () => setDeleteModalOpen(false) }>
-            Cancel
+                Cancel
+              </Button>
+            </ModalFooter>
+          </Modal>
+
+          <Modal isOpen={isAddPointsModalOpen} toggle={() => setAddPointsModalOpen(!isAddPointsModalOpen)}>
+            <ModalHeader toggle={() => setAddPointsModalOpen(!isAddPointsModalOpen)}>
+              Add Points to {user?.nickname}
+            </ModalHeader>
+            <ModalBody>
+              <FormGroup>
+                <label htmlFor="points">Points</label>
+                <Input
+                  type="number"
+                  name="points"
+                  id="points"
+                  value={pointsToAdd}
+                  onChange={(e) => setPointsToAdd(Number(e.target.value))}
+                />
+              </FormGroup>
+              <FormGroup>
+                <label htmlFor="reason">Reason</label>
+                <Input
+                  type="select"
+                  name="reason"
+                  id="reason"
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
+                >
+                  <option value="Event">Event</option>
+                  <option value="Bonus">Bonus</option>
+                  <option value="Achievement">Achievement</option>
+                  <option value="Autre">Other</option>
+                </Input>
+              </FormGroup>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="success" onClick={handleAddPoints}>
+                Add Points
+              </Button>{' '}
+              <Button color="secondary" onClick={() => setAddPointsModalOpen(false)}>
+                Cancel
               </Button>
             </ModalFooter>
           </Modal>
