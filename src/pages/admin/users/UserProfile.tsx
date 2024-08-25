@@ -66,6 +66,7 @@ const UserProfile : React.FC = () => {
       const response = await fetch(`/api/levels/next?currentPoints=${user?.points}`)
       const data = await response.json()
       setNextLevel(data)
+      setUser({ ...user, level: data.level, title: data.lastTitle })
     }
 
     fetchNextLevel()
@@ -282,7 +283,8 @@ const UserProfile : React.FC = () => {
                     <div className="h3 font-weight-300">
                       <b>Level:</b> { user.level },
                       { ' ' }
-                      <b>Points:</b> { user.points }
+                      <b>Points:</b> { user.points } <br/>
+                      { user.title }
                       {nextLevel && (
                         <div className="progress-bar">
                           <Progress
@@ -303,7 +305,7 @@ const UserProfile : React.FC = () => {
                     <Col xs="8">
                       <h3 className="mb-0">Edit { user.nickname }&apos;s account</h3>
                     </Col>
-                    <Col className="text-right" xs="4">
+                    <Col className="d-flex justify-content-end" xs="4">
                       <Button
                         color="primary"
                         href={ '/admin/users/' + id + '/dreams' }
