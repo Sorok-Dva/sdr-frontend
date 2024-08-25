@@ -187,12 +187,6 @@ const UserProfile : React.FC = () => {
     }
   }
 
-  const getProgressBarClass = (points : number) => {
-    if (points < 250) return 'bg-gradient-danger'
-    if (points < 500) return 'bg-gradient-warning'
-    return 'bg-gradient-success'
-  }
-
   if (!user) return <Container className="loader-container">
     <div className="spinner-wrapper">
       <Spinner animation="border" role="status" className="custom-spinner">
