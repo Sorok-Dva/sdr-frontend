@@ -5,7 +5,7 @@ import useLevelUpNotifications from 'hooks/levelUpNotif'
 const LevelUpNotifier: React.FC = () => {
   const { user } = useUser()
 
-  useLevelUpNotifications({ userId: user ? user.id : -1 })
+  if (user) useLevelUpNotifications({ userId: user ? user.id : -1 })
 
   return null
 }

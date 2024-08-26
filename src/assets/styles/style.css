@@ -3712,7 +3712,6 @@ Blog Details Area Style
 .news-details-area .blog-details-desc .article-footer {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 30px;
 }
 .news-details-area .blog-details-desc .article-footer .article-tags {
   flex: 0 0 50%;
