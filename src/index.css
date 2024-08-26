@@ -43,3 +43,7 @@ code {
 .tabs_item.active {
   display: block;
 }
+
+.highlight-row {
+  background-color: #4da1f1 !important;
+}

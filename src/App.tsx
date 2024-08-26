@@ -52,6 +52,7 @@ import ValidateUser from 'pages/ValidateUser'
 
 import { ToastContainer } from 'react-toastify'
 import LevelUpNotifier from 'components/LevelUpNotifier'
+import Leaderboard from './pages/Leaderboard'
 
 const theme = {
   colors: {
@@ -119,6 +120,7 @@ const AppContent: React.FC = () => {
             <Route path="/tutorial/:id/:slug" element={<Tutorial />} />
             <Route path="/users/validate/:token" element={<ValidateUser />} />
             <Route path="/reset-password/:token" element={<ResetPassword />} />
+            <Route path="/community/leaderboard" element={<Leaderboard />} />
             <Route path="*" element={<NotFound />} />
           </>
         )}
