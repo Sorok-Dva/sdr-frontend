@@ -15,7 +15,7 @@ const Notifications = ({ userId }: Record<string, number>) => {
     )
   }
   useEffect(() => {
-    const eventSource = new EventSource(`http://localhost:3010/api/notifications?userId=${userId}`)
+    const eventSource = new EventSource(`https://sentier-des-reves.fr/api/notifications?userId=${userId}`)
 
     eventSource.onmessage = (event) => {
       try {
