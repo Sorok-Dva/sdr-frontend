@@ -36,7 +36,7 @@
     "@types/aos": "^3.0.7",
     "@types/fslightbox-react": "^1.7.7",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.101",
+    "@types/node": "^22.5.0",
     "@types/react": "^18.3.3",
     "@types/react-bootstrap": "^0.32.36",
     "@types/react-dom": "^18.3.0",
