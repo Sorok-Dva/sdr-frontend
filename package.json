@@ -47,7 +47,7 @@
     "aos": "^2.3.4",
     "autoprefixer": "10.4.20",
     "bootstrap": "^5.3.3",
-    "chart.js": "^3.5.1",
+    "chart.js": "^4.4.4",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.28",
     "fslightbox-react": "^1.7.6",
