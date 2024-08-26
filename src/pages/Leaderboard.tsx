@@ -10,11 +10,11 @@ import { useAuth } from 'context/AuthContext'
 import { Link } from 'react-router-dom'
 import PageBanner from 'components/Common/PageBanner'
 import type { UserProfile } from 'types/user'
-import { useUser } from '../context/UserContext'
+import { useUser } from 'context/UserContext'
 
 const UserList: React.FC = () => {
   const { token } = useAuth()
-  const { user } = useUser()
+  const { user: currentUser } = useUser()
   const [users, setUsers] = useState<UserProfile[]>([])
   const [sortedField, setSortedField] = useState<keyof UserProfile | null>(null)
   const [isAsc, setIsAsc] = useState<boolean>(true)
@@ -130,7 +130,7 @@ const UserList: React.FC = () => {
             </thead>
             <tbody>
               { currentUsers.map((user) => {
-                const isCurrentUser = user.id === user.id
+                const isCurrentUser = currentUser?.id === user.id
 
                 return (
                   <tr key={ user.id } className={isCurrentUser ? 'highlight-row' : ''}>
