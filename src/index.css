@@ -10,6 +10,26 @@ body {
   color: black;
 }
 
+body.light-theme {
+  background-color: white;
+  color: black;
+}
+
+body.dark-theme {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-theme.bg-dark {
+  background-color: #121212 !important;
+  color: white !important;
+}
+
+body.light-theme.bg-light {
+  background-color: white !important;
+  color: black !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

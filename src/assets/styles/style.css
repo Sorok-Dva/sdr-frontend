@@ -123,7 +123,6 @@ h3,
 h4,
 h5,
 h6 {
-  color: #212121;
   font-family: var(--font-dosis);
   font-weight: 700;
 }
@@ -284,7 +283,7 @@ Go Top Style
 .scroll-to-top {
   position: fixed;
   cursor: pointer;
-  bottom: 15px;
+  bottom: 65px;
   right: 15px;
   background-color: #212121;
   z-index: 4;
@@ -354,6 +353,83 @@ Go Top Style
   visibility: hidden;
 }
 .scroll-to-top:focus i:last-child {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+}
+
+/*
+Theme switcher Style
+======================================================*/
+.theme-switcher {
+  position: fixed;
+  cursor: pointer;
+  bottom: 15px;
+  right: 15px;
+  background-color: #212121;
+  z-index: 4;
+  width: 40px;
+  text-align: center;
+  height: 42px;
+  line-height: 42px;
+  transition: 0.9s;
+}
+.theme-switcher i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  color: #ffffff;
+  transition: 0.5s;
+  font-size: 20px;
+}
+
+.theme-switcher::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: #1dd3f8;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+}
+.theme-switcher:hover {
+  color: #ffffff;
+  background-color: #1dd3f8;
+}
+.theme-switcher:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.theme-switcher:hover i:first-child {
+  opacity: 0;
+  top: 0;
+  visibility: hidden;
+}
+.theme-switcher:hover i:last-child {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+}
+.theme-switcher:focus {
+  color: #ffffff;
+}
+.theme-switcher:focus::before {
+  opacity: 1;
+  visibility: visible;
+}
+.theme-switcher:focus i:first-child {
+  opacity: 0;
+  top: 0;
+  visibility: hidden;
+}
+.theme-switcher:focus i:last-child {
   opacity: 1;
   visibility: visible;
   top: 50%;
@@ -1385,7 +1461,6 @@ About Area Style
   font-family: var(--font-dosis);
   font-size: 16px;
   font-weight: 600;
-  color: #212121;
   position: relative;
   padding-left: 35px;
   margin-bottom: 10px;
@@ -1504,13 +1579,17 @@ Choose Us Area Style
 Offer Area Style
 ======================================================*/
 .offer-area {
-  background-color: #f2fefe;
   position: relative;
   z-index: 1;
   overflow: hidden;
 }
-.offer-area.gray-bg {
-  background-color: #f0f0f0;
+body.light-theme.offer-area.light-bg {
+  background-color: #f2fefe;
+  color: black;
+}
+body.dark-theme.offer-area.dark-bg {
+  background-color: #181f20;
+  color: white;
 }
 .offer-area .offer-shape img {
   position: absolute;
@@ -1579,9 +1658,7 @@ Offer Area Style
 .single-offer h3 {
   margin-bottom: 10px;
 }
-.single-offer h3 a {
-  color: #212121;
-}
+
 .single-offer h3 a:hover {
   color: #1dd3f8;
 }
@@ -3011,16 +3088,6 @@ Banner Four Area Style
   top: 200px;
   right: 200px;
   animation: animationFramesOne 10s infinite linear;
-}
-
-/*
-LandingPage Four Section Title Color Area Style
-======================================================*/
-.home-four-section-title h2 {
-  color: #ffffff;
-}
-.home-four-section-title p {
-  color: #e7e7e7;
 }
 
 /*

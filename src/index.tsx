@@ -10,7 +10,6 @@ import './assets/styles/style.css'
 import './assets/styles/responsive.css'
 
 import AosAnimation from './components/Layouts/AosAnimation'
-import ScrollToTop from './components/Layouts/ScrollToTop'
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -19,6 +18,7 @@ import ScrollToTopHook from 'hooks/scrollToTop'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import * as Sentry from '@sentry/react'
+import { ThemeProvider } from 'context/ThemeContext'
 
 if (process.env.REACT_APP_SENTRY_DSN) Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -49,16 +49,17 @@ const root = ReactDOM.createRoot(
 )
 
 root.render(
-  <Sentry.ErrorBoundary>
-    <React.StrictMode>
-      <Router>
-        <ScrollToTopHook />
-        <App/>
-        <AosAnimation />
-        <ScrollToTop />
-      </Router>
-    </React.StrictMode>
-  </Sentry.ErrorBoundary>
+  <ThemeProvider>
+    <Sentry.ErrorBoundary>
+      <React.StrictMode>
+        <Router>
+          <ScrollToTopHook />
+          <App/>
+          <AosAnimation />
+        </Router>
+      </React.StrictMode>
+    </Sentry.ErrorBoundary>
+  </ThemeProvider>
 )
 
 // If you want to start measuring performance in your app, pass a function

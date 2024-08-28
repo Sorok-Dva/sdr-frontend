@@ -7,17 +7,20 @@ import 'styles/Spinner.css'
 
 import React from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as SCThemeProvider } from 'styled-components'
 
 import { UserProvider, useUser } from 'context/UserContext'
 import { AuthProvider } from 'context/AuthContext'
 import { ErrorProvider, useError } from 'context/ErrorContext'
+import { ThemeProvider } from 'context/ThemeContext'
 
 import GoogleTagManager from 'components/GoogleTagManager'
 import Navbar from 'components/Layouts/Navbar'
 import Footer from 'components/Layouts/Footer'
 import NotFound from 'components/ErrorPage/404'
 import AdminRoute from 'components/AdminRoute'
+import ScrollToTop from 'components/Layouts/ScrollToTop'
+import ThemeSwitcher from 'components/Layouts/ThemeSwitcher'
 
 import AdminNavbar from 'components/Layouts/AdminNavbar'
 import AddCategory from 'pages/admin/categories/AddCategory'
@@ -71,79 +74,83 @@ const AppContent: React.FC = () => {
 
   return (
     <>
-      {!isAdminRoute ? (<Navbar />) : (<AdminNavbar />) }
-      <Routes>
-        {serverError ? (
-          <>
-            <Route path="/service-unavailable" element={<ServiceUnavailable />} />
-            <Route path="*" element={<Navigate to="/service-unavailable" />} />
-          </>
-        ) : (
-          <>
-            {user ? (
-              <>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/settings" element={<UserSettingsPage />} />
-                <Route path="/dream-diary" element={<DreamDiary />} />
-                { user.isAdmin && (
-                  <Route element={<AdminRoute />}>
-                    <Route path="/admin" element={<AdminLayout />}>
-                      <Route path="home" element={<AdminDashboard />} />
-                      <Route path="users" element={<UserList />} />
-                      <Route path="users/:id" element={<AdminUserProfile />} />
-                      <Route path="reports" element={<ReportsList />} />
-                      <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
-                      <Route path="tutorials" element={<ListTutorials />} />
-                      <Route path="tutorials/add" element={<AddTutorial />} />
-                      <Route path="tutorials/:id/edit" element={<EditTutorial />} />
-                      <Route path="categories/add" element={<AddCategory />} />
-                      <Route path="categories/list" element={<ListCategories />} />
+      <ThemeProvider>
+        {!isAdminRoute ? (<Navbar />) : (<AdminNavbar />) }
+        <Routes>
+          {serverError ? (
+            <>
+              <Route path="/service-unavailable" element={<ServiceUnavailable />} />
+              <Route path="*" element={<Navigate to="/service-unavailable" />} />
+            </>
+          ) : (
+            <>
+              {user ? (
+                <>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/settings" element={<UserSettingsPage />} />
+                  <Route path="/dream-diary" element={<DreamDiary />} />
+                  { user.isAdmin && (
+                    <Route element={<AdminRoute />}>
+                      <Route path="/admin" element={<AdminLayout />}>
+                        <Route path="home" element={<AdminDashboard />} />
+                        <Route path="users" element={<UserList />} />
+                        <Route path="users/:id" element={<AdminUserProfile />} />
+                        <Route path="reports" element={<ReportsList />} />
+                        <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
+                        <Route path="tutorials" element={<ListTutorials />} />
+                        <Route path="tutorials/add" element={<AddTutorial />} />
+                        <Route path="tutorials/:id/edit" element={<EditTutorial />} />
+                        <Route path="categories/add" element={<AddCategory />} />
+                        <Route path="categories/list" element={<ListCategories />} />
+                      </Route>
                     </Route>
-                  </Route>
-                )}
-              </>
-            ) : (
-              <>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/recover-password" element={<RecoverPassword />} />
-              </>
-            )}
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/privacy" element={<PrivacyPolicyPage />} />
-            <Route path="/terms-of-service" element={<TOSPage />} />
-            <Route path="/user/:nickname" element={<UserProfile />} />
-            <Route path="/tutorials" element={<TutorialsList />} />
-            <Route path="/tutorials/most-viewed" element={<MostViewed />} />
-            <Route path="/tutorials/most-liked" element={<MostLiked />} />
-            <Route path="/tutorial/:id/:slug" element={<Tutorial />} />
-            <Route path="/users/validate/:token" element={<ValidateUser />} />
-            <Route path="/reset-password/:token" element={<ResetPassword />} />
-            <Route path="/community/leaderboard" element={<Leaderboard />} />
-            <Route path="*" element={<NotFound />} />
-          </>
-        )}
-      </Routes>
-      {!isAdminRoute && <Footer />}
-      <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
+                  )}
+                </>
+              ) : (
+                <>
+                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/recover-password" element={<RecoverPassword />} />
+                </>
+              )}
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/privacy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms-of-service" element={<TOSPage />} />
+              <Route path="/user/:nickname" element={<UserProfile />} />
+              <Route path="/tutorials" element={<TutorialsList />} />
+              <Route path="/tutorials/most-viewed" element={<MostViewed />} />
+              <Route path="/tutorials/most-liked" element={<MostLiked />} />
+              <Route path="/tutorial/:id/:slug" element={<Tutorial />} />
+              <Route path="/users/validate/:token" element={<ValidateUser />} />
+              <Route path="/reset-password/:token" element={<ResetPassword />} />
+              <Route path="/community/leaderboard" element={<Leaderboard />} />
+              <Route path="*" element={<NotFound />} />
+            </>
+          )}
+        </Routes>
+        {!isAdminRoute && <Footer />}
+        <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
+      </ThemeProvider>
     </>
   )
 }
 
 const App: React.FC = () => {
   return (
-    <ThemeProvider theme={theme}>
+    <SCThemeProvider theme={theme}>
       <ErrorProvider>
         <AuthProvider>
           <UserProvider>
             <GoogleTagManager />
             <LevelUpNotifier />
             <AppContent />
+            <ScrollToTop />
+            <ThemeSwitcher />
           </UserProvider>
         </AuthProvider>
       </ErrorProvider>
-    </ThemeProvider>
+    </SCThemeProvider>
   )
 }
 

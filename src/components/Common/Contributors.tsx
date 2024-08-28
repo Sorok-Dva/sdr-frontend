@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Img as Image } from 'react-image'
 
 import teamShape from '../../assets/images/team/team-shape.png'
@@ -26,14 +26,21 @@ const contributors = [
 ]
 
 const Contributors: React.FC = () => {
+  const [theme, setTheme] = useState('dark')
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'dark'
+    setTheme(savedTheme)
+    document.body.className = savedTheme + '-theme'
+  }, [])
   return (
     <>
       <div className="team-area pb-70">
         <div className="container">
           <div className="section-title home-four-section-title">
             <span>Équipe</span>
-            <h2 style={{ color: 'black'}}>Découvrez le Créateur Inspiré</h2>
-            <p style={{ color: 'black'}}>
+            <h2>Découvrez le Créateur Inspiré</h2>
+            <p>
               &quot;Le Sentier des Rêves&quot; est le fruit de ma passion pour l&apos;onirisme et les rêves lucides.
               En tant que créateur unique de cette plateforme, je m&apos;efforce de vous offrir les meilleures ressources et
               une communauté accueillante pour explorer et partager vos expériences oniriques.
@@ -42,7 +49,7 @@ const Contributors: React.FC = () => {
             </p>
           </div>
 
-          <div className="row justify-content-center">
+          <div className={`row justify-content-center ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
             {contributors &&
               contributors.slice(0, 3).map((value, i) => (
                 <div
@@ -52,7 +59,7 @@ const Contributors: React.FC = () => {
                   data-aos-delay={value.aosDelay}
                   key={i}
                 >
-                  <div className="single-team active">
+                  <div className={`single-team active ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
                     <div className="team-single-img">
                       <Image
                         src={value.image}
@@ -72,8 +79,8 @@ const Contributors: React.FC = () => {
                     </div>
 
                     <div className="team-content">
-                      <h3 style={{ color: 'black'}}>{value.name}</h3>
-                      <span style={{ color: 'black'}}>{value.designation}</span>
+                      <h3>{value.name}</h3>
+                      <span>{value.designation}</span>
 
                       <ul>
                         {value.socialLinks.map((value, i) => (
