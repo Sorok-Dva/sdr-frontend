@@ -31,7 +31,6 @@ const Contributors: React.FC = () => {
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'dark'
     setTheme(savedTheme)
-    document.body.className = savedTheme + '-theme'
   }, [])
   return (
     <>
@@ -49,7 +48,7 @@ const Contributors: React.FC = () => {
             </p>
           </div>
 
-          <div className={`row justify-content-center ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
+          <div className={'row justify-content-center'}>
             {contributors &&
               contributors.slice(0, 3).map((value, i) => (
                 <div

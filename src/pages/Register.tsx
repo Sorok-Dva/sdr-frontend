@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   Button,
@@ -17,6 +17,7 @@ import PasswordStrengthChecker from '../components/Common/PasswordStrengthChecke
 import PageBanner from 'components/Common/PageBanner'
 import { toast } from 'react-toastify'
 import { ToastDefaultOptions } from 'utils/toastOptions'
+import { ThemeContext } from 'context/ThemeContext'
 
 const Register : React.FC = () => {
   const navigate = useNavigate()
@@ -29,6 +30,13 @@ const Register : React.FC = () => {
   const [, setIsPolicyClicked] = useState(false)
   const [, setIsTermsClicked] = useState(false)
   const mainRef = useRef<HTMLDivElement>(null)
+  const themeContext = useContext(ThemeContext)
+
+  if (!themeContext) {
+    throw new Error('ThemeContext not found')
+  }
+
+  const { theme } = themeContext
 
   useEffect(() => {
     if (mainRef.current) {
@@ -116,19 +124,19 @@ const Register : React.FC = () => {
           <Container className="pt-lg-7">
             <Row className="justify-content-center">
               <Col lg="5">
-                <Card className="mt-30 shadow border-0">
-                  <CardBody className="px-lg-5 py-lg-5">
+                <Card className="mt-30 shadow border-0 mb-4">
+                  <CardBody className={`px-lg-5 py-lg-5 ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
                     <div className="text-center text-muted mb-4">
                       <h1>Inscription par email</h1>
                     </div>
                     <Form role="form" onSubmit={handleSubmit}>
                       <FormGroup className={validateUsername(nickname) ? 'has-success' : 'has-danger'}>
-                        <InputGroup className="input-group-alternative mb-3">
+                        <InputGroup className={`input-group-alternative mb-3 ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
                           <InputGroupText>
                             <i className="ni ni-hat-3" />
                           </InputGroupText>
                           <Input
-                            className={`form-control ${validateUsername(nickname) ? 'is-valid' : 'is-invalid'}`}
+                            className={`form-control ${validateUsername(nickname) ? 'is-valid' : 'is-invalid'} ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}
                             placeholder="Username"
                             type="text"
                             value={nickname}
@@ -138,12 +146,12 @@ const Register : React.FC = () => {
                       </FormGroup>
 
                       <FormGroup className={validateEmail(email) ? 'has-success' : 'has-danger'}>
-                        <InputGroup className={`input-group-alternative mb-3 ${validateEmail(email) ? 'is-valid' : 'is-invalid'}`}>
+                        <InputGroup className={`input-group-alternative mb-3 ${validateEmail(email) ? 'is-valid' : 'is-invalid'} ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
                           <InputGroupText>
                             <i className="ni ni-email-83" />
                           </InputGroupText>
                           <Input
-                            className={`form-control ${validateEmail(email) ? 'is-valid' : 'is-invalid'}`}
+                            className={`form-control ${validateEmail(email) ? 'is-valid' : 'is-invalid'} ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}
                             placeholder="Email"
                             type="email"
                             value={email}
@@ -153,12 +161,12 @@ const Register : React.FC = () => {
                       </FormGroup>
 
                       <FormGroup className={validatePassword(password) ? 'has-success' : 'has-danger'}>
-                        <InputGroup className="input-group-alternative">
+                        <InputGroup className={`input-group-alternative ${validateEmail(email) ? 'is-valid' : 'is-invalid'} ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
                           <InputGroupText>
                             <i className="ni ni-lock-circle-open" />
                           </InputGroupText>
                           <Input
-                            className={validatePassword(password) ? 'is-valid' : 'is-invalid'}
+                            className={`${validatePassword(password) ? 'is-valid' : 'is-invalid'} ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}
                             placeholder="Password"
                             type={showPassword ? 'text' : 'password'}
                             autoComplete="off"
@@ -168,7 +176,7 @@ const Register : React.FC = () => {
                         </InputGroup>
                       </FormGroup>
 
-                      <PasswordStrengthChecker password={password} />
+                      <PasswordStrengthChecker password={password} theme={theme} />
 
                       <Row className="my-4">
                         <Col xs="12">

@@ -101,6 +101,7 @@ a {
   display: inline-block;
   transition: $transition;
   text-decoration: none;
+  color: $heading-color;
 
   &:hover {
     text-decoration: none;
@@ -108,6 +109,12 @@ a {
   }
   &:focus {
     text-decoration: none;
+  }
+
+  .bg-dark & {
+    &:hover {
+      color: $white-color;
+    }
   }
 }
 button {
@@ -3436,9 +3443,6 @@ Team Area Four Style
     }
   }
   .team-content {
-    h3 {
-      color: $heading-color;
-    }
     span {
       margin-bottom: 15px;
       display: block;
@@ -3451,7 +3455,6 @@ Team Area Four Style
         display: inline-block;
         padding: 0 5px;
         a {
-          background-color: #fafafa;
           width: 30px;
           height: 30px;
           line-height: 30px;

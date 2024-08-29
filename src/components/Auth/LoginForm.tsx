@@ -1,12 +1,13 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUser } from 'context/UserContext'
 import { toast } from 'react-toastify'
 import { Button, Form, FormGroup, Input, InputGroup, InputGroupText } from 'reactstrap'
 import PageBanner from '../Common/PageBanner'
 import { ToastDefaultOptions } from 'utils/toastOptions'
+import { ThemeContext } from 'context/ThemeContext'
 
 const LoginForm: React.FC = () => {
   const { login } = useUser()
@@ -16,6 +17,13 @@ const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const mainRef = useRef<HTMLDivElement>(null)
+  const themeContext = useContext(ThemeContext)
+
+  if (!themeContext) {
+    throw new Error('ThemeContext not found')
+  }
+
+  const { theme } = themeContext
 
   useEffect(() => {
     if (mainRef.current) {
@@ -93,9 +101,9 @@ const LoginForm: React.FC = () => {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <div className="contact-form-action">
+              <div className={`contact-form-action ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
                 <div className="form-heading text-center">
-                  <h3 className="form-title">Se connecter</h3>
+                  <h3 className={`form-title${theme === 'dark' ? '-dark' : ''}`}>Se connecter</h3>
                 </div>
 
                 { error && <div className="alert alert-danger text-center">{ error }</div> }
@@ -133,7 +141,7 @@ const LoginForm: React.FC = () => {
 
                     <div className="col-12">
                       <FormGroup className="mb-3">
-                        <InputGroup className="input-group-alternative">
+                        <InputGroup className={`input-group-alternative ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
                           <InputGroupText>
                             <i className="ni ni-email-83"/>
                           </InputGroupText>
@@ -142,6 +150,7 @@ const LoginForm: React.FC = () => {
                             type="text"
                             value={ username }
                             onChange={ (e) => setUsername(e.target.value) }
+                            className={theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}
                           />
                         </InputGroup>
                       </FormGroup>
@@ -149,7 +158,8 @@ const LoginForm: React.FC = () => {
 
                     <div className="col-12">
                       <FormGroup>
-                        <InputGroup className="input-group-alternative">
+                        <InputGroup
+                          className={`input-group-alternative ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
                           <InputGroupText>
                             <i className="ni ni-lock-circle-open"/>
                           </InputGroupText>
@@ -159,12 +169,14 @@ const LoginForm: React.FC = () => {
                             autoComplete="off"
                             value={ password }
                             onChange={ (e) => setPassword(e.target.value) }
+                            className={theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}
                           />
                           <InputGroupText>
                             <Button
                               color="secondary"
                               outline
                               onClick={ () => setShowPassword(!showPassword) }
+                              className={theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}
                             >
                               { showPassword ? 'Hide': 'Show' }
                             </Button>

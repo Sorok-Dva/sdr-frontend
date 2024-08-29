@@ -3,20 +3,21 @@ import { FaCheck, FaXmark } from 'react-icons/fa6'
 
 interface PasswordStrengthCheckerProps {
   password : string;
+  theme : string;
 }
 
-const PasswordStrengthChecker : React.FC<PasswordStrengthCheckerProps> = ({ password }) => {
+const PasswordStrengthChecker : React.FC<PasswordStrengthCheckerProps> = ({ password , theme}) => {
   const hasUpperCase = /[A-Z]/.test(password)
   const hasLowerCase = /[a-z]/.test(password)
   const hasNumber = /\d/.test(password)
   const hasSpecialChar = /(?=.*[\W_])/.test(password)
   const isValidLength = password.length >= 8
-  
+
   return (
     <>
-      <div className="card text-white bg-gradient-white mb-3" style={ { padding: '10px' } }>
+      <div className={`card mb-3 ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`} style={ { padding: '10px' } }>
         <div className="card-body">
-          <h5 className="card-title text-black">Password Strength</h5>
+          <h5 className="card-title">Password Strength</h5>
           <p className="card-text">
             <small className={ isValidLength ? 'text-success': 'text-danger' }>
               { isValidLength ? <FaCheck /> : <FaXmark /> } Minimum 8 characters
@@ -37,7 +38,7 @@ const PasswordStrengthChecker : React.FC<PasswordStrengthCheckerProps> = ({ pass
         </div>
       </div>
     </>
-  
+
   )
 }
 

@@ -12,7 +12,6 @@ import { ThemeProvider as SCThemeProvider } from 'styled-components'
 import { UserProvider, useUser } from 'context/UserContext'
 import { AuthProvider } from 'context/AuthContext'
 import { ErrorProvider, useError } from 'context/ErrorContext'
-import { ThemeProvider } from 'context/ThemeContext'
 
 import GoogleTagManager from 'components/GoogleTagManager'
 import Navbar from 'components/Layouts/Navbar'
@@ -74,64 +73,62 @@ const AppContent: React.FC = () => {
 
   return (
     <>
-      <ThemeProvider>
-        {!isAdminRoute ? (<Navbar />) : (<AdminNavbar />) }
-        <Routes>
-          {serverError ? (
-            <>
-              <Route path="/service-unavailable" element={<ServiceUnavailable />} />
-              <Route path="*" element={<Navigate to="/service-unavailable" />} />
-            </>
-          ) : (
-            <>
-              {user ? (
-                <>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/settings" element={<UserSettingsPage />} />
-                  <Route path="/dream-diary" element={<DreamDiary />} />
-                  { user.isAdmin && (
-                    <Route element={<AdminRoute />}>
-                      <Route path="/admin" element={<AdminLayout />}>
-                        <Route path="home" element={<AdminDashboard />} />
-                        <Route path="users" element={<UserList />} />
-                        <Route path="users/:id" element={<AdminUserProfile />} />
-                        <Route path="reports" element={<ReportsList />} />
-                        <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
-                        <Route path="tutorials" element={<ListTutorials />} />
-                        <Route path="tutorials/add" element={<AddTutorial />} />
-                        <Route path="tutorials/:id/edit" element={<EditTutorial />} />
-                        <Route path="categories/add" element={<AddCategory />} />
-                        <Route path="categories/list" element={<ListCategories />} />
-                      </Route>
+      {!isAdminRoute ? (<Navbar />) : (<AdminNavbar />) }
+      <Routes>
+        {serverError ? (
+          <>
+            <Route path="/service-unavailable" element={<ServiceUnavailable />} />
+            <Route path="*" element={<Navigate to="/service-unavailable" />} />
+          </>
+        ) : (
+          <>
+            {user ? (
+              <>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/settings" element={<UserSettingsPage />} />
+                <Route path="/dream-diary" element={<DreamDiary />} />
+                { user.isAdmin && (
+                  <Route element={<AdminRoute />}>
+                    <Route path="/admin" element={<AdminLayout />}>
+                      <Route path="home" element={<AdminDashboard />} />
+                      <Route path="users" element={<UserList />} />
+                      <Route path="users/:id" element={<AdminUserProfile />} />
+                      <Route path="reports" element={<ReportsList />} />
+                      <Route path="reports/:screenshotId/details" element={<ReportDetails />} />
+                      <Route path="tutorials" element={<ListTutorials />} />
+                      <Route path="tutorials/add" element={<AddTutorial />} />
+                      <Route path="tutorials/:id/edit" element={<EditTutorial />} />
+                      <Route path="categories/add" element={<AddCategory />} />
+                      <Route path="categories/list" element={<ListCategories />} />
                     </Route>
-                  )}
-                </>
-              ) : (
-                <>
-                  <Route path="/" element={<LandingPage />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/recover-password" element={<RecoverPassword />} />
-                </>
-              )}
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/privacy" element={<PrivacyPolicyPage />} />
-              <Route path="/terms-of-service" element={<TOSPage />} />
-              <Route path="/user/:nickname" element={<UserProfile />} />
-              <Route path="/tutorials" element={<TutorialsList />} />
-              <Route path="/tutorials/most-viewed" element={<MostViewed />} />
-              <Route path="/tutorials/most-liked" element={<MostLiked />} />
-              <Route path="/tutorial/:id/:slug" element={<Tutorial />} />
-              <Route path="/users/validate/:token" element={<ValidateUser />} />
-              <Route path="/reset-password/:token" element={<ResetPassword />} />
-              <Route path="/community/leaderboard" element={<Leaderboard />} />
-              <Route path="*" element={<NotFound />} />
-            </>
-          )}
-        </Routes>
-        {!isAdminRoute && <Footer />}
-        <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
-      </ThemeProvider>
+                  </Route>
+                )}
+              </>
+            ) : (
+              <>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/recover-password" element={<RecoverPassword />} />
+              </>
+            )}
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/privacy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-of-service" element={<TOSPage />} />
+            <Route path="/user/:nickname" element={<UserProfile />} />
+            <Route path="/tutorials" element={<TutorialsList />} />
+            <Route path="/tutorials/most-viewed" element={<MostViewed />} />
+            <Route path="/tutorials/most-liked" element={<MostLiked />} />
+            <Route path="/tutorial/:id/:slug" element={<Tutorial />} />
+            <Route path="/users/validate/:token" element={<ValidateUser />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
+            <Route path="/community/leaderboard" element={<Leaderboard />} />
+            <Route path="*" element={<NotFound />} />
+          </>
+        )}
+      </Routes>
+      {!isAdminRoute && <Footer />}
+      <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
     </>
   )
 }

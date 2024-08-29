@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useContext } from 'react'
-import { ThemeContext } from 'context/ThemeContext' // Assurez-vous que le chemin est correct
+import { ThemeContext } from 'context/ThemeContext'
 
 const ThemeSwitcher = () => {
   const themeContext = useContext(ThemeContext)

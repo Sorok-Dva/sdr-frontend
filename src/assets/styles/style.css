@@ -1474,7 +1474,6 @@ About Area Style
   left: 0;
   color: #1dd3f8;
   font-size: 14px;
-  background-color: #d7eef8;
   width: 25px;
   height: 25px;
   line-height: 25px;
@@ -3169,9 +3168,7 @@ Team Area Four Style
   display: flex;
   animation: rotation 20s linear infinite;
 }
-.single-team .team-content h3 {
-  color: #212121;
-}
+
 .single-team .team-content span {
   margin-bottom: 15px;
   display: block;
@@ -3525,6 +3522,13 @@ Sign In & Log In  Area Style
   margin-bottom: 10px;
   text-transform: capitalize;
 }
+.form-title-dark {
+  font-size: 35px;
+  color: #bfd5ff;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
 .user-area-all-style .contact-form-action .form-heading .form-desc {
   font-size: 18px;
   color: #677286;
@@ -4257,7 +4261,6 @@ Blog Details Area Style
   background-color: #1dd3f8;
 }
 .news-details-area .widget-area .widget {
-  margin-top: 35px;
   background-color: #ffffff;
   box-shadow: 0px 0px 29px 0px rgba(102, 102, 102, 0.08);
 }
@@ -4380,6 +4383,11 @@ Blog Details Area Style
   display: inline-block;
   color: #474c40;
 }
+
+.dark-theme .news-details-area .widget-area .widget-posts-thumb .item .info .title a {
+  display: inline-block;
+  color: #bfc4b6;
+}
 .news-details-area .widget-area .widget-posts-thumb .item .info .title a:hover {
   color: #1dd3f8;
 }
@@ -4450,6 +4458,13 @@ Blog Details Area Style
   font-weight: normal;
   font-size: 14px;
 }
+
+.dark-theme .news-details-area .widget-area .widget_categories ul li a {
+  display: block;
+  color: #bfc4b6;
+  font-weight: normal;
+  font-size: 14px;
+}
 .news-details-area .widget-area .widget_categories ul li a span {
   float: right;
   font-size: 13px;
@@ -4500,6 +4515,17 @@ Blog Details Area Style
 .news-details-area .widget-area .tagcloud a {
   display: inline-block;
   color: #666666;
+  font-weight: normal;
+  font-size: 14px !important;
+  padding: 7px 10px;
+  border: 1px dashed #eeeeee;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.dark-theme .news-details-area .widget-area .tagcloud a {
+  display: inline-block;
+  color: #bfc4b6;
   font-weight: normal;
   font-size: 14px !important;
   padding: 7px 10px;

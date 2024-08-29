@@ -1,16 +1,24 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 import type { Tutorial } from 'types/tutorial'
 import { stripHtmlTags } from 'utils/stripHtmlTags'
 import { slugify } from 'utils/slugify'
 import ImageLoader from 'components/Common/ImageLoader'
+import { ThemeContext } from 'context/ThemeContext'
 
 const LastTutorials: React.FC = () => {
   const [tutorials, setTutorials] = useState<Tutorial[]>([])
   const [loading, setLoading] = useState(true)
+  const themeContext = useContext(ThemeContext)
+
+  if (!themeContext) {
+    throw new Error('ThemeContext not found')
+  }
+
+  const { theme } = themeContext
 
   useEffect(() => {
     const fetchLatestTutorials = async () => {
@@ -51,7 +59,7 @@ const LastTutorials: React.FC = () => {
                 data-aos-duration="800"
                 data-aos-delay={200 * (index + 1)}
               >
-                <div className="single-news">
+                <div className={`single-news ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
                   <div className="blog-img">
                     <Link to={`/tutorial/${tutorial.id}/${slugify(tutorial.title)}`}>
                       <Image
@@ -69,7 +77,7 @@ const LastTutorials: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="news-content-wrap">
+                  <div className={`news-content-wrap ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
                     <ul>
                       <li>
                         <Link to="#">

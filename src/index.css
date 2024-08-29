@@ -30,6 +30,17 @@ body.light-theme.bg-light {
   color: black !important;
 }
 
+.bg-dark > .input-group-text {
+  background-color: #212529;
+  border-color: #3b3c3e;
+  color: white;
+}
+
+.bg-dark > input::placeholder {
+  color: #b6bec6;
+  opacity: 1; /* Firefox */
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
