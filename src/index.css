@@ -41,6 +41,11 @@ body.light-theme.bg-light {
   opacity: 1; /* Firefox */
 }
 
+.sdr-bg-dark {
+  background-color: #121212;
+  color: white;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

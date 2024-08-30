@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { Badge, Container, Progress, Spinner, Tooltip } from 'reactstrap'
 import { toast } from 'react-toastify'
@@ -9,6 +9,7 @@ import teamShape from 'assets/images/team/team-shape.png'
 import PageBanner from 'components/Common/PageBanner'
 import type { UserProfile } from 'types/user'
 import type { Level } from 'types/level'
+import { ThemeContext } from 'context/ThemeContext'
 
 const Profile: React.FC = () => {
   const { nickname } = useParams<{ nickname: string }>()
@@ -17,7 +18,13 @@ const Profile: React.FC = () => {
   const main = useRef<HTMLDivElement>(null)
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [nextLevel, setNextLevel] = useState<Level | null>(null)
+  const themeContext = useContext(ThemeContext)
 
+  if (!themeContext) {
+    throw new Error('ThemeContext not found')
+  }
+
+  const { theme } = themeContext
   useEffect(() => {
     const fetchNextLevel = async () => {
       if (!userProfile?.points) return
@@ -93,12 +100,12 @@ const Profile: React.FC = () => {
         <div className="container">
           <div className="row justify-content-center">
             <div
-              className="col-lg-6"
+              className={`col-lg-6 ${theme === 'dark' ? 'dark-theme text-white' : 'bg-light text-dark'}`}
               data-aos="fade-up"
               data-aos-duration="800"
               data-aos-delay="100"
             >
-              <div className="single-team active">
+              <div className={`single-team active ${theme === 'dark' ? 'sdr-bg-dark text-white' : 'bg-light text-dark'}`}>
                 <div className="team-single-img">
                   <Image
                     src={ userProfile.avatar }
@@ -122,7 +129,7 @@ const Profile: React.FC = () => {
                   flexDirection: 'column',
                   alignItems: 'center'
                 } }>
-                  <h3 style={ { color: 'black' } }>
+                  <h3>
                     { userProfile.nickname },
                     Niveau { userProfile.level }
                   </h3>
@@ -140,7 +147,7 @@ const Profile: React.FC = () => {
                   >
                     {userProfile.points} points.
                   </Tooltip>
-                  <span className="mt-3" style={ { color: 'black' } }>
+                  <span className="mt-3">
                     A rejoint le Sentier des Rêves le { new Date(userProfile.createdAt).toLocaleDateString() }
                   </span>
                   <ul>
@@ -158,7 +165,6 @@ const Profile: React.FC = () => {
                     </div>
                   )}
                 </div>
-
               </div>
             </div>
           </div>
