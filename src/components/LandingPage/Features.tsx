@@ -1,8 +1,9 @@
 'use client'
 
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Img as Image } from 'react-image'
+import { ThemeContext } from 'context/ThemeContext'
 
 import shapeImg1 from '../../assets/images/shape/services-shape/1.png'
 import shapeImg2 from '../../assets/images/shape/services-shape/2.png'
@@ -63,9 +64,21 @@ const featuresData = [
 ]
 
 const Features: React.FC = () => {
+  const themeContext = useContext(ThemeContext)
+  if (!themeContext) {
+    throw new Error('ThemeContext not found')
+  }
+
+  const { theme } = themeContext
+  console.log('Rendered with theme:', theme)
+
+  useEffect(() => {
+    console.log('Theme has changed:', theme)
+  }, [theme])
+
   return (
     <>
-      <div className="offer-area pt-100 pb-70">
+      <div className={`offer-area pt-100 pb-70 ${ theme === 'dark' ? 'dark-bg' : 'light-bg' }`}>
         <div className="container">
           <div className="section-title">
             <span>Nos Services</span>
@@ -85,7 +98,7 @@ const Features: React.FC = () => {
                   data-aos-duration="800"
                   data-aos-delay={value.aosDelay}
                 >
-                  <div className="single-offer">
+                  <div className={`single-offer ${ theme === 'dark' ? 'bg-dark' : 'bg-light' }`}>
                     <i className={value.iconName}></i>
                     <h3>
                       <Link to={value.viewDetails}>{value.title}</Link>

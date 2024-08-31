@@ -1,5 +1,5 @@
 import '../../styles/Upvote.css'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Img as Image } from 'react-image'
 import { useUser } from 'context/UserContext'
@@ -7,6 +7,7 @@ import { useAuth } from 'context/AuthContext'
 import { ToastDefaultOptions } from 'utils/toastOptions'
 import { toast } from 'react-toastify'
 import { FaThumbsUp } from 'react-icons/fa6'
+import { ThemeContext } from 'context/ThemeContext'
 
 export type Comment = {
    id: number;
@@ -29,7 +30,13 @@ const CommentsArea: React.FC = () => {
   const { token } = useAuth()
   const [comments, setComments] = useState<Comment[]>([])
   const [newComment, setNewComment] = useState('')
-  
+  const themeContext = useContext(ThemeContext)
+
+  if (!themeContext) {
+    throw new Error('ThemeContext not found')
+  }
+
+  const { theme } = themeContext
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -40,10 +47,10 @@ const CommentsArea: React.FC = () => {
         console.error('Failed to fetch comments:', error)
       }
     }
-    
+
     fetchComments()
   }, [tutorialId])
-  
+
   const handleAddComment = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
@@ -59,7 +66,7 @@ const CommentsArea: React.FC = () => {
           content: newComment,
         }),
       })
-      
+
       if (response.ok) {
         const data = await response.json()
         toast.success('Commentaire ajouté avec succès !',
@@ -76,7 +83,7 @@ const CommentsArea: React.FC = () => {
       console.error('Failed to add comment:', error)
     }
   }
-  
+
   const handleUpvote = async (commentId: number) => {
     try {
       if (!user) return
@@ -87,19 +94,19 @@ const CommentsArea: React.FC = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      
+
       if (!response.ok) {
         toast.error('Une erreur est survenue lors de l\'ajout de votre like.',
           ToastDefaultOptions
         )
       }
-      
+
       const updatedComment = await response.json()
-      
+
       const updatedComments = comments.map((comment) =>
         comment.id === commentId ? { ...comment, upvote: updatedComment.upvote } : comment
       )
-      
+
       setComments(updatedComments)
     } catch (error) {
       toast.error('Une erreur est survenue lors de l\'ajout de votre like.',
@@ -108,9 +115,9 @@ const CommentsArea: React.FC = () => {
       console.error('Failed to upvote comment:', error)
     }
   }
-  
+
   return (
-    <div className="comments-area">
+    <div className={`comments-area ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
       <h3 className="comments-title">{ comments.length } Commentaires:</h3>
       { comments.length === 0 && <h5 className="mx-auto">Soyez le premier à laisser un commentaire !</h5> }
       <ol className="comment-list">

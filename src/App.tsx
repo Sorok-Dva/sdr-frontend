@@ -7,7 +7,7 @@ import 'styles/Spinner.css'
 
 import React from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as SCThemeProvider } from 'styled-components'
 
 import { UserProvider, useUser } from 'context/UserContext'
 import { AuthProvider } from 'context/AuthContext'
@@ -18,6 +18,8 @@ import Navbar from 'components/Layouts/Navbar'
 import Footer from 'components/Layouts/Footer'
 import NotFound from 'components/ErrorPage/404'
 import AdminRoute from 'components/AdminRoute'
+import ScrollToTop from 'components/Layouts/ScrollToTop'
+import ThemeSwitcher from 'components/Layouts/ThemeSwitcher'
 
 import AdminNavbar from 'components/Layouts/AdminNavbar'
 import AddCategory from 'pages/admin/categories/AddCategory'
@@ -133,17 +135,19 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <ThemeProvider theme={theme}>
+    <SCThemeProvider theme={theme}>
       <ErrorProvider>
         <AuthProvider>
           <UserProvider>
             <GoogleTagManager />
             <LevelUpNotifier />
             <AppContent />
+            <ScrollToTop />
+            <ThemeSwitcher />
           </UserProvider>
         </AuthProvider>
       </ErrorProvider>
-    </ThemeProvider>
+    </SCThemeProvider>
   )
 }
 

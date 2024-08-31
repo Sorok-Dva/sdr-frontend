@@ -3,8 +3,8 @@ import MainBanner from '../components/LandingPage/MainBanner'
 import Features from 'components/LandingPage/Features'
 // import Newsletter from '../components/Common/Newsletter'
 import LastTutorials from 'components/Tutorials/LastTutorials'
-const LandingPage : React.FC = () => {
 
+const LandingPage : React.FC = () => {
   return (
     <>
       <MainBanner />
