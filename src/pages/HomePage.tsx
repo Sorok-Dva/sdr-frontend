@@ -23,7 +23,6 @@ const GridContainer = styled.div`
 `
 
 const Section = styled.div`
-  background-color: #f9f9f9;
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -37,28 +36,24 @@ const SectionTitle = styled.h3`
 const JournalEntry = styled.div`
   margin-bottom: 1rem;
   padding: 1rem;
-  background-color: #fff;
   border-radius: 8px;
 `
 
 const TutorialItem = styled.div`
   margin-bottom: 1rem;
   padding: 1rem;
-  background-color: #fff;
   border-radius: 8px;
 `
 
 const CommunityPost = styled.div`
   margin-bottom: 1rem;
   padding: 1rem;
-  background-color: #fff;
   border-radius: 8px;
 `
 
 const ProgressTracker = styled.div`
   margin-bottom: 1rem;
   padding: 1rem;
-  background-color: #fff;
   border-radius: 8px;
 `
 

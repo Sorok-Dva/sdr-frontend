@@ -1,7 +1,8 @@
 'use client'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { ThemeContext } from 'context/ThemeContext'
 
 const featuresData = [
   {
@@ -30,6 +31,13 @@ const featuresData = [
 ]
 
 const Features: React.FC = () => {
+  const themeContext = useContext(ThemeContext)
+
+  if (!themeContext) {
+    throw new Error('ThemeContext not found')
+  }
+
+  const { theme } = themeContext
   return (
     <>
       <div className="features-area mt-minus-70 pb-40">
@@ -44,7 +52,7 @@ const Features: React.FC = () => {
                   data-aos-delay={value.aosDelay}
                   key={i}
                 >
-                  <div className="single-features">
+                  <div className={`single-features ${theme === 'dark' ? 'dark-theme text-white' : 'bg-light text-dark'}`}>
                     <i className={value.iconName}></i>
                     <h3>{value.title}</h3>
                     <p>{value.shortText}</p>
