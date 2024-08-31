@@ -1,13 +1,20 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { Tutorial } from 'types/tutorial'
 import { slugify } from 'utils/slugify'
+import { ThemeContext } from 'context/ThemeContext'
 
 const TutorialsSidebar: React.FC = () => {
   const [popularTutorials, setPopularTutorials] = useState<Tutorial[]>([])
+  const themeContext = useContext(ThemeContext)
 
+  if (!themeContext) {
+    throw new Error('ThemeContext not found')
+  }
+
+  const { theme } = themeContext
   useEffect(() => {
     const fetchPopularTutorials = async () => {
       try {
@@ -24,10 +31,10 @@ const TutorialsSidebar: React.FC = () => {
 
   return (
     <>
-      <div className="widget-area" id="secondary">
+      <div className={`widget-area ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`} id="secondary">
         <div className="widget widget-posts-thumb">
           <h3 className="widget-title">Tutos populaires</h3>
-          <div className="post-wrap">
+          <div className={`post-wrap ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
             {popularTutorials.map((tutorial) => (
               <article key={tutorial.id} className="item">
                 <Link to={`/tutorial/${tutorial.id}/${slugify(tutorial.title)}`} className="thumb">
@@ -46,7 +53,7 @@ const TutorialsSidebar: React.FC = () => {
                       {tutorial.title}
                     </Link>
                   </h4>
-                  <Link to="#">
+                  <Link to={`/user/${tutorial.user?.nickname}`}>
                     <i className="flaticon-user"></i> { tutorial.user?.nickname ?? 'Unknown' }
                   </Link>
                   <i className="fa fa-heart" style={{ marginLeft: '1rem'}}></i> { tutorial.upvote } Likes
@@ -60,7 +67,7 @@ const TutorialsSidebar: React.FC = () => {
           <div className="widget widget_categories">
             <h3 className="widget-title">Categories</h3>
 
-            <div className="post-wrap">
+            <div className={`post-wrap ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
               <ul>
                 <li>
                   <Link to="#">
@@ -89,7 +96,7 @@ const TutorialsSidebar: React.FC = () => {
           <div className="widget widget_tag_cloud">
             <h3 className="widget-title">Tags</h3>
 
-            <div className="post-wrap">
+            <div className={`post-wrap ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
               <div className="tagcloud">
                 <Link to="#">Rêves Lucides (3)</Link>
                 <Link to="#">Interpretation (2)</Link>

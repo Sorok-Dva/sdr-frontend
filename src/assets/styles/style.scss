@@ -101,6 +101,7 @@ a {
   display: inline-block;
   transition: $transition;
   text-decoration: none;
+  color: $heading-color;
 
   &:hover {
     text-decoration: none;
@@ -108,6 +109,12 @@ a {
   }
   &:focus {
     text-decoration: none;
+  }
+
+  .bg-dark & {
+    &:hover {
+      color: $white-color;
+    }
   }
 }
 button {
@@ -266,6 +273,92 @@ Go Top Style
   position: fixed;
   cursor: pointer;
   bottom: 15px;
+  right: 15px;
+  background-color: $heading-color;
+  z-index: 4;
+  width: 40px;
+  text-align: center;
+  height: 42px;
+  line-height: 42px;
+  transition: 0.9s;
+
+  i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    color: $white-color;
+    transition: 0.5s;
+    font-size: 20px;
+    &:last-child {
+      opacity: 0;
+      visibility: hidden;
+      top: 60%;
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: $main-color;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
+  }
+  &:hover {
+    color: $white-color;
+    background-color: $main-color;
+    &::before {
+      opacity: 1;
+      visibility: visible;
+    }
+    i {
+      &:first-child {
+        opacity: 0;
+        top: 0;
+        visibility: hidden;
+      }
+      &:last-child {
+        opacity: 1;
+        visibility: visible;
+        top: 50%;
+      }
+    }
+  }
+  &:focus {
+    color: $white-color;
+    &::before {
+      opacity: 1;
+      visibility: visible;
+    }
+    i {
+      &:first-child {
+        opacity: 0;
+        top: 0;
+        visibility: hidden;
+      }
+      &:last-child {
+        opacity: 1;
+        visibility: visible;
+        top: 50%;
+      }
+    }
+  }
+}
+
+/*
+Theme switcher Style
+======================================================*/
+.theme-switcher {
+  position: fixed;
+  cursor: pointer;
+  bottom: 65px;
   right: 15px;
   background-color: $heading-color;
   z-index: 4;
@@ -1589,6 +1682,10 @@ Offer Area Style
 
   &.gray-bg {
     background-color: #f0f0f0;
+  }
+
+  &.dark-bg {
+    background-color: #181f20;
   }
 
   .offer-shape {
@@ -3346,9 +3443,6 @@ Team Area Four Style
     }
   }
   .team-content {
-    h3 {
-      color: $heading-color;
-    }
     span {
       margin-bottom: 15px;
       display: block;
@@ -3361,7 +3455,6 @@ Team Area Four Style
         display: inline-block;
         padding: 0 5px;
         a {
-          background-color: #fafafa;
           width: 30px;
           height: 30px;
           line-height: 30px;

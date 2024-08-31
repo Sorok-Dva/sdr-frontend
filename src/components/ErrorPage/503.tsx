@@ -1,11 +1,20 @@
 'use client'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Col, Row } from 'reactstrap'
 import { FaDiscord, FaRotateRight } from 'react-icons/fa6'
 import PageBanner from 'components/Common/PageBanner'
+import { ThemeContext } from 'context/ThemeContext'
 
 const CustomErrorContent: React.FC = () => {
+  const themeContext = useContext(ThemeContext)
+
+  if (!themeContext) {
+    throw new Error('ThemeContext not found')
+  }
+
+  const { theme } = themeContext
+
   const handleReload = () => {
     window.location.href = '/'
   }
@@ -17,9 +26,9 @@ const CustomErrorContent: React.FC = () => {
         homePageText="Accueil"
         activePageText="Serveur indisponible"
       />
-      <div className="pt-50 pb-70">
+      <div className={`pt-50 pb-70 ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
         <div className="container">
-          <div className="error-area">
+          <div className={`error-area ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light text-dark'}`} >
             <Row>
               <Col>
                 <img

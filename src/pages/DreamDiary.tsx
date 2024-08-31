@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PageBanner from 'components/Common/PageBanner'
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa'
 import { useAuth } from 'context/AuthContext'
 import { toast } from 'react-toastify'
 import { ToastDefaultOptions } from 'utils/toastOptions'
+import { ThemeContext } from 'context/ThemeContext'
 
 export type Dream = {
   title: string;
@@ -218,10 +219,16 @@ const Journal = () => {
     content: '',
     privacy: 'private' as DreamPrivacy,
   })
-  
+
   const dreamsPerPage = 2
   const [currentPage, setCurrentPage] = useState(0)
-  
+  const themeContext = useContext(ThemeContext)
+
+  if (!themeContext) {
+    throw new Error('ThemeContext not found')
+  }
+
+  const { theme } = themeContext
   useEffect(() => {
     const fetchDreams = async () => {
       try {
@@ -236,10 +243,10 @@ const Journal = () => {
         console.error('Failed to fetch dreams', err)
       }
     }
-    
+
     fetchDreams()
   }, [token])
-  
+
   const handleInputChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target
     setNewDream({
@@ -247,17 +254,17 @@ const Journal = () => {
       [name]: value,
     })
   }
-  
+
   const handlePrivacyChange = () => {
     setNewDream({
       ...newDream,
       privacy: newDream.privacy === 'private' ? 'public' : 'private',
     })
   }
-  
+
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    
+
     if (newDream.title && newDream.content) {
       try {
         const response = await fetch('/api/dreams/', {
@@ -268,17 +275,17 @@ const Journal = () => {
           },
           body: JSON.stringify(newDream),
         })
-        
+
         if (response.ok) {
           const newDreamFromServer = await response.json()
-          
+
           const today = new Date()
           const formattedDate = today.toLocaleDateString('fr-FR', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
           })
-          
+
           const updatedDreams = [...dreams, { ...newDreamFromServer, date: formattedDate }]
           setDreams(updatedDreams)
           setNewDream({ title: '', content: '', privacy: 'private' })
@@ -302,13 +309,13 @@ const Journal = () => {
       }
     }
   }
-  
+
   const currentDreams = [...dreams].reverse().slice(currentPage * dreamsPerPage, (currentPage + 1) * dreamsPerPage)
-  
+
   const nextPage = () => {
     setCurrentPage((prev) => prev + 1)
   }
-  
+
   const prevPage = () => {
     setCurrentPage((prev) => prev - 1)
   }
@@ -348,7 +355,7 @@ const Journal = () => {
                       checked={ newDream.privacy === 'public' }
                       onChange={ handlePrivacyChange }
                     />
-                    <Label htmlFor="privacy">
+                    <Label htmlFor="privacy" className={theme === 'dark' ? 'text-dark' : ''}>
                       Rendre ce rêve public
                     </Label>
                   </CheckboxContainer>
@@ -358,7 +365,7 @@ const Journal = () => {
               <Page>
                 <PageTitle>Vos Rêves</PageTitle>
                 { dreams.length === 0 ? (
-                  <p>Vous n'avez enregistré aucun rêve pour le moment.</p>
+                  <p className={theme === 'dark' ? 'text-dark' : ''}>Vous n'avez enregistré aucun rêve pour le moment.</p>
                 ): (
                   currentDreams.map((dream, index) => (
                     <DreamEntry key={ index }>

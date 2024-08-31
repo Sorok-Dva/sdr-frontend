@@ -10,6 +10,7 @@ import PageBanner from 'components/Common/PageBanner'
 import type { UserProfile } from 'types/user'
 import type { Level } from 'types/level'
 import type { PointHistory } from 'types/pointHistory'
+import { ThemeContext } from 'context/ThemeContext'
 
 const Profile: React.FC = () => {
   const { nickname } = useParams<{ nickname: string }>()
@@ -23,7 +24,13 @@ const Profile: React.FC = () => {
   const [isAsc, setIsAsc] = useState<boolean>(true)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [rowsPerPage, setRowsPerPage] = useState<number>(10)
+  const themeContext = useContext(ThemeContext)
 
+  if (!themeContext) {
+    throw new Error('ThemeContext not found')
+  }
+
+  const { theme } = themeContext
   useEffect(() => {
     const fetchNextLevel = async () => {
       if (!userProfile?.points) return
@@ -128,12 +135,12 @@ const Profile: React.FC = () => {
         <div className="container">
           <div className="row justify-content-center">
             <div
-              className="col-lg-6"
+              className={`col-lg-6 ${theme === 'dark' ? 'dark-theme text-white' : 'bg-light text-dark'}`}
               data-aos="fade-up"
               data-aos-duration="800"
               data-aos-delay="100"
             >
-              <div className="single-team active">
+              <div className={`single-team active ${theme === 'dark' ? 'sdr-bg-dark text-white' : 'bg-light text-dark'}`}>
                 <div className="team-single-img">
                   <Image
                     src={userProfile.avatar}
@@ -156,9 +163,10 @@ const Profile: React.FC = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center'
-                }}>
-                  <h3 style={{ color: 'black' }}>
-                    {userProfile.nickname}, Niveau {userProfile.level}
+                } }>
+                  <h3>
+                    { userProfile.nickname },
+                    Niveau { userProfile.level }
                   </h3>
                   <Badge pill color='primary' className="w-25"
                     href="#"
@@ -174,8 +182,8 @@ const Profile: React.FC = () => {
                   >
                     {userProfile.points} points.
                   </Tooltip>
-                  <span className="mt-3" style={{ color: 'black' }}>
-                    A rejoint le Sentier des Rêves le {new Date(userProfile.createdAt).toLocaleDateString()}
+                  <span className="mt-3">
+                    A rejoint le Sentier des Rêves le { new Date(userProfile.createdAt).toLocaleDateString() }
                   </span>
                   <ul>
                     <li>{userProfile.totalDreams} rêves (dont {userProfile.publicDreams} publics)</li>

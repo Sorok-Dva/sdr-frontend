@@ -123,7 +123,6 @@ h3,
 h4,
 h5,
 h6 {
-  color: #212121;
   font-family: var(--font-dosis);
   font-weight: 700;
 }
@@ -284,7 +283,7 @@ Go Top Style
 .scroll-to-top {
   position: fixed;
   cursor: pointer;
-  bottom: 15px;
+  bottom: 65px;
   right: 15px;
   background-color: #212121;
   z-index: 4;
@@ -354,6 +353,83 @@ Go Top Style
   visibility: hidden;
 }
 .scroll-to-top:focus i:last-child {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+}
+
+/*
+Theme switcher Style
+======================================================*/
+.theme-switcher {
+  position: fixed;
+  cursor: pointer;
+  bottom: 15px;
+  right: 15px;
+  background-color: #212121;
+  z-index: 4;
+  width: 40px;
+  text-align: center;
+  height: 42px;
+  line-height: 42px;
+  transition: 0.9s;
+}
+.theme-switcher i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  color: #ffffff;
+  transition: 0.5s;
+  font-size: 20px;
+}
+
+.theme-switcher::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: #1dd3f8;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+}
+.theme-switcher:hover {
+  color: #ffffff;
+  background-color: #1dd3f8;
+}
+.theme-switcher:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.theme-switcher:hover i:first-child {
+  opacity: 0;
+  top: 0;
+  visibility: hidden;
+}
+.theme-switcher:hover i:last-child {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+}
+.theme-switcher:focus {
+  color: #ffffff;
+}
+.theme-switcher:focus::before {
+  opacity: 1;
+  visibility: visible;
+}
+.theme-switcher:focus i:first-child {
+  opacity: 0;
+  top: 0;
+  visibility: hidden;
+}
+.theme-switcher:focus i:last-child {
   opacity: 1;
   visibility: visible;
   top: 50%;
@@ -1385,7 +1461,6 @@ About Area Style
   font-family: var(--font-dosis);
   font-size: 16px;
   font-weight: 600;
-  color: #212121;
   position: relative;
   padding-left: 35px;
   margin-bottom: 10px;
@@ -1399,7 +1474,6 @@ About Area Style
   left: 0;
   color: #1dd3f8;
   font-size: 14px;
-  background-color: #d7eef8;
   width: 25px;
   height: 25px;
   line-height: 25px;
@@ -1504,13 +1578,17 @@ Choose Us Area Style
 Offer Area Style
 ======================================================*/
 .offer-area {
-  background-color: #f2fefe;
   position: relative;
   z-index: 1;
   overflow: hidden;
 }
-.offer-area.gray-bg {
-  background-color: #f0f0f0;
+body.light-theme.offer-area.light-bg {
+  background-color: #f2fefe;
+  color: black;
+}
+body.dark-theme.offer-area.dark-bg {
+  background-color: #181f20;
+  color: white;
 }
 .offer-area .offer-shape img {
   position: absolute;
@@ -1579,9 +1657,7 @@ Offer Area Style
 .single-offer h3 {
   margin-bottom: 10px;
 }
-.single-offer h3 a {
-  color: #212121;
-}
+
 .single-offer h3 a:hover {
   color: #1dd3f8;
 }
@@ -3014,16 +3090,6 @@ Banner Four Area Style
 }
 
 /*
-LandingPage Four Section Title Color Area Style
-======================================================*/
-.home-four-section-title h2 {
-  color: #ffffff;
-}
-.home-four-section-title p {
-  color: #e7e7e7;
-}
-
-/*
 About Area Four Style
 ======================================================*/
 .about-area-four .about-content h2 {
@@ -3102,9 +3168,7 @@ Team Area Four Style
   display: flex;
   animation: rotation 20s linear infinite;
 }
-.single-team .team-content h3 {
-  color: #212121;
-}
+
 .single-team .team-content span {
   margin-bottom: 15px;
   display: block;
@@ -3458,6 +3522,13 @@ Sign In & Log In  Area Style
   margin-bottom: 10px;
   text-transform: capitalize;
 }
+.form-title-dark {
+  font-size: 35px;
+  color: #bfd5ff;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
 .user-area-all-style .contact-form-action .form-heading .form-desc {
   font-size: 18px;
   color: #677286;
@@ -4190,7 +4261,6 @@ Blog Details Area Style
   background-color: #1dd3f8;
 }
 .news-details-area .widget-area .widget {
-  margin-top: 35px;
   background-color: #ffffff;
   box-shadow: 0px 0px 29px 0px rgba(102, 102, 102, 0.08);
 }
@@ -4313,6 +4383,11 @@ Blog Details Area Style
   display: inline-block;
   color: #474c40;
 }
+
+.dark-theme .news-details-area .widget-area .widget-posts-thumb .item .info .title a {
+  display: inline-block;
+  color: #bfc4b6;
+}
 .news-details-area .widget-area .widget-posts-thumb .item .info .title a:hover {
   color: #1dd3f8;
 }
@@ -4383,6 +4458,13 @@ Blog Details Area Style
   font-weight: normal;
   font-size: 14px;
 }
+
+.dark-theme .news-details-area .widget-area .widget_categories ul li a {
+  display: block;
+  color: #bfc4b6;
+  font-weight: normal;
+  font-size: 14px;
+}
 .news-details-area .widget-area .widget_categories ul li a span {
   float: right;
   font-size: 13px;
@@ -4433,6 +4515,17 @@ Blog Details Area Style
 .news-details-area .widget-area .tagcloud a {
   display: inline-block;
   color: #666666;
+  font-weight: normal;
+  font-size: 14px !important;
+  padding: 7px 10px;
+  border: 1px dashed #eeeeee;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.dark-theme .news-details-area .widget-area .tagcloud a {
+  display: inline-block;
+  color: #bfc4b6;
   font-weight: normal;
   font-size: 14px !important;
   padding: 7px 10px;
