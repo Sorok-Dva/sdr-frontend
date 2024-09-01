@@ -53,7 +53,7 @@ import UserSettingsPage from 'pages/UserSettings'
 import ValidateUser from 'pages/ValidateUser'
 
 import { ToastContainer } from 'react-toastify'
-import LevelUpNotifier from 'components/LevelUpNotifier'
+import Notifier from 'components/Notifier'
 import Leaderboard from './pages/Leaderboard'
 
 const theme = {
@@ -140,7 +140,7 @@ const App: React.FC = () => {
         <AuthProvider>
           <UserProvider>
             <GoogleTagManager />
-            <LevelUpNotifier />
+            <Notifier />
             <AppContent />
             <ScrollToTop />
             <ThemeSwitcher />
