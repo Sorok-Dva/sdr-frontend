@@ -51,6 +51,7 @@ const LoginForm: React.FC = () => {
         const data = await response.json()
         const token = data.token
         const payload = JSON.parse(atob(token.split('.')[1]))
+        console.log('PAYLOAD', payload)
         login({
           id: payload.id,
           email: payload.email,

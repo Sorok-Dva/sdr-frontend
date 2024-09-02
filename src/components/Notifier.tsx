@@ -1,13 +1,13 @@
 import React from 'react'
+import useNotifier from 'hooks/notifications'
 import { useUser } from 'context/UserContext'
-import notifications from 'hooks/notifications'
 
-const Notifier: React.FC = () => {
+const NotifierComponent: React.FC = () => {
   const { user } = useUser()
 
-  notifications({ token: user ? user.token : 'undefined' })
+  useNotifier({ token: user ? user.token : 'undefined' })
 
   return null
 }
 
-export default Notifier
+export default NotifierComponent
