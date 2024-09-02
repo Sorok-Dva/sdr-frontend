@@ -71,7 +71,7 @@
     "reactstrap": "9.2.2",
     "sharp": "^0.33.5",
     "styled-components": "^6.1.11",
-    "swiper": "^11.0.5",
+    "swiper": "^11.1.12",
     "tinymce": "^7.3.0",
     "typescript": "^5.5.4",
     "web-vitals": "^2.1.4"
