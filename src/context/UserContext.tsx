@@ -14,6 +14,7 @@ export interface User {
   isAdmin : boolean;
   validated : boolean;
   lastNicknameChange: Date;
+  token: string;
 }
 
 interface UserContextType {

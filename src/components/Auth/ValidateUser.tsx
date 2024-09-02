@@ -40,6 +40,7 @@ const ValidateUser: React.FC = () => {
               isAdmin: payload.isAdmin,
               validated: payload.validated,
               lastNicknameChange: payload.lastNicknameChange,
+              token: payload.token,
             }, token)
             if (!user) navigate('/')
             else navigate('/settings')
