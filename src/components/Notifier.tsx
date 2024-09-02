@@ -5,7 +5,7 @@ import notifications from 'hooks/notifications'
 const Notifier: React.FC = () => {
   const { user } = useUser()
 
-  notifications({ userId: user ? user.id : -1 })
+  notifications({ token: user ? user.token : 'undefined' })
 
   return null
 }

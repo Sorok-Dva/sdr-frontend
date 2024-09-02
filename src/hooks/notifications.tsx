@@ -26,12 +26,14 @@ const LossPointsNotif = ({ points }: { points: number }) => (
   </Link>
 )
 
-const Notifications = ({ userId }: { userId: number }) => {
+const Notifications = ({ token }: { token: string }) => {
   useEffect(() => {
+    if (token === 'undefined') return
+
     let eventSource: EventSource
 
     const connectEventSource = () => {
-      eventSource = new EventSource(`/api/notifications?userId=${userId}`)
+      eventSource = new EventSource(`/api/notifications?token=${token}`)
 
       eventSource.onmessage = (event) => {
         try {
@@ -40,7 +42,7 @@ const Notifications = ({ userId }: { userId: number }) => {
 
           const data = typeof parsedData === 'string' ? JSON.parse(parsedData) : parsedData
 
-          if (data.userId === userId) {
+          if (data.token === token) {
             switch (data.event) {
             case 'levelUp':
               toast.success(<LevelUpNotif title={data.title} />)
@@ -78,7 +80,7 @@ const Notifications = ({ userId }: { userId: number }) => {
         eventSource.close()
       }
     }
-  }, [userId])
+  }, [token])
 
   return null
 }
