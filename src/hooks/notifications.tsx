@@ -28,42 +28,55 @@ const LossPointsNotif = ({ points }: { points: number }) => (
 
 const Notifications = ({ userId }: { userId: number }) => {
   useEffect(() => {
-    if (userId === -1) return
+    let eventSource: EventSource
 
-    const eventSource = new EventSource(`/api/notifications?userId=${userId}`)
+    const connectEventSource = () => {
+      eventSource = new EventSource(`/api/notifications?userId=${userId}`)
 
-    eventSource.onmessage = (event) => {
-      try {
-        console.log('got event:', event.data)
-        const rawData = event.data.replace('data: ', '')
-        const parsedData = JSON.parse(rawData)
+      eventSource.onmessage = (event) => {
+        try {
+          const rawData = event.data.replace('data: ', '')
+          const parsedData = JSON.parse(rawData)
 
-        const finalData = typeof parsedData === 'string' ? JSON.parse(parsedData) : parsedData
+          const data = typeof parsedData === 'string' ? JSON.parse(parsedData) : parsedData
 
-        if (finalData.userId === userId) {
-          switch (finalData.event) {
-          case 'levelUp':
-            toast.success(<LevelUpNotif title={finalData.title} />)
-            break
-          case 'winPoints':
-            toast.success(<WinPointsNotif points={finalData.points} />)
-            break
-          case 'lossPoints':
-            toast.warn(<LossPointsNotif points={finalData.points} />)
-            break
+          if (data.userId === userId) {
+            switch (data.event) {
+            case 'levelUp':
+              toast.success(<LevelUpNotif title={data.title} />)
+              break
+            case 'winPoints':
+              toast.success(<WinPointsNotif points={data.points} />)
+              break
+            case 'lossPoints':
+              toast.warn(<LossPointsNotif points={ data.points }/>)
+              break
+            default:
+              console.warn('Unhandled event type:', data.event)
+            }
           }
+        } catch (e) {
+          console.error('Error parsing event data:', e)
         }
-      } catch (e) {
-        console.error('Error parsing event data:', e)
+      }
+
+      eventSource.onerror = (error) => {
+        console.error('EventSource failed:', error)
+        eventSource.close()
+
+        setTimeout(() => {
+          console.log('Reconnecting to EventSource...')
+          connectEventSource()
+        }, 5000)
       }
     }
 
-    eventSource.onerror = (error) => {
-      console.error('EventSource failed:', error)
-    }
+    connectEventSource()
 
     return () => {
-      eventSource.close()
+      if (eventSource) {
+        eventSource.close()
+      }
     }
   }, [userId])
 
