@@ -23,7 +23,7 @@
   "proxy": "http://localhost:3010/",
   "dependencies": {
     "@babel/runtime": "^7.25.4",
-    "@sentry/cli": "^2.33.1",
+    "@sentry/cli": "^2.36.1",
     "@sentry/react": "^8.26.0",
     "@tabler/icons-react": "^3.17.0",
     "@testing-library/jest-dom": "^5.17.0",
