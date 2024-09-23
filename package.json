@@ -74,7 +74,7 @@
     "swiper": "^11.1.12",
     "tinymce": "^7.3.0",
     "typescript": "^5.5.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^4.2.3"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
